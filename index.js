@@ -50,13 +50,16 @@ if (process.env.NODE_ENV != "production") {
 
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
-// const checkLoggedInSession = (req, res, next) => {
-//     if (!req.session.loggedIn) {
+// function checkIfLoggedIn(req, res, next) {
+//     console.log("REQ SESSION", req.session);
+//     if (!req.session.loggedIn && req.url != "/welcome") {
 //         res.redirect("/welcome");
+//     } else if (req.session.loggedIn && req.url != "/") {
+//         res.redirect("/");
 //     } else {
 //         next();
 //     }
-// };
+// }
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
@@ -64,13 +67,14 @@ if (process.env.NODE_ENV != "production") {
 //     res.send("LOG PAGE!"); //userlogo
 // });
 
+app.get("/welcome");
+// checkIfLoggedIn
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/submit-registration", (req, res) => {
     console.log("SUBMIT REGISTRATION BODY:", req.body);
-    console.log("REQ session:", req.session);
     hashPass(req.body.password)
         .then(hashedPassword => {
             return queryFunction.createUser(
