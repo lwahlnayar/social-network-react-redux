@@ -50,26 +50,21 @@ if (process.env.NODE_ENV != "production") {
 
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
-// function checkIfLoggedIn(req, res, next) {
-//     console.log("REQ SESSION", req.session);
-//     if (!req.session.loggedIn && req.url != "/welcome") {
-//         res.redirect("/welcome");
-//     } else if (req.session.loggedIn && req.url != "/") {
-//         res.redirect("/");
-//     } else {
-//         next();
-//     }
-// }
+function checkIfLoggedIn(req, res, next) {
+    if (!req.session.loggedIn && req.url != "/welcome") {
+        res.redirect("/welcome");
+    } else if (req.session.loggedIn && req.url != "/") {
+        res.redirect("/");
+    } else {
+        next();
+    }
+}
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-// app.get("/", checkLoggedInSession, (req, res) => {
-//     res.send("LOG PAGE!"); //userlogo
-// });
-
 app.get("/welcome");
-// checkIfLoggedIn
-app.get("*", function(req, res) {
+
+app.get("*", checkIfLoggedIn, function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 

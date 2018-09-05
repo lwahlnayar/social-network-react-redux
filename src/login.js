@@ -40,7 +40,7 @@ export default class Login extends React.Component {
         return (
             <div className="loginContainer">
                 <h3>Log In</h3>
-                {this.state.error && <p>Wrong User Name or Password!</p>}
+                {this.state.error && <p>Wrong Username or Password!</p>}
                 <form>
                     <div className="input_holder">
                         <p>E-mail Address</p>
