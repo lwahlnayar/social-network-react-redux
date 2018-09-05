@@ -62,78 +62,86 @@ function checkIfLoggedIn(req, res, next) {
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-app.get("/welcome");
-
 app.get("*", checkIfLoggedIn, function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/submit-registration", (req, res) => {
     console.log("SUBMIT REGISTRATION BODY:", req.body);
-    hashPass(req.body.password)
-        .then(hashedPassword => {
-            return queryFunction.createUser(
-                req.body.firstname,
-                req.body.lastname,
-                req.body.email,
-                hashedPassword
-            );
-        })
-        .then(useridResponse => {
-            console.log(
-                "USER ID RESPONSE AFTER CREATING USER",
-                useridResponse.rows[0]
-            );
-            req.session.loggedIn = useridResponse.rows[0]; //sets cookie based on the users ID
-            res.json({
-                loggedIn: true
+    if (!req.body.password) {
+        res.json({ error: true });
+    } else {
+        if (passRestrictions(req.body.password) == false) {
+            return res.json({ weakPassword: true });
+        }
+        hashPass(req.body.password)
+            .then(hashedPassword => {
+                return queryFunction.createUser(
+                    req.body.firstname,
+                    req.body.lastname,
+                    req.body.email,
+                    hashedPassword
+                );
+            })
+            .then(useridResponse => {
+                console.log(
+                    "USER ID RESPONSE AFTER CREATING USER",
+                    useridResponse.rows[0]
+                );
+                req.session.loggedIn = useridResponse.rows[0]; //sets cookie based on the users ID
+                res.json({
+                    loggedIn: true
+                });
+            })
+            .catch(e => {
+                console.log(chalk.red("CREATEUSER/REGISTER ERROR:"), e);
+                res.json({
+                    error: true
+                });
             });
-        })
-        .catch(e => {
-            console.log(chalk.red("CREATEUSER/REGISTER ERROR:"), e);
-            res.json({
-                error: true
-            });
-        });
+    }
 });
 
 app.post("/login-check", (req, res) => {
     console.log(req.body);
-    queryFunction
-        .fetchPassword(req.body.email)
-        .then(passwordResponse => {
-            console.log("REQ PASSWORD TO COMPARE", req.body.password);
-            console.log(
-                "PASSWORD RESPONSE AFTER SENDING USER EMAIL TO SQL: ",
-                passwordResponse.rows[0]
-            );
-            return checkPass(
-                req.body.password,
-                passwordResponse.rows[0].password
-            ).then(passwordMatch => {
-                if (passwordMatch) {
-                    queryFunction.fetchId(req.body.email).then(fetchedId => {
-                        console.log("fetchedID", fetchedId);
-                        req.session.loggedIn = fetchedId.rows[0].id; //set cookie based on fetched ID
-                        console.log("success! logged in: ", req.session);
+    if (!req.body.email || !req.body.password) {
+        res.json({ blankFieldsError: true });
+    } else {
+        queryFunction
+            .fetchPassword(req.body.email)
+            .then(passwordResponse => {
+                return checkPass(
+                    req.body.password,
+                    passwordResponse.rows[0].password
+                ).then(passwordMatch => {
+                    if (passwordMatch) {
+                        queryFunction
+                            .fetchId(req.body.email)
+                            .then(fetchedId => {
+                                req.session.loggedIn = fetchedId.rows[0].id; //set cookie based on fetched ID
+                                console.log(
+                                    "success! logged in: ",
+                                    req.session
+                                );
+                                res.json({
+                                    loggedIn: true
+                                });
+                            });
+                    } else {
+                        console.log("MEEP MERP!", req.session);
                         res.json({
-                            loggedIn: true
+                            error: true
                         });
-                    });
-                } else {
-                    console.log("MEEP MERP!", req.session);
-                    res.json({
-                        errorType: "wrongPassword"
-                    });
-                }
+                    }
+                });
+            })
+            .catch(e => {
+                console.log(chalk.red("FETCH PASSWORD ERROR:"), e);
+                res.json({
+                    errorType: "general"
+                });
             });
-        })
-        .catch(e => {
-            console.log(chalk.red("FETCH PASSWORD ERROR:"), e);
-            res.json({
-                errorType: "general"
-            });
-        });
+    }
 });
 
 //server listening

@@ -25,13 +25,15 @@ export default class Login extends React.Component {
             console.log("login response:", res);
             if (res.data.loggedIn) {
                 location.replace("/");
-            } else {
-                console.log("res data", res.data.errorType);
-                let x = res.data.errorType;
-                this.setState({
-                    error: true
-                });
+            } else if (res.data.blankFieldsError) {
+                this.setState({ error: false, blankFields: true });
                 console.log("THIS STATE", this.state);
+            } else {
+                console.log("res data", res.data);
+                this.setState({
+                    error: true,
+                    blankFields: false
+                });
             }
         });
     }
@@ -40,7 +42,14 @@ export default class Login extends React.Component {
         return (
             <div className="loginContainer">
                 <h3>Log In</h3>
-                {this.state.error && <p>Wrong Username or Password!</p>}
+                {this.state.blankFields && (
+                    <p className="errorMessage">
+                        Please enter an E-mail or Password!
+                    </p>
+                )}
+                {this.state.error && (
+                    <p className="errorMessage">Wrong Username or Password!</p>
+                )}
                 <form>
                     <div className="input_holder">
                         <p>E-mail Address</p>

@@ -20,12 +20,13 @@ export default class Registration extends React.Component {
         };
         console.log(registerInput);
         axios.post("/submit-registration", registerInput).then(res => {
-            console.log("registration object sent");
             console.log("loggedIn response obj (based on cookie): ", res.data);
             if (res.data.loggedIn) {
                 location.replace("/");
+            } else if (res.data.weakPassword) {
+                this.setState({ error: false, weakPassword: true });
             } else {
-                this.setState({ error: true });
+                this.setState({ error: true, weakPassword: false });
             }
         });
     }
@@ -38,7 +39,16 @@ export default class Registration extends React.Component {
         return (
             <div className="registrationContainer">
                 <h3>Register Now!</h3>
-                {this.state.error && <p>Oops! Something went wrong!</p>}
+                {this.state.error && (
+                    <p className="errorMessage">Oops! Something went wrong!</p>
+                )}
+                {this.state.weakPassword && (
+                    <p className="errorMessage">
+                        Your password is weak! Please make sure to have at least
+                        8 characters, at least 1 number, 1 upper and 1 lower
+                        case letter.
+                    </p>
+                )}
                 <form>
                     <div className="input_holder">
                         <p>First Name</p>
