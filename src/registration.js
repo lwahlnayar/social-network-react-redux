@@ -1,9 +1,10 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
 
 export default class Registration extends React.Component {
     constructor() {
         super();
+        this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
     }
@@ -19,6 +20,14 @@ export default class Registration extends React.Component {
         console.log(registerInput);
         axios.post("/submit-registration", registerInput).then(res => {
             console.log("registration object sent");
+            console.log("loggedIn response obj (based on cookie): ", res.data);
+            if (res.data.loggedIn) {
+                location.replace("/");
+            } else {
+                console.log("Error#1");
+                this.setState({ error: true });
+                console.log(this.state);
+            }
         });
     }
 
@@ -30,6 +39,7 @@ export default class Registration extends React.Component {
         return (
             <div className="registrationContainer">
                 <h3>Register Now!</h3>
+                {this.state.error && <p>Oops! Something went wrong!</p>}
                 <form>
                     <div className="input_holder">
                         <p>First Name</p>
