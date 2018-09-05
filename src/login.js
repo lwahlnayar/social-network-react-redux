@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default class Login extends React.Component {
     constructor() {
         super();
+        this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
     }
@@ -21,7 +22,17 @@ export default class Login extends React.Component {
         };
         console.log(loginInput);
         axios.post("/login-check", loginInput).then(res => {
-            console.log("login object sent");
+            console.log("login response:", res);
+            if (res.data.loggedIn) {
+                location.replace("/");
+            } else {
+                console.log("res data", res.data.errorType);
+                let x = res.data.errorType;
+                this.setState({
+                    error: true
+                });
+                console.log("THIS STATE", this.state);
+            }
         });
     }
 
@@ -29,6 +40,7 @@ export default class Login extends React.Component {
         return (
             <div className="loginContainer">
                 <h3>Log In</h3>
+                {this.state.error && <p>Wrong User Name or Password!</p>}
                 <form>
                     <div className="input_holder">
                         <p>E-mail Address</p>

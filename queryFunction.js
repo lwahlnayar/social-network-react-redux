@@ -16,6 +16,10 @@ module.exports.fetchPassword = function(email) {
     ]);
 };
 
+module.exports.fetchId = function(email) {
+    return db.query(`SELECT id FROM users WHERE email = $1`, [email || null]);
+};
+
 // module.exports.getAllData = function() {
 //     return db
 //         .query(

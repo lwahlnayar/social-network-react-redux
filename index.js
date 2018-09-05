@@ -107,12 +107,38 @@ app.post("/login-check", (req, res) => {
     queryFunction
         .fetchPassword(req.body.email)
         .then(passwordResponse => {
+            console.log("REQ PASSWORD TO COMPARE", req.body.password);
             console.log(
                 "PASSWORD RESPONSE AFTER SENDING USER EMAIL TO SQL: ",
                 passwordResponse.rows[0]
             );
+            return checkPass(
+                req.body.password,
+                passwordResponse.rows[0].password
+            ).then(passwordMatch => {
+                if (passwordMatch) {
+                    queryFunction.fetchId(req.body.email).then(fetchedId => {
+                        console.log("fetchedID", fetchedId);
+                        req.session.loggedIn = fetchedId.rows[0].id; //set cookie based on fetched ID
+                        console.log("success! logged in: ", req.session);
+                        res.json({
+                            loggedIn: true
+                        });
+                    });
+                } else {
+                    console.log("MEEP MERP!", req.session);
+                    res.json({
+                        errorType: "wrongPassword"
+                    });
+                }
+            });
         })
-        .catch(e => console.log(chalk.red("FETCH PASSWORD ERROR:"), e));
+        .catch(e => {
+            console.log(chalk.red("FETCH PASSWORD ERROR:"), e);
+            res.json({
+                errorType: "general"
+            });
+        });
 });
 
 //server listening

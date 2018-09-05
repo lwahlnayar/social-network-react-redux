@@ -25,9 +25,7 @@ export default class Registration extends React.Component {
             if (res.data.loggedIn) {
                 location.replace("/");
             } else {
-                console.log("Error#1");
                 this.setState({ error: true });
-                console.log(this.state);
             }
         });
     }
