@@ -6,6 +6,11 @@ const queryFunction = require("./queryFunction");
 const chalk = require("chalk");
 const { hashPass, checkPass, passRestrictions } = require("./hashFunctions");
 const cookieSession = require("cookie-session");
+const { uploadS3 } = require("./s3");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const { s3Url } = require("./config");
+const path = require("path");
 
 let secrets;
 process.env.NODE_ENV === "production"
@@ -19,6 +24,24 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 14
     })
 );
+
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
 
 //PURPOSE: VULNERABILITIES
 const csurf = require("csurf");
@@ -63,7 +86,6 @@ function checkIfLoggedIn(req, res, next) {
 //////////////////////////////////////////////////////////////////////////
 
 app.post("/submit-registration", (req, res) => {
-    console.log("SUBMIT REGISTRATION BODY:", req.body);
     if (!req.body.password) {
         res.json({ error: true });
     } else {
@@ -142,7 +164,7 @@ app.post("/login-check", (req, res) => {
 
 app.get("/user-data", (req, res) => {
     queryFunction
-        .fetchUserData(req.session.loggedIn.id)
+        .fetchUserData(req.session.loggedIn)
         .then(userData => {
             const { firstname, lastname, avatar, user_bio } = userData.rows[0];
             res.json({
@@ -156,6 +178,19 @@ app.get("/user-data", (req, res) => {
             console.log("GET USERDATA QUERRY ERROR: ", e);
             res.status(500).json({ error: true });
         });
+});
+
+app.post("/avatar-uploads", uploader.single("file"), uploadS3, (req, res) => {
+    const avatarUrl = s3Url + req.file.filename;
+    if (req.file) {
+        queryFunction
+            .updateAvatar(req.session.loggedIn, s3Url + req.file.filename)
+            .then(() => {
+                res.json({ avatar: avatarUrl });
+            });
+    } else {
+        res.status(500).json({ errorUploadingImage: true });
+    }
 });
 
 //order here MATTERS

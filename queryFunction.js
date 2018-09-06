@@ -24,6 +24,13 @@ module.exports.fetchUserData = function(id) {
     return db.query(`SELECT * FROM users WHERE id = $1`, [id || null]);
 };
 
+module.exports.updateAvatar = function(id, avatar_url) {
+    return db.query(`UPDATE users SET avatar = $2 WHERE id = $1`, [
+        id || null,
+        avatar_url || null
+    ]);
+};
+
 // module.exports.getAllData = function() {
 //     return db
 //         .query(
