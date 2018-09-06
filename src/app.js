@@ -17,6 +17,13 @@ export default class App extends React.Component {
     async componentDidMount() {
         const { data } = await axios.get("/user-data");
         this.setState(data);
+
+        //close modal on Esc key
+        window.addEventListener("keydown", e => {
+            if (e.keyCode == 27) {
+                this.setState({ modalVisible: false });
+            }
+        });
     }
 
     makeUploaderVisible() {
