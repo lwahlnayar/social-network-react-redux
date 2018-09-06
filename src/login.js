@@ -41,10 +41,10 @@ export default class Login extends React.Component {
     render() {
         return (
             <div className="loginContainer">
-                <h3>Log In</h3>
+                <h3>Sign In</h3>
                 {this.state.blankFields && (
                     <p className="errorMessage">
-                        Please enter an E-mail or Password!
+                        Please fill out all input fields!
                     </p>
                 )}
                 {this.state.error && (
@@ -57,6 +57,7 @@ export default class Login extends React.Component {
                             onChange={this.handleChange}
                             type="text"
                             name="email"
+                            placeholder="your_email@example.com"
                         />
                     </div>
                     <div className="input_holder">
@@ -65,6 +66,7 @@ export default class Login extends React.Component {
                             onChange={this.handleChange}
                             type="password"
                             name="password"
+                            placeholder="Insert your password"
                         />
                     </div>
                     <button
@@ -72,7 +74,7 @@ export default class Login extends React.Component {
                         className="loginButton"
                         name="loginButton"
                     >
-                        Log In
+                        Sign In
                     </button>
                 </form>
                 <Link to="/">Register!</Link>

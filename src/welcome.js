@@ -6,14 +6,40 @@ import Login from "./login";
 export default function Welcome() {
     return (
         <div className="welcomeContainer">
-            <h1>Welcome to SpicedBook!</h1>
-            <h2>Fun H2 comment goes here!</h2>
-            <HashRouter>
-                <div>
-                    <Route exact path="/" component={Registration} />
-                    <Route path="/login" component={Login} />
+            <header>
+                <nav>
+                    <img
+                        id="logo"
+                        src="./sesame_logo_white.png"
+                        alt="sesame logo"
+                    />
+                </nav>
+            </header>
+            <section>
+                <div className="centerHolder">
+                    <div className="greetings">
+                        <h1>Welcome to SpicedBook!</h1>
+                        <h2>A place to keep in touch...</h2>
+                        <p className="fadein">
+                            ...and discuss how Sesame's the coolest cohort in
+                            town ;-)
+                        </p>
+                    </div>
+                    <div className="formHolder">
+                        <HashRouter>
+                            <div>
+                                <Route
+                                    exact
+                                    path="/"
+                                    component={Registration}
+                                />
+                                <Route path="/login" component={Login} />
+                            </div>
+                        </HashRouter>
+                    </div>
                 </div>
-            </HashRouter>
+            </section>
+            <footer />
         </div>
     );
 }

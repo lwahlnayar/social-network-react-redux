@@ -1,3 +1,141 @@
 * {
-    background: azure;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #24292e;
+}
+
+/* ALLPAGES HEADER */
+
+header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 72px;
+    background-color: #24292e;
+    border: solid black;
+    margin-bottom: 50px;
+}
+
+nav {
+    width: 980px;
+}
+
+#logo {
+    padding-top: 7px;
+    width: 110px;
+}
+
+/* ALLPAGES FOOTER */
+footer {
+    height: 60px;
+    width: 100%;
+    background: white;
+}
+
+/* WELCOME STRUCTURE */
+
+.welcomeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 100%;
+    min-height: 100%;
+    background: #edf0f5;
+}
+
+.welcomeContainer .centerHolder {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    /* this width needs removing on mediaframe */
+    width: 980px;
+    min-height: 100vh;
+    margin-bottom: 50px;
+}
+
+.welcomeContainer .greetings {
+    max-height: 380px;
+}
+
+.welcomeContainer .formHolder {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    z-index: 1;
+    background: white;
+    border: solid #dddfe2 1px;
+    border-radius: 6px;
+    /*     this width to be fixed */
+    width: 400px;
+    height: fit-content;
+    min-height: 260px;
+}
+
+.welcomeContainer form {
+    margin-bottom: 15px;
+}
+
+.welcomeContainer div.formHolder h3 {
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.welcomeContainer div.formHolder .input_holder {
+    margin-bottom: 15px;
+}
+
+.welcomeContainer div.formHolder .input_holder p {
+    font-size: 0.98rem;
+}
+
+.welcomeContainer div.formHolder input {
+    border: 1px solid #bdc7d8;
+    height: 40px;
+    min-width: 310px;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+.welcomeContainer p.terms {
+    width: 310px;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.welcomeContainer button {
+    margin-top: 18px;
+    margin-bottom: 15px;
+    min-width: 100%;
+    height: 50px;
+    background-color: #2ebc4f;
+    border: none;
+    border-radius: 2px;
+    color: white;
+}
+
+.welcomeContainer button:hover {
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: mediumseagreen;
+}
+
+/* WELCOME MICRODETAILS */
+.welcomeContainer h1 {
+    font-size: 70px;
+}
+
+.welcomeContainer h2 {
+    margin-top: 40px;
+    font-size: 35px;
+}
+
+.welcomeContainer p.fadein {
+    margin-top: 35px;
+    font-size: 20px;
 }

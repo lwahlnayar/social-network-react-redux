@@ -45,7 +45,7 @@ export default class Registration extends React.Component {
                 {this.state.weakPassword && (
                     <p className="errorMessage">
                         Your password is weak! Please make sure to have at least
-                        8 characters, at least 1 number, 1 upper and 1 lower
+                        eight characters, at least 1 number, 1 upper and 1 lower
                         case letter.
                     </p>
                 )}
@@ -56,6 +56,7 @@ export default class Registration extends React.Component {
                             onChange={this.handleChange}
                             type="text"
                             name="firstname"
+                            placeholder="Your first name"
                         />
                     </div>
                     <div className="input_holder">
@@ -64,6 +65,7 @@ export default class Registration extends React.Component {
                             onChange={this.handleChange}
                             type="text"
                             name="lastname"
+                            placeholder="Your last name"
                         />
                     </div>
                     <div className="input_holder">
@@ -72,6 +74,7 @@ export default class Registration extends React.Component {
                             onChange={this.handleChange}
                             type="text"
                             name="email"
+                            placeholder="your_email@example.com"
                         />
                     </div>
                     <div className="input_holder">
@@ -80,7 +83,12 @@ export default class Registration extends React.Component {
                             onChange={this.handleChange}
                             type="password"
                             name="password"
+                            placeholder="Insert a password"
                         />
+                        <p className="terms">
+                            Password must contain at least eight characters, one
+                            numeral, one small and one big letter.
+                        </p>
                     </div>
                     <button
                         onClick={this.submit}
@@ -89,8 +97,12 @@ export default class Registration extends React.Component {
                     >
                         Register
                     </button>
+                    <p className="terms">
+                        By clicking on "Register", you agree to our terms and
+                        conditions.
+                    </p>
                 </form>
-                <Link to="/login">Log in!</Link>
+                <Link to="/login">Sign in!</Link>
             </div>
         );
     }
