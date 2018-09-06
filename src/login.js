@@ -77,7 +77,6 @@ export default class Login extends React.Component {
                         Sign In
                     </button>
                 </form>
-                <Link to="/">Register!</Link>
             </div>
         );
     }

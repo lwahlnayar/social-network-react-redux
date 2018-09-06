@@ -102,7 +102,6 @@ export default class Registration extends React.Component {
                         conditions.
                     </p>
                 </form>
-                <Link to="/login">Sign in!</Link>
             </div>
         );
     }

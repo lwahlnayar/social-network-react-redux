@@ -2,31 +2,36 @@ import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import Registration from "./registration";
 import Login from "./login";
+import { Link } from "react-router-dom";
 
 export default function Welcome() {
     return (
-        <div className="welcomeContainer">
-            <header>
-                <nav>
-                    <img
-                        id="logo"
-                        src="./sesame_logo_white.png"
-                        alt="sesame logo"
-                    />
-                </nav>
-            </header>
-            <section>
-                <div className="centerHolder">
-                    <div className="greetings">
-                        <h1>Welcome to SpicedBook!</h1>
-                        <h2>A place to keep in touch...</h2>
-                        <p className="fadein">
-                            ...and discuss how Sesame's the coolest cohort in
-                            town ;-)
-                        </p>
-                    </div>
-                    <div className="formHolder">
-                        <HashRouter>
+        <HashRouter>
+            <div className="welcomeContainer">
+                <header>
+                    <nav>
+                        <img
+                            id="logo"
+                            src="./sesame_logo_white.png"
+                            alt="sesame logo"
+                        />
+                        <div className="headerLinks">
+                            <Link to="/login">Sign in</Link>
+                            <Link to="/">Register</Link>
+                        </div>
+                    </nav>
+                </header>
+                <section>
+                    <div className="centerHolder">
+                        <div className="greetings">
+                            <h1>Welcome to SpicedBook!</h1>
+                            <h2>A place to keep in touch...</h2>
+                            <p className="fadein">
+                                ...and discuss how Sesame's the coolest cohort
+                                in town ;-)
+                            </p>
+                        </div>
+                        <div className="formHolder">
                             <div>
                                 <Route
                                     exact
@@ -35,17 +40,21 @@ export default function Welcome() {
                                 />
                                 <Route path="/login" component={Login} />
                             </div>
-                        </HashRouter>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <footer>
-                <div className="footerCenterHolder">
-                    <img id="logo" src="./sesame_logo.png" alt="sesame logo" />
-                    <p>SpicedBook &copy;</p>
-                </div>
-            </footer>
-        </div>
+                </section>
+                <footer>
+                    <div className="footerCenterHolder">
+                        <img
+                            id="logo"
+                            src="./sesame_logo.png"
+                            alt="sesame logo"
+                        />
+                        <p>SpicedBook &copy;</p>
+                    </div>
+                </footer>
+            </div>
+        </HashRouter>
     );
 }
 
