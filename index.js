@@ -53,7 +53,7 @@ if (process.env.NODE_ENV != "production") {
 function checkIfLoggedIn(req, res, next) {
     if (!req.session.loggedIn && req.url != "/welcome") {
         res.redirect("/welcome");
-    } else if (req.session.loggedIn && req.url != "/") {
+    } else if (req.session.loggedIn && req.url == "/welcome") {
         res.redirect("/");
     } else {
         next();
@@ -61,10 +61,6 @@ function checkIfLoggedIn(req, res, next) {
 }
 //////////////////////////////ROUTE RESTRICTIONS///////////////////////////
 //////////////////////////////////////////////////////////////////////////
-
-app.get("*", checkIfLoggedIn, function(req, res) {
-    res.sendFile(__dirname + "/index.html");
-});
 
 app.post("/submit-registration", (req, res) => {
     console.log("SUBMIT REGISTRATION BODY:", req.body);
@@ -142,6 +138,29 @@ app.post("/login-check", (req, res) => {
                 });
             });
     }
+});
+
+app.get("/user-data", (req, res) => {
+    queryFunction
+        .fetchUserData(req.session.loggedIn.id)
+        .then(userData => {
+            const { firstname, lastname, avatar, user_bio } = userData.rows[0];
+            res.json({
+                firstname: firstname,
+                lastname: lastname,
+                avatar: avatar,
+                user_bio: user_bio
+            });
+        })
+        .catch(e => {
+            console.log("GET USERDATA QUERRY ERROR: ", e);
+            res.status(500).json({ error: true });
+        });
+});
+
+//order here MATTERS
+app.get("*", checkIfLoggedIn, (req, res) => {
+    res.sendFile(__dirname + "/index.html");
 });
 
 //server listening

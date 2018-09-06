@@ -20,6 +20,10 @@ module.exports.fetchId = function(email) {
     return db.query(`SELECT id FROM users WHERE email = $1`, [email || null]);
 };
 
+module.exports.fetchUserData = function(id) {
+    return db.query(`SELECT * FROM users WHERE id = $1`, [id || null]);
+};
+
 // module.exports.getAllData = function() {
 //     return db
 //         .query(
