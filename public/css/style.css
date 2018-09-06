@@ -8,7 +8,8 @@ body {
     color: #24292e;
 }
 
-/* ALLPAGES HEADER */
+/* SITEWIDE */
+/* HEADER SECTION */
 
 header {
     display: flex;
@@ -45,7 +46,7 @@ nav div.headerLinks a:hover {
     color: #2ebc4f;
 }
 
-/* ALLPAGES FOOTER */
+/* FOOTER SECTION */
 footer {
     display: flex;
     justify-content: center;
@@ -63,6 +64,22 @@ footer p {
     width: 980px;
     display: flex;
 }
+
+/* MINOR SITEWIDE THINGS */
+
+.errorTemplate {
+    display: flex;
+    justify-content: center;
+    background-color: #edf0f5;
+    height: 100%;
+    padding: 200px;
+}
+
+img#close {
+    width: 50px;
+}
+
+/* END SITEWIDE */
 
 /* WELCOME STRUCTURE */
 
@@ -171,6 +188,16 @@ footer p {
 
 /* APP HOMEPAGE */
 
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 100%;
+    min-height: 100%;
+    background: #edf0f5;
+}
+
 .appContainer div.overlay {
     display: flex;
     justify-content: center;
@@ -186,10 +213,23 @@ footer p {
 .appContainer div.overlay div.uploaderModal {
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: white;
     border-radius: 3px;
     height: 80vh;
     width: 100vh;
+}
+
+.appContainer div.overlay #close {
+    position: relative;
+    margin-top: 18px;
+    transform: translateX(320px);
+}
+
+.appContainer div.overlay h2 {
+    text-align: center;
+    font-size: 50px;
+    margin: 80px;
 }
 
 .appContainer #fileButton {

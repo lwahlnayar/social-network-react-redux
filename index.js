@@ -121,7 +121,6 @@ app.post("/submit-registration", (req, res) => {
 });
 
 app.post("/login-check", (req, res) => {
-    console.log(req.body);
     if (!req.body.email || !req.body.password) {
         res.json({ blankFieldsError: true });
     } else {
@@ -160,6 +159,11 @@ app.post("/login-check", (req, res) => {
                 });
             });
     }
+});
+
+app.get("/sign-out", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
 });
 
 app.get("/user-data", (req, res) => {

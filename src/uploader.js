@@ -3,8 +3,14 @@ import React from "react";
 export default function Uploader(props) {
     return (
         <div className="uploaderContainer">
-            <div className="overlay">
+            <div onClick={props.exitModal} className="overlay">
                 <div className="uploaderModal">
+                    <img
+                        id="close"
+                        onClick={props.exitModal}
+                        src="./close-x.png"
+                    />
+
                     <h2>Want to change your Profile Picture?</h2>
                     <input
                         onChange={props.submit}

@@ -11,6 +11,7 @@ export default class App extends React.Component {
         this.state = {};
         this.makeUploaderVisible = this.makeUploaderVisible.bind(this);
         this.submit = this.submit.bind(this);
+        this.exitModal = this.exitModal.bind(this);
     }
 
     async componentDidMount() {
@@ -22,9 +23,13 @@ export default class App extends React.Component {
         this.setState({ modalVisible: true });
     }
 
-    updateAvatarInstantly(avatar) {
+    updateAvatarInstantly(argument) {
         this.setState({ modalVisible: false });
-        this.setState(avatar);
+        this.setState(argument);
+    }
+
+    exitModal() {
+        this.setState({ modalVisible: false });
     }
 
     submit(e) {
@@ -41,6 +46,13 @@ export default class App extends React.Component {
     }
 
     render() {
+        if (!this.state.firstname) {
+            return (
+                <div className="errorTemplate">
+                    <img src="./loading.gif" />
+                </div>
+            );
+        }
         return (
             <HashRouter>
                 <div className="appContainer">
@@ -52,8 +64,7 @@ export default class App extends React.Component {
                                 alt="sesame logo"
                             />
                             <div className="headerLinks">
-                                <Link to="/login">Sign in</Link>
-                                <Link to="/">Register</Link>
+                                <a href="/sign-out">Sign Out</a>
                             </div>
                         </nav>
                     </header>
@@ -66,7 +77,10 @@ export default class App extends React.Component {
                                 clickHandler={this.makeUploaderVisible}
                             />
                             {this.state.modalVisible && (
-                                <Uploader submit={this.submit} />
+                                <Uploader
+                                    submit={this.submit}
+                                    exitModal={this.exitModal}
+                                />
                             )}
                         </div>
                     </section>
