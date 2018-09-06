@@ -13,8 +13,9 @@ body {
 header {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 72px;
+    height: 82px;
     background-color: #24292e;
     border: solid black;
     margin-bottom: 50px;
@@ -25,15 +26,27 @@ nav {
 }
 
 #logo {
-    padding-top: 7px;
     width: 110px;
+    height: 60px;
 }
 
 /* ALLPAGES FOOTER */
 footer {
-    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
     width: 100%;
     background: white;
+}
+
+footer p {
+    padding-top: 24px;
+}
+
+.footerCenterHolder {
+    width: 980px;
+    display: flex;
 }
 
 /* WELCOME STRUCTURE */
@@ -113,6 +126,7 @@ footer {
     margin-bottom: 15px;
     min-width: 100%;
     height: 50px;
+    font-size: 20px;
     background-color: #2ebc4f;
     border: none;
     border-radius: 2px;

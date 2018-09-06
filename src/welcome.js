@@ -39,7 +39,12 @@ export default function Welcome() {
                     </div>
                 </div>
             </section>
-            <footer />
+            <footer>
+                <div className="footerCenterHolder">
+                    <img id="logo" src="./sesame_logo.png" alt="sesame logo" />
+                    <p>SpicedBook &copy;</p>
+                </div>
+            </footer>
         </div>
     );
 }
