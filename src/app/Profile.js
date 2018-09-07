@@ -2,14 +2,10 @@ import React from "react";
 import ProfilePic from "./Profile-pic";
 
 export default function Profile(props) {
+    const { clickHandler, rootState } = props;
     return (
         <section className="profileContainer">
-            <ProfilePic
-                firstname={props.firstname}
-                lastname={props.lastname}
-                profilePicUrl={props.profilePicUrl}
-                clickHandler={props.clickHandler}
-            />
+            <ProfilePic rootState={rootState} clickHandler={clickHandler} />
         </section>
     );
 }

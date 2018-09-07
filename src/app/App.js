@@ -84,9 +84,7 @@ export default class App extends React.Component {
                                 path="/"
                                 render={() => (
                                     <Profile
-                                        firstname={this.state.firstname}
-                                        lastname={this.state.lastname}
-                                        profilePicUrl={this.state.avatar}
+                                        rootState={this.state}
                                         clickHandler={this.makeUploaderVisible}
                                     />
                                 )}

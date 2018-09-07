@@ -168,12 +168,7 @@ app.get("/user-data", (req, res) => {
         .fetchUserData(id)
         .then(userData => {
             const { firstname, lastname, avatar, user_bio } = userData.rows[0];
-            res.json({
-                firstname: firstname,
-                lastname: lastname,
-                avatar: avatar,
-                user_bio: user_bio
-            });
+            res.json({ firstname, lastname, avatar, user_bio });
         })
         .catch(e => {
             console.log("GET USERDATA QUERRY ERROR: ", e);
