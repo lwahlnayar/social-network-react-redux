@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "../axios";
-import ProfilePic from "./Profile-pic";
+import Profile from "./Profile";
 import Uploader from "./Uploader";
 
 export default class App extends React.Component {
@@ -29,11 +29,6 @@ export default class App extends React.Component {
         this.setState({ modalVisible: true });
     }
 
-    updateAvatarInstantly(argument) {
-        this.setState({ modalVisible: false });
-        this.setState(argument);
-    }
-
     exitModal() {
         this.setState({ modalVisible: false });
     }
@@ -41,6 +36,11 @@ export default class App extends React.Component {
     handleModalClick(e) {
         e.stopPropagation();
         console.log("handlemodalclick");
+    }
+
+    updateAvatarInstantly(argument) {
+        this.setState({ modalVisible: false });
+        this.setState(argument);
     }
 
     submit(e) {
@@ -51,7 +51,6 @@ export default class App extends React.Component {
 
         axios.post("/avatar-uploads", fd).then(res => {
             console.log("RESPONSE IN POST/UPLOAD IMAGE ajax", res.data.avatar);
-            console.log("2", this.state.avatar);
             this.updateAvatarInstantly(res.data);
         });
     }
@@ -65,7 +64,7 @@ export default class App extends React.Component {
             );
         }
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <div className="appContainer">
                     <header>
                         <nav>
@@ -81,12 +80,18 @@ export default class App extends React.Component {
                     </header>
                     <section>
                         <div className="centerHolder">
-                            <ProfilePic
-                                firstname={this.state.firstname}
-                                lastname={this.state.lastname}
-                                profilepPicUrl={this.state.avatar}
-                                clickHandler={this.makeUploaderVisible}
+                            <Route
+                                path="/"
+                                render={() => (
+                                    <Profile
+                                        firstname={this.state.firstname}
+                                        lastname={this.state.lastname}
+                                        profilePicUrl={this.state.avatar}
+                                        clickHandler={this.makeUploaderVisible}
+                                    />
+                                )}
                             />
+
                             {this.state.modalVisible && (
                                 <Uploader
                                     handleModalClick={this.handleModalClick}
@@ -107,7 +112,7 @@ export default class App extends React.Component {
                         </div>
                     </footer>
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         );
     }
 }

@@ -230,17 +230,17 @@ p.errorMessage {
     margin-bottom: 50px;
 }
 
-.appContainer .profilePicContainer {
+.appContainer .profileContainer {
     max-width: max-content;
 }
 
-.appContainer .profilePicContainer img {
+.appContainer .profileContainer img {
     max-width: 100%;
     background-color: white;
     border-radius: 200px;
 }
 
-.appContainer .profilePicContainer img:hover {
+.appContainer .profileContainer img:hover {
     cursor: pointer;
 }
 
