@@ -299,12 +299,40 @@ p.errorMessage {
     width: 280px;
     height: 50px;
     margin-bottom: 30px;
+    color: white;
+    font-size: 20px;
 }
 
 .appContainer #labelUploadButton:hover {
     cursor: pointer;
     transition: 0.5s ease;
     background-color: mediumseagreen;
+}
+
+/* USER BIO COMPONENT */
+
+.appContainer div.userBio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2ebc4f;
+    border-radius: 2px;
+    width: 280px;
+    height: 50px;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 20px;
+}
+
+.appContainer div.userBio:hover {
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: mediumseagreen;
+}
+
+.appContainer .profileContainer textarea {
+    width: 100%;
+    border-radius: 3px;
 }
 
 /* ANIMATIONS BELOW */

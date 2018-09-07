@@ -190,8 +190,6 @@ app.post("/avatar-uploads", uploader.single("file"), uploadS3, (req, res) => {
 });
 
 app.post("/post-bio", (req, res) => {
-    console.log("user bio:", req.body);
-    console.log("useridpostbio", req.session.loggedIn);
     queryFunction
         .postBio(req.session.loggedIn, req.body.user_bio)
         .then(() => {
