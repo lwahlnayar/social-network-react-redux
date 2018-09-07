@@ -40,15 +40,19 @@ export default class App extends React.Component {
     }
     //////////////////////////////////
     toggleBioInputField() {
+        console.log("button pressed!");
         this.setState({ bioInputFieldCheck: !this.state.bioInputFieldCheck });
     }
 
     async postBio(e) {
-        if (e.keyCode == 13) {
-            let bioObject = { user_bio: e.target.value };
+        if (e.keyCode == 13 || e.button == 0) {
+            let textOnClick = document.getElementById("textArea").value;
+            let bioObject = { user_bio: e.target.value || textOnClick };
+
             const { data } = await axios.post("/post-bio", bioObject);
             console.log("AXIOS POSTBIO RESPONSE (destructured as data):", data);
             this.setState(data);
+            this.setState({ bioInputFieldCheck: false });
         }
     }
 

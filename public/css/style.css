@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: quicksand, sans-serif;
+    font-family: Quicksand, sans-serif;
     color: #24292e;
 }
 
@@ -96,6 +96,24 @@ p.errorMessage {
     max-width: 310px;
     margin: 10px auto;
     color: tomato;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2ebc4f;
+    border-radius: 2px;
+    max-width: 100%;
+    height: 50px;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.button:hover {
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: mediumseagreen;
 }
 
 /* END SITEWIDE */
@@ -226,12 +244,19 @@ p.errorMessage {
     position: relative;
     /* this width needs removing on mediaframe */
     width: 980px;
-    min-height: 100vh;
+    min-height: 80vh;
     margin-bottom: 50px;
 }
 
 .appContainer .profileContainer {
-    max-width: max-content;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.appContainer .profilePicContainer {
+    margin: auto;
 }
 
 .appContainer .profileContainer img {
@@ -311,28 +336,34 @@ p.errorMessage {
 
 /* USER BIO COMPONENT */
 
-.appContainer div.userBio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #2ebc4f;
-    border-radius: 2px;
-    width: 280px;
-    height: 50px;
-    margin-bottom: 30px;
-    color: white;
-    font-size: 20px;
+.appContainer div.userBio.button {
+    margin-bottom: 50px;
+    transform: translateY(45px);
 }
 
-.appContainer div.userBio:hover {
-    cursor: pointer;
-    transition: 0.5s ease;
-    background-color: mediumseagreen;
+.appContainer div.enterBio.button {
+    transform: translateY(45px);
+    margin-bottom: 50px;
+}
+
+.appContainer .profileContainer h4 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .appContainer .profileContainer textarea {
     width: 100%;
+    height: 45px;
     border-radius: 3px;
+}
+
+.appContainer p#bioComment {
+    font-style: italic;
+    font-family: "Indie Flower";
+    font-size: 20px;
+    margin-top: 5px;
+    word-wrap: break-word;
 }
 
 /* ANIMATIONS BELOW */

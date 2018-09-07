@@ -7,7 +7,7 @@ export default function ProfilePic(props) {
         <div className="profilePicContainer">
             <img
                 onClick={clickHandler}
-                width="300px"
+                width="250px"
                 src={avatar || "/default_image.png"}
             />
             <h1 className="userfullname">

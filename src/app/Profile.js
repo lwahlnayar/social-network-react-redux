@@ -4,16 +4,40 @@ import ProfilePic from "./Profile-pic";
 export default function Profile(props) {
     const { clickHandler, toggleBioInputField, postBio, rootState } = props;
     const { user_bio, bioInputFieldCheck } = rootState;
+
+    let buttonText;
+    if (!user_bio) {
+        buttonText = "Add a short biography!";
+    } else {
+        buttonText = "Edit your biography!";
+    }
+
     const addBioButton = (
-        <div onClick={toggleBioInputField} className="userBio">
-            Add a short biography!
+        <div>
+            {user_bio && <h4>About me</h4>}
+            <p id="bioComment">{user_bio}</p>
+            <div onClick={toggleBioInputField} className="button userBio">
+                {buttonText}
+            </div>
         </div>
     );
     const bioInputField = (
-        <textarea onKeyDown={postBio} defaultValue={user_bio} />
+        <div id="inputField">
+            <textarea
+                id="textArea"
+                maxlength="50"
+                onKeyDown={postBio}
+                defaultValue={user_bio}
+            />
+            <div
+                htmlFor="textArea"
+                onClick={postBio}
+                className="button enterBio"
+            >
+                Save
+            </div>
+        </div>
     );
-    console.log("props", props);
-    console.log("bioInputField", bioInputFieldCheck);
 
     return (
         <section className="profileContainer">
