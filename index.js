@@ -106,7 +106,7 @@ app.post("/submit-registration", (req, res) => {
                     "USER ID RESPONSE AFTER CREATING USER",
                     useridResponse.rows[0]
                 );
-                req.session.loggedIn = useridResponse.rows[0]; //sets cookie based on the users ID
+                req.session.loggedIn = useridResponse.rows[0].id; //sets cookie based on the users ID
                 res.json({
                     loggedIn: true
                 });
@@ -136,10 +136,6 @@ app.post("/login-check", (req, res) => {
                             .fetchId(req.body.email)
                             .then(fetchedId => {
                                 req.session.loggedIn = fetchedId.rows[0].id; //set cookie based on fetched ID
-                                console.log(
-                                    "success! logged in: ",
-                                    req.session
-                                );
                                 res.json({
                                     loggedIn: true
                                 });
@@ -167,8 +163,9 @@ app.get("/sign-out", (req, res) => {
 });
 
 app.get("/user-data", (req, res) => {
+    let id = req.session.loggedIn;
     queryFunction
-        .fetchUserData(req.session.loggedIn)
+        .fetchUserData(id)
         .then(userData => {
             const { firstname, lastname, avatar, user_bio } = userData.rows[0];
             res.json({

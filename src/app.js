@@ -39,6 +39,11 @@ export default class App extends React.Component {
         this.setState({ modalVisible: false });
     }
 
+    handleModalClick(e) {
+        e.stopPropagation();
+        console.log("handlemodalclick");
+    }
+
     submit(e) {
         const file = e.target.files[0];
         console.log("FILE variable:", file);
@@ -85,6 +90,7 @@ export default class App extends React.Component {
                             />
                             {this.state.modalVisible && (
                                 <Uploader
+                                    handleModalClick={this.handleModalClick}
                                     submit={this.submit}
                                     exitModal={this.exitModal}
                                 />

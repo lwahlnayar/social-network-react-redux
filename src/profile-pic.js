@@ -5,6 +5,7 @@ export default function ProfilePic(props) {
         <div className="profilePicContainer">
             <img
                 onClick={props.clickHandler}
+                width="300px"
                 src={props.profilepPicUrl || "/default_image.png"}
             />
             <h1 className="userfullname">

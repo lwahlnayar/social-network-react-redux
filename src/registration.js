@@ -40,13 +40,14 @@ export default class Registration extends React.Component {
             <div className="registrationContainer">
                 <h3>Register Now!</h3>
                 {this.state.error && (
-                    <p className="errorMessage">Oops! Something went wrong!</p>
+                    <p className="errorMessage">
+                        Please fill out all input fields!
+                    </p>
                 )}
                 {this.state.weakPassword && (
                     <p className="errorMessage">
-                        Your password is weak! Please make sure to have at least
-                        eight characters, at least 1 number, 1 upper and 1 lower
-                        case letter.
+                        Your password is weak! Make sure to follow the minimum
+                        safety requirements!
                     </p>
                 )}
                 <form>

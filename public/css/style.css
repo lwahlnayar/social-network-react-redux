@@ -5,6 +5,7 @@
 }
 
 body {
+    font-family: quicksand, sans-serif;
     color: #24292e;
 }
 
@@ -69,20 +70,37 @@ footer p {
 /* MINOR SITEWIDE THINGS */
 
 .errorTemplate {
+    position: absolute;
     display: flex;
     justify-content: center;
     background-color: #edf0f5;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
     padding: 200px;
+}
+
+.errorTemplate img {
+    width: 67px;
+    height: 75px;
 }
 
 img#close {
     width: 50px;
 }
 
+img#close:hover {
+    cursor: pointer;
+}
+
+p.errorMessage {
+    max-width: 310px;
+    margin: 10px auto;
+    color: tomato;
+}
+
 /* END SITEWIDE */
 
-/* WELCOME STRUCTURE */
+/* -----------------WELCOME------------------- */
 
 .welcomeContainer {
     display: flex;
@@ -117,7 +135,7 @@ img#close {
     border: solid #dddfe2 1px;
     border-radius: 6px;
     /*     this width to be fixed */
-    width: 400px;
+    width: 450px;
     height: fit-content;
     min-height: 260px;
 }
@@ -187,16 +205,43 @@ img#close {
     font-size: 20px;
 }
 
-/* APP HOMEPAGE */
+/* -------------- APP HOMEPAGE------------------- */
 
 .appContainer {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     min-width: 100%;
     min-height: 100%;
     background: #edf0f5;
+}
+
+.appContainer .centerHolder {
+    position: relative;
+    /* this width needs removing on mediaframe */
+    width: 980px;
+    min-height: 100vh;
+    margin-bottom: 50px;
+}
+
+.appContainer .profilePicContainer {
+    max-width: max-content;
+}
+
+.appContainer .profilePicContainer img {
+    max-width: 100%;
+    background-color: white;
+    border-radius: 200px;
+}
+
+.appContainer .profilePicContainer img:hover {
+    cursor: pointer;
+}
+
+.appContainer h1.userfullname {
+    margin-top: 20px;
+    font-size: 35px;
 }
 
 .appContainer div.overlay {
@@ -212,8 +257,10 @@ img#close {
 }
 
 .appContainer div.overlay div.uploaderModal {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     background-color: white;
     border-radius: 3px;
@@ -222,15 +269,16 @@ img#close {
 }
 
 .appContainer div.overlay #close {
-    position: relative;
+    position: absolute;
+    top: 5px;
+    right: 18px;
     margin-top: 18px;
-    transform: translateX(320px);
 }
 
 .appContainer div.overlay h2 {
     text-align: center;
-    font-size: 50px;
-    margin: 80px;
+    font-size: 35px;
+    margin: 30px;
 }
 
 .appContainer #fileButton {
@@ -245,6 +293,7 @@ img#close {
     border-radius: 2px;
     width: 280px;
     height: 50px;
+    margin-bottom: 30px;
 }
 
 .appContainer #labelUploadButton:hover {

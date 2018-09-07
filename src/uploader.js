@@ -4,7 +4,7 @@ export default function Uploader(props) {
     return (
         <div className="uploaderContainer">
             <div onClick={props.exitModal} className="overlay">
-                <div className="uploaderModal">
+                <div onClick={props.handleModalClick} className="uploaderModal">
                     <img
                         id="close"
                         onClick={props.exitModal}
