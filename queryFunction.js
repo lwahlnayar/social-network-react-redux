@@ -31,6 +31,13 @@ module.exports.updateAvatar = function(id, avatar_url) {
     ]);
 };
 
+module.exports.postBio = function(id, user_bio) {
+    return db.query(`UPDATE users SET user_bio = $2 WHERE id = $1`, [
+        id || null,
+        user_bio || null
+    ]);
+};
+
 // module.exports.getAllData = function() {
 //     return db
 //         .query(

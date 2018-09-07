@@ -189,6 +189,20 @@ app.post("/avatar-uploads", uploader.single("file"), uploadS3, (req, res) => {
     }
 });
 
+app.post("/post-bio", (req, res) => {
+    console.log("user bio:", req.body);
+    console.log("useridpostbio", req.session.loggedIn);
+    queryFunction
+        .postBio(req.session.loggedIn, req.body.user_bio)
+        .then(() => {
+            res.json({ user_bio: req.body.user_bio });
+        })
+        .catch(e => {
+            console.log("ERROR POSTING USERBIO", e);
+            res.status(500).json({ errorPostingUserBio: true });
+        });
+});
+
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {
     res.sendFile(__dirname + "/index.html");

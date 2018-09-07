@@ -7,10 +7,12 @@ import Uploader from "./Uploader";
 export default class App extends React.Component {
     constructor() {
         super();
-        this.state = {};
+        this.state = { bioInputFieldCheck: false };
         this.makeUploaderVisible = this.makeUploaderVisible.bind(this);
         this.submit = this.submit.bind(this);
         this.exitModal = this.exitModal.bind(this);
+        this.toggleBioInputField = this.toggleBioInputField.bind(this);
+        this.postBio = this.postBio.bind(this);
     }
 
     async componentDidMount() {
@@ -35,9 +37,22 @@ export default class App extends React.Component {
 
     handleModalClick(e) {
         e.stopPropagation();
-        console.log("handlemodalclick");
+    }
+    //////////////////////////////////
+    toggleBioInputField() {
+        this.setState({ bioInputFieldCheck: !this.state.bioInputFieldCheck });
     }
 
+    async postBio(e) {
+        if (e.keyCode == 13) {
+            let bioObject = { user_bio: e.target.value };
+            const { data } = await axios.post("/post-bio", bioObject);
+            console.log("AXIOS POSTBIO RESPONSE (destructured as data):", data);
+            this.setState(data);
+        }
+    }
+
+    /////////////////////////////////
     updateAvatarInstantly(argument) {
         this.setState({ modalVisible: false });
         this.setState(argument);
@@ -86,6 +101,10 @@ export default class App extends React.Component {
                                     <Profile
                                         rootState={this.state}
                                         clickHandler={this.makeUploaderVisible}
+                                        toggleBioInputField={
+                                            this.toggleBioInputField
+                                        }
+                                        postBio={this.postBio}
                                     />
                                 )}
                             />

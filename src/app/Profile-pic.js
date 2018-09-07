@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProfilePic(props) {
     const { firstname, lastname, avatar, user_bio } = props.rootState;
-    const { clickHandler } = props.clickHandler;
+    const { clickHandler } = props;
     return (
         <div className="profilePicContainer">
             <img
