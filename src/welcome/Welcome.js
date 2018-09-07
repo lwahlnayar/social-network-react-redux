@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
-import Registration from "./registration";
-import Login from "./login";
+import Registration from "./Registration";
+import Login from "./Login";
 import { Link } from "react-router-dom";
 
 export default function Welcome() {
@@ -24,7 +24,12 @@ export default function Welcome() {
                 <section>
                     <div className="centerHolder">
                         <div className="greetings">
-                            <h1>Welcome to SpicedBook!</h1>
+                            <h1>
+                                Welcome to{" "}
+                                <span className="flicker-in-1">
+                                    SpicedBook!
+                                </span>
+                            </h1>
                             <h2>A place to keep in touch...</h2>
                             <p className="fadein">
                                 ...and discuss how Sesame's the coolest cohort

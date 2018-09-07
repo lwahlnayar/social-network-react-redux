@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import axios from "axios";
-import Welcome from "./welcome";
-import App from "./app";
+import Welcome from "./welcome/Welcome";
+import App from "./app/App";
 
 let elem;
 

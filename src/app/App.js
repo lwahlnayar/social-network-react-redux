@@ -1,9 +1,9 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
-import axios from "./axios";
+import axios from "../axios";
 import { Link } from "react-router-dom";
-import ProfilePic from "./profile-pic";
-import Uploader from "./uploader";
+import ProfilePic from "./Profile-pic";
+import Uploader from "./Uploader";
 
 export default class App extends React.Component {
     constructor() {
