@@ -1,7 +1,6 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "../axios";
-import { Link } from "react-router-dom";
 import ProfilePic from "./Profile-pic";
 import Uploader from "./Uploader";
 
