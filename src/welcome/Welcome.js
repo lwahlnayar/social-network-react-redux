@@ -25,15 +25,21 @@ export default function Welcome() {
                     <div className="centerHolder">
                         <div className="greetings">
                             <h1>
-                                Welcome to{" "}
+                                <span className="slide-in-blurred-top">
+                                    Welcome
+                                </span>{" "}
+                                <span className="slide-in-blurred-top2">
+                                    to
+                                </span>{" "}
                                 <span className="flicker-in-1">
                                     SpicedBook!
                                 </span>
                             </h1>
-                            <h2>A place to keep in touch...</h2>
-                            <p className="fadein">
-                                ...and discuss how Sesame's the coolest cohort
-                                in town ;-)
+                            <h2 className="fade-in">
+                                A place to keep in touch...
+                            </h2>
+                            <p className="fade-in2">
+                                ...and discuss how Karo is a Gordita bonita
                             </p>
                         </div>
                         <div className="formHolder">
