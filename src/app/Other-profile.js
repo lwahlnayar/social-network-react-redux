@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "../axios";
 import ProfilePic from "./Profile-pic";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class OtherProfile extends React.Component {
     constructor() {
@@ -14,7 +15,14 @@ export default class OtherProfile extends React.Component {
             `/get-other-users-data/${this.props.match.params.otherUserId}`
         );
         this.setState(data);
-        // console.log("this state for otherprofile component:", this.state);
+    }
+
+    async componentWillReceiveProps() {
+        console.log("yo, props received from willreceiveprops:", this.props);
+        const { data } = await axios.get(
+            `/get-other-users-data/${this.props.match.params.otherUserId}`
+        );
+        this.setState(data);
     }
 
     render() {
@@ -33,6 +41,9 @@ export default class OtherProfile extends React.Component {
                     {firstname} {lastname}
                 </h1>
                 {user_bio && userBioHtml}
+                <Link to="/1">1</Link>
+                <Link to="/2">2</Link>
+                <Link to="/3">3</Link>
             </section>
         );
     }

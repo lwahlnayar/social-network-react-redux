@@ -102,10 +102,6 @@ app.post("/submit-registration", (req, res) => {
                 );
             })
             .then(useridResponse => {
-                console.log(
-                    "USER ID RESPONSE AFTER CREATING USER",
-                    useridResponse.rows[0]
-                );
                 req.session.loggedIn = useridResponse.rows[0].id; //sets cookie based on the users ID
                 res.json({
                     loggedIn: true
