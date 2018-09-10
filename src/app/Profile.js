@@ -1,5 +1,6 @@
 import React from "react";
 import ProfilePic from "./Profile-pic";
+import FriendButton from "./Friend-button";
 
 export default function Profile(props) {
     const { clickHandler, toggleBioInputField, postBio, rootState } = props;
@@ -25,7 +26,7 @@ export default function Profile(props) {
         <div id="inputField">
             <textarea
                 id="textArea"
-                maxlength="50"
+                maxLength="50"
                 onKeyDown={postBio}
                 defaultValue={user_bio}
             />
@@ -42,6 +43,7 @@ export default function Profile(props) {
     return (
         <section className="profileContainer">
             <ProfilePic rootState={rootState} clickHandler={clickHandler} />
+            <FriendButton />
             {bioInputFieldCheck ? bioInputField : addBioButton}
         </section>
     );

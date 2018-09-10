@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "../axios";
-import ProfilePic from "./Profile-pic";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import FriendButton from "./Friend-button";
 
 export default class OtherProfile extends React.Component {
     constructor() {
@@ -29,11 +29,6 @@ export default class OtherProfile extends React.Component {
     }
 
     async componentWillReceiveProps(nextprops) {
-        console.log(
-            "componentWillReceiveProps",
-            nextprops.routeProps.match.params.otherUserId,
-            this.props.rootId
-        );
         if (
             nextprops.routeProps.match.params.otherUserId == this.props.rootId
         ) {
@@ -72,6 +67,7 @@ export default class OtherProfile extends React.Component {
                 <Link to="/1">1</Link>
                 <Link to="/2">2</Link>
                 <Link to="/3">3</Link>
+                <FriendButton />
             </section>
         );
     }
