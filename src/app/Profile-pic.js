@@ -6,6 +6,7 @@ export default function ProfilePic(props) {
     return (
         <div className="profilePicContainer">
             <img
+                className="mainProfilePic"
                 onClick={clickHandler}
                 width="250px"
                 src={avatar || "/default_image.png"}

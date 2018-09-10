@@ -289,7 +289,7 @@ p.errorMessage {
     border-radius: 200px;
 }
 
-.appContainer .profileContainer img:hover {
+.appContainer .profileContainer img.mainProfilePic:hover {
     cursor: pointer;
 }
 

@@ -201,6 +201,18 @@ app.post("/post-bio", (req, res) => {
         });
 });
 
+app.get("/get-other-users-data/:otherUserId", async (req, res) => {
+    try {
+        const otherUsersData = await queryFunction.getOtherUsersData(
+            req.params.otherUserId
+        );
+        res.json(otherUsersData.rows[0]);
+    } catch (e) {
+        console.log("ERROR FETCHING OTHER USERS DATA", e);
+        res.status(500).json({ errorPostingUserBio: true });
+    }
+});
+
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {
     res.sendFile(__dirname + "/index.html");

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "../axios";
 import Profile from "./Profile";
 import Uploader from "./Uploader";
+import OtherProfile from "./Other-profile.js";
 
 export default class App extends React.Component {
     constructor() {
@@ -100,6 +101,7 @@ export default class App extends React.Component {
                     <section>
                         <div className="centerHolder">
                             <Route
+                                exact
                                 path="/"
                                 render={() => (
                                     <Profile
@@ -111,6 +113,11 @@ export default class App extends React.Component {
                                         postBio={this.postBio}
                                     />
                                 )}
+                            />
+                            <Route
+                                exact
+                                path="/:otherUserId"
+                                component={OtherProfile}
                             />
 
                             {this.state.modalVisible && (

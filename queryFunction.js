@@ -38,6 +38,10 @@ module.exports.postBio = function(id, user_bio) {
     ]);
 };
 
+module.exports.getOtherUsersData = function(id) {
+    return db.query(`SELECT * FROM users WHERE id = $1`, [id || null]);
+};
+
 // module.exports.getAllData = function() {
 //     return db
 //         .query(
