@@ -117,7 +117,12 @@ export default class App extends React.Component {
                             <Route
                                 exact
                                 path="/:otherUserId"
-                                component={OtherProfile}
+                                render={props => (
+                                    <OtherProfile
+                                        rootId={this.state.id}
+                                        routeProps={props}
+                                    />
+                                )}
                             />
 
                             {this.state.modalVisible && (

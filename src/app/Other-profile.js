@@ -10,22 +10,50 @@ export default class OtherProfile extends React.Component {
     }
 
     async componentDidMount() {
-        console.log("componentDidMount ran succesfully. mounted!");
-        const { data } = await axios.get(
-            `/get-other-users-data/${this.props.match.params.otherUserId}`
-        );
-        this.setState(data);
+        if (
+            this.props.routeProps.match.params.otherUserId == this.props.rootId
+        ) {
+            this.props.routeProps.history.push("/");
+        } else {
+            try {
+                const { data } = await axios.get(
+                    `/get-other-users-data/${
+                        this.props.routeProps.match.params.otherUserId
+                    }`
+                );
+                this.setState(data);
+            } catch (e) {
+                console.log("Error with componentwillreceiveprops:", e);
+            }
+        }
     }
 
-    async componentWillReceiveProps() {
-        console.log("yo, props received from willreceiveprops:", this.props);
-        const { data } = await axios.get(
-            `/get-other-users-data/${this.props.match.params.otherUserId}`
+    async componentWillReceiveProps(nextprops) {
+        console.log(
+            "componentWillReceiveProps",
+            nextprops.routeProps.match.params.otherUserId,
+            this.props.rootId
         );
-        this.setState(data);
+        if (
+            nextprops.routeProps.match.params.otherUserId == this.props.rootId
+        ) {
+            this.props.routeProps.history.push("/");
+        } else {
+            try {
+                const { data } = await axios.get(
+                    `/get-other-users-data/${
+                        nextprops.routeProps.match.params.otherUserId
+                    }`
+                );
+                this.setState(data);
+            } catch (e) {
+                console.log("Error with componentwillreceiveprops:", e);
+            }
+        }
     }
 
     render() {
+        console.log("ON RENDER (id from root):", this.props.rootId);
         const { firstname, lastname, avatar, user_bio } = this.state;
         const userBioHtml = (
             <div>
@@ -48,12 +76,3 @@ export default class OtherProfile extends React.Component {
         );
     }
 }
-
-// <div className="profilePicContainer">
-//     <img width="250px" src={avatar || "/default_image.png"} />
-//     <h1 className="userfullname">
-//         {firstname} {lastname}
-//     </h1>
-// </div>
-// <ProfilePic rootState={rootState} clickHandler={clickHandler} />
-// {bioInputFieldCheck ? bioInputField : addBioButton}

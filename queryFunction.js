@@ -38,7 +38,7 @@ module.exports.postBio = function(id, user_bio) {
     ]);
 };
 
-module.exports.getOtherUsersData = function(id) {
+module.exports.fetchOtherUsersData = function(id) {
     return db.query(`SELECT * FROM users WHERE id = $1`, [id || null]);
 };
 

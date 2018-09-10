@@ -163,8 +163,14 @@ app.get("/user-data", (req, res) => {
     queryFunction
         .fetchUserData(id)
         .then(userData => {
-            const { firstname, lastname, avatar, user_bio } = userData.rows[0];
-            res.json({ firstname, lastname, avatar, user_bio });
+            const {
+                id,
+                firstname,
+                lastname,
+                avatar,
+                user_bio
+            } = userData.rows[0];
+            res.json({ id, firstname, lastname, avatar, user_bio });
         })
         .catch(e => {
             console.log("GET USERDATA QUERRY ERROR: ", e);
@@ -199,10 +205,17 @@ app.post("/post-bio", (req, res) => {
 
 app.get("/get-other-users-data/:otherUserId", async (req, res) => {
     try {
-        const otherUsersData = await queryFunction.getOtherUsersData(
+        const otherUsersData = await queryFunction.fetchOtherUsersData(
             req.params.otherUserId
         );
-        res.json(otherUsersData.rows[0]);
+        const {
+            id,
+            firstname,
+            lastname,
+            avatar,
+            user_bio
+        } = otherUsersData.rows[0];
+        res.json({ id, firstname, lastname, avatar, user_bio });
     } catch (e) {
         console.log("ERROR FETCHING OTHER USERS DATA", e);
         res.status(500).json({ errorPostingUserBio: true });
