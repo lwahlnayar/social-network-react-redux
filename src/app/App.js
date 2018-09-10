@@ -129,7 +129,7 @@ export default class App extends React.Component {
                                 src="./sesame_logo.png"
                                 alt="sesame logo"
                             />
-                            <p>SpicedBook &copy;</p>
+                            <p>SesameBook &copy;</p>
                         </div>
                     </footer>
                 </div>

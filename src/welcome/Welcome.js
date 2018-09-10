@@ -32,14 +32,14 @@ export default function Welcome() {
                                     to
                                 </span>{" "}
                                 <span className="flicker-in-1">
-                                    SpicedBook!
+                                    SesameBook!
                                 </span>
                             </h1>
                             <h2 className="fade-in">
-                                A place to keep in touch...
+                                A place to stay in touch...
                             </h2>
                             <p className="fade-in2">
-                                ...and discuss how Karo is a Gordita bonita
+                                ...and worship the Funky Chicken
                             </p>
                         </div>
                         <div className="formHolder">
@@ -61,7 +61,7 @@ export default function Welcome() {
                             src="./sesame_logo.png"
                             alt="sesame logo"
                         />
-                        <p>SpicedBook &copy;</p>
+                        <p>SesameBook &copy;</p>
                     </div>
                 </footer>
             </div>
