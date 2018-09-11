@@ -218,9 +218,94 @@ app.get("/get-other-users-data/:otherUserId", async (req, res) => {
         res.json({ id, firstname, lastname, avatar, user_bio });
     } catch (e) {
         console.log("ERROR FETCHING OTHER USERS DATA", e);
-        res.status(500).json({ errorPostingUserBio: true });
+        res.status(500).json({ errorGettingOtherUserData: true });
     }
 });
+
+app.post("/friend-status", async (req, res) => {
+    try {
+        const friendStatus = await queryFunction.checkFriendStatus(
+            req.session.loggedIn,
+            req.body.otherUserId
+        );
+        if (friendStatus.rows[0]) {
+            if (req.session.loggedIn == friendStatus.rows[0].sender_id) {
+                res.json({
+                    friendReqSent: true,
+                    friendStatus: friendStatus.rows[0].status
+                });
+            } else if (
+                req.session.loggedIn == friendStatus.rows[0].receiver_id
+            ) {
+                res.json({
+                    friendReqReceived: true,
+                    friendStatus: friendStatus.rows[0].status
+                });
+            }
+        } else {
+            res.json({
+                friendReqSent: false,
+                friendReqReceived: false,
+                friendStatus: null
+            });
+        }
+    } catch (e) {
+        console.log("ERROR CHECKING FRIENDSHIP STATUS", e);
+        res.status(500).json({ errorCheckingFriendStatus: true });
+    }
+});
+
+app.post("/add-friend", async (req, res) => {
+    try {
+        const addFriend = await queryFunction.addFriend(
+            req.session.loggedIn,
+            req.body.otherUserId,
+            1
+        );
+        res.json({ friendReqSent: true, friendStatus: 1 });
+    } catch (e) {
+        console.log("ERROR ADDING FRIEND QUERY", e);
+        res.status(500).json({ errorAddingFriend: true });
+    }
+});
+
+app.get("/accept-friend-req", async (req, res) => {
+    try {
+        const acceptFriendReq = await queryFunction.acceptFriendReq(
+            req.session.loggedIn
+        );
+        res.json({ friendReqAccepted: true, friendStatus: 2 });
+    } catch (e) {
+        console.log("ERROR ACCEPTING FRIEND REQ QUERY", e);
+        res.status(500).json({ errorAcceptingFriend: true });
+    }
+});
+
+app.post("/cancel-friend-req", async (req, res) => {
+    try {
+        const cancelFriendReq = await queryFunction.cancelFriendReq(
+            req.session.loggedIn,
+            req.body.otherUserId
+        );
+        res.json({ friendReqSent: false, friendStatus: null });
+    } catch (e) {
+        console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
+        res.status(500).json({ errorCancellingFriend: true });
+    }
+});
+
+// app.post("/unfriend", async (req, res) => {
+//     try {
+//         const unfriend = await queryFunction.unfriend(
+//             req.session.loggedIn,
+//             req.body.otherUserId
+//         );
+//         res.json({ friendReqSent: false, friendStatus: null });
+//     } catch (e) {
+//         console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
+//         res.status(500).json({ errorCancellingFriend: true });
+//     }
+// });
 
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {

@@ -48,7 +48,7 @@ export default class OtherProfile extends React.Component {
     }
 
     render() {
-        console.log("ON RENDER (id from root):", this.props.rootId);
+        // console.log("ON RENDER (id from root):", this.props.rootId);
         const { firstname, lastname, avatar, user_bio } = this.state;
         const userBioHtml = (
             <div>
@@ -67,7 +67,10 @@ export default class OtherProfile extends React.Component {
                 <Link to="/1">1</Link>
                 <Link to="/2">2</Link>
                 <Link to="/3">3</Link>
-                <FriendButton />
+                <FriendButton
+                    rootId={this.props.rootId}
+                    otherUserId={this.props.routeProps.match.params.otherUserId}
+                />
             </section>
         );
     }
