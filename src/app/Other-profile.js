@@ -47,8 +47,38 @@ export default class OtherProfile extends React.Component {
         }
     }
 
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log("nextprops", nextProps);
+    //     console.log("prevstate", prevState);
+    //     if (
+    //         prevState.otherUserId !=
+    //         nextProps.routeProps.match.params.otherUserId
+    //     ) {
+    //         return {
+    //             newOtherId: nextProps.routeProps.match.params.otherUserId
+    //         };
+    //     }
+    //     return null;
+    // }
+    //
+    // componentDidUpdate() {
+    //     if (this.state.newOtherId) {
+    //         this.fetchData(this.state.newOtherId);
+    //     }
+    // }
+    //
+    // async fetchData(id) {
+    //     console.log("FETCHDATA ID", id);
+    //     console.log("thisstate on fetchdata-------->", this.state);
+    //     try {
+    //         const { data } = await axios.get(`/get-other-users-data/${id}`);
+    //         this.setState({ newOtherId: null });
+    //     } catch (e) {
+    //         console.log("Error with componentwillreceiveprops:", e);
+    //     }
+    // }
+
     render() {
-        // console.log("ON RENDER (id from root):", this.props.rootId);
         const { firstname, lastname, avatar, user_bio } = this.state;
         const userBioHtml = (
             <div>
