@@ -287,25 +287,33 @@ app.post("/cancel-friend-req", async (req, res) => {
             req.session.loggedIn,
             req.body.otherUserId
         );
-        res.json({ friendReqSent: false, friendStatus: null });
+        res.json({
+            friendReqReceived: false,
+            friendReqSent: false,
+            friendStatus: null
+        });
     } catch (e) {
         console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
         res.status(500).json({ errorCancellingFriend: true });
     }
 });
 
-// app.post("/unfriend", async (req, res) => {
-//     try {
-//         const unfriend = await queryFunction.unfriend(
-//             req.session.loggedIn,
-//             req.body.otherUserId
-//         );
-//         res.json({ friendReqSent: false, friendStatus: null });
-//     } catch (e) {
-//         console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
-//         res.status(500).json({ errorCancellingFriend: true });
-//     }
-// });
+app.post("/unfriend", async (req, res) => {
+    try {
+        const unfriend = await queryFunction.unfriend(
+            req.session.loggedIn,
+            req.body.otherUserId
+        );
+        res.json({
+            friendReqReceived: false,
+            friendReqSent: false,
+            friendStatus: null
+        });
+    } catch (e) {
+        console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
+        res.status(500).json({ errorCancellingFriend: true });
+    }
+});
 
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {

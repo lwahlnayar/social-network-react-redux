@@ -70,3 +70,10 @@ module.exports.acceptFriendReq = function(id) {
         [id || null]
     );
 };
+
+module.exports.unfriend = function(userId, otherUserId) {
+    return db.query(
+        `DELETE FROM friend_requests WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)`,
+        [userId || null, otherUserId || null]
+    );
+};

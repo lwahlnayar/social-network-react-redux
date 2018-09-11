@@ -8,6 +8,7 @@ export default class FriendButton extends React.Component {
         this.addFriend = this.addFriend.bind(this);
         this.cancelFriend = this.cancelFriend.bind(this);
         this.acceptFriend = this.acceptFriend.bind(this);
+        this.unfriend = this.unfriend.bind(this);
     }
 
     async componentDidMount() {
@@ -50,13 +51,15 @@ export default class FriendButton extends React.Component {
             console.log("acceptfriend data response: ", data);
             this.setState(data);
         } catch (e) {
-            console.log("error mounting cancel method:", e);
+            console.log("error mounting acceptFriend method:", e);
         }
     }
 
     async unfriend() {
         try {
-            const { data } = await axios.get("/unfriend");
+            const { data } = await axios.post("/unfriend", {
+                otherUserId: this.props.otherUserId
+            });
             console.log("unfriend data response: ", data);
             this.setState(data);
         } catch (e) {
@@ -68,15 +71,14 @@ export default class FriendButton extends React.Component {
         let buttonText;
         let dynamicMethod;
         console.log("main user id", this.props.rootId);
-        console.log("friendbutton state", this.state);
 
         if (this.state.friendReqReceived && this.state.friendStatus == 1) {
             buttonText = "Accept Request";
             dynamicMethod = this.acceptFriend;
         }
         if (this.state.friendReqReceived && this.state.friendStatus == 2) {
-            buttonText = "You are friends";
-            //createunfriend
+            buttonText = "Unfriend";
+            dynamicMethod = this.unfriend;
         }
         if (!this.state.friendReqSent && !this.state.friendStatus) {
             buttonText = "Add Friend";
@@ -87,8 +89,8 @@ export default class FriendButton extends React.Component {
             dynamicMethod = this.cancelFriend;
         }
         if (this.state.friendReqSent && this.state.friendStatus == 2) {
-            buttonText = "You are friends";
-            //createUnfriend
+            buttonText = "Unfriend";
+            dynamicMethod = this.unfriend;
         }
 
         return (
