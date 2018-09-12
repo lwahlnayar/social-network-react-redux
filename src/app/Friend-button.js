@@ -70,7 +70,7 @@ export default class FriendButton extends React.Component {
     render() {
         let buttonText;
         let dynamicMethod;
-        console.log("main user id", this.props.rootId);
+        // console.log("main user id", this.props.rootId);
 
         if (this.state.friendReqReceived && this.state.friendStatus == 1) {
             buttonText = "Accept Request";

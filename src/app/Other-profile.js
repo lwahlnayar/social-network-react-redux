@@ -7,6 +7,7 @@ export default class OtherProfile extends React.Component {
     constructor() {
         super();
         this.state = {};
+        this.fetchData = this.fetchData.bind(this);
     }
 
     async componentDidMount() {
@@ -21,62 +22,70 @@ export default class OtherProfile extends React.Component {
                         this.props.routeProps.match.params.otherUserId
                     }`
                 );
-                this.setState(data);
+
+                this.setState({
+                    ...data,
+                    otherUserId: this.props.routeProps.match.params.otherUserId
+                });
             } catch (e) {
-                console.log("Error with componentwillreceiveprops:", e);
+                console.log("Error with componenwillmount:", e);
             }
         }
     }
-
-    async componentWillReceiveProps(nextprops) {
-        if (
-            nextprops.routeProps.match.params.otherUserId == this.props.rootId
-        ) {
-            this.props.routeProps.history.push("/");
-        } else {
-            try {
-                const { data } = await axios.get(
-                    `/get-other-users-data/${
-                        nextprops.routeProps.match.params.otherUserId
-                    }`
-                );
-                this.setState(data);
-            } catch (e) {
-                console.log("Error with componentwillreceiveprops:", e);
-            }
-        }
-    }
-
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     console.log("nextprops", nextProps);
-    //     console.log("prevstate", prevState);
+    //
+    // async componentWillReceiveProps(nextprops) {
     //     if (
-    //         prevState.otherUserId !=
-    //         nextProps.routeProps.match.params.otherUserId
+    //         nextprops.routeProps.match.params.otherUserId == this.props.rootId
     //     ) {
-    //         return {
-    //             newOtherId: nextProps.routeProps.match.params.otherUserId
-    //         };
-    //     }
-    //     return null;
-    // }
-    //
-    // componentDidUpdate() {
-    //     if (this.state.newOtherId) {
-    //         this.fetchData(this.state.newOtherId);
-    //     }
-    // }
-    //
-    // async fetchData(id) {
-    //     console.log("FETCHDATA ID", id);
-    //     console.log("thisstate on fetchdata-------->", this.state);
-    //     try {
-    //         const { data } = await axios.get(`/get-other-users-data/${id}`);
-    //         this.setState({ newOtherId: null });
-    //     } catch (e) {
-    //         console.log("Error with componentwillreceiveprops:", e);
+    //         this.props.routeProps.history.push("/");
+    //     } else {
+    //         try {
+    //             const { data } = await axios.get(
+    //                 `/get-other-users-data/${
+    //                     nextprops.routeProps.match.params.otherUserId
+    //                 }`
+    //             );
+    //             this.setState(data);
+    //         } catch (e) {
+    //             console.log("Error with componentwillreceiveprops:", e);
+    //         }
     //     }
     // }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (
+            prevState.otherUserId !=
+            nextProps.routeProps.match.params.otherUserId
+        ) {
+            return {
+                newOtherId: nextProps.routeProps.match.params.otherUserId
+            };
+        }
+        return null;
+    }
+
+    componentDidUpdate() {
+        if (this.state.newOtherId) {
+            this.fetchData(this.state.newOtherId);
+        }
+    }
+
+    async fetchData(id) {
+        try {
+            console.log("this", this);
+            if (
+                this.props.routeProps.match.params.otherUserId ==
+                this.props.rootId
+            ) {
+                this.props.routeProps.history.push("/");
+            } else {
+                const { data } = await axios.get(`/get-other-users-data/${id}`);
+                this.setState({ ...data, otherUserId: id, newOtherId: null });
+            }
+        } catch (e) {
+            console.log("Error with componentwillreceiveprops:", e);
+        }
+    }
 
     render() {
         const { firstname, lastname, avatar, user_bio } = this.state;
