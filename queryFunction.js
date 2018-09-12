@@ -57,10 +57,10 @@ module.exports.addFriend = function(sender_id, receiver_id, status) {
     );
 };
 
-module.exports.acceptFriendReq = function(id) {
+module.exports.acceptFriendReq = function(userId, otherUserId) {
     return db.query(
-        `UPDATE friend_requests SET status = 2 WHERE receiver_id = $1`,
-        [id || null]
+        `UPDATE friend_requests SET status = 2 WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)`,
+        [userId || null, otherUserId || null]
     );
 };
 

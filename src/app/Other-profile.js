@@ -32,25 +32,6 @@ export default class OtherProfile extends React.Component {
             }
         }
     }
-    //
-    // async componentWillReceiveProps(nextprops) {
-    //     if (
-    //         nextprops.routeProps.match.params.otherUserId == this.props.rootId
-    //     ) {
-    //         this.props.routeProps.history.push("/");
-    //     } else {
-    //         try {
-    //             const { data } = await axios.get(
-    //                 `/get-other-users-data/${
-    //                     nextprops.routeProps.match.params.otherUserId
-    //                 }`
-    //             );
-    //             this.setState(data);
-    //         } catch (e) {
-    //             console.log("Error with componentwillreceiveprops:", e);
-    //         }
-    //     }
-    // }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (

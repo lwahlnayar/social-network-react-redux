@@ -269,10 +269,11 @@ app.post("/add-friend", async (req, res) => {
     }
 });
 
-app.get("/accept-friend-req", async (req, res) => {
+app.post("/accept-friend-req", async (req, res) => {
     try {
         const acceptFriendReq = await queryFunction.acceptFriendReq(
-            req.session.loggedIn
+            req.session.loggedIn,
+            req.body.otherUserId
         );
         res.json({ friendReqAccepted: true, friendStatus: 2 });
     } catch (e) {
@@ -319,10 +320,6 @@ app.get("/fetchall-friends-wannabes", async (req, res) => {
     try {
         const allFriendsWannabes = await queryFunction.fetchFriendsWannabes(
             req.session.loggedIn
-        );
-        console.log(
-            "queryfunction fetchfriendswannabees response: ",
-            allFriendsWannabes.rows
         );
         res.json({ allFriendsWannabes: allFriendsWannabes.rows });
     } catch (e) {

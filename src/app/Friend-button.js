@@ -47,8 +47,9 @@ export default class FriendButton extends React.Component {
 
     async acceptFriend() {
         try {
-            const { data } = await axios.get("/accept-friend-req");
-            console.log("acceptfriend data response: ", data);
+            const { data } = await axios.post("/accept-friend-req", {
+                otherUserId: this.props.otherUserId
+            });
             this.setState(data);
         } catch (e) {
             console.log("error mounting acceptFriend method:", e);
@@ -60,7 +61,6 @@ export default class FriendButton extends React.Component {
             const { data } = await axios.post("/unfriend", {
                 otherUserId: this.props.otherUserId
             });
-            console.log("unfriend data response: ", data);
             this.setState(data);
         } catch (e) {
             console.log("error mounting unfriend method:", e);
