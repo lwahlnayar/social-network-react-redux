@@ -108,7 +108,7 @@ app.post("/submit-registration", (req, res) => {
                 });
             })
             .catch(e => {
-                console.log(chalk.red("CREATEUSER/REGISTER ERROR:"), e);
+                console.log(chalk.red("CREATEUSER/REGISTER ERROR: "), e);
                 res.json({
                     error: true
                 });
@@ -145,7 +145,7 @@ app.post("/login-check", (req, res) => {
                 });
             })
             .catch(e => {
-                console.log(chalk.red("FETCH PASSWORD ERROR:"), e);
+                console.log(chalk.red("FETCH PASSWORD ERROR: "), e);
                 res.json({
                     errorType: "general"
                 });
@@ -198,7 +198,7 @@ app.post("/post-bio", (req, res) => {
             res.json({ user_bio: req.body.user_bio });
         })
         .catch(e => {
-            console.log("ERROR POSTING USERBIO", e);
+            console.log("ERROR POSTING USERBIO: ", e);
             res.status(500).json({ errorPostingUserBio: true });
         });
 });
@@ -217,7 +217,7 @@ app.get("/get-other-users-data/:otherUserId", async (req, res) => {
         } = otherUsersData.rows[0];
         res.json({ id, firstname, lastname, avatar, user_bio });
     } catch (e) {
-        console.log("ERROR FETCHING OTHER USERS DATA", e);
+        console.log("ERROR FETCHING OTHER USERS DATA: ", e);
         res.status(500).json({ errorGettingOtherUserData: true });
     }
 });
@@ -250,7 +250,7 @@ app.post("/friend-status", async (req, res) => {
             });
         }
     } catch (e) {
-        console.log("ERROR CHECKING FRIENDSHIP STATUS", e);
+        console.log("ERROR CHECKING FRIENDSHIP STATUS: ", e);
         res.status(500).json({ errorCheckingFriendStatus: true });
     }
 });
@@ -264,7 +264,7 @@ app.post("/add-friend", async (req, res) => {
         );
         res.json({ friendReqSent: true, friendStatus: 1 });
     } catch (e) {
-        console.log("ERROR ADDING FRIEND QUERY", e);
+        console.log("ERROR ADDING FRIEND QUERY: ", e);
         res.status(500).json({ errorAddingFriend: true });
     }
 });
@@ -276,7 +276,7 @@ app.get("/accept-friend-req", async (req, res) => {
         );
         res.json({ friendReqAccepted: true, friendStatus: 2 });
     } catch (e) {
-        console.log("ERROR ACCEPTING FRIEND REQ QUERY", e);
+        console.log("ERROR ACCEPTING FRIEND REQ QUERY: ", e);
         res.status(500).json({ errorAcceptingFriend: true });
     }
 });
@@ -293,7 +293,7 @@ app.post("/cancel-friend-req", async (req, res) => {
             friendStatus: null
         });
     } catch (e) {
-        console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
+        console.log("ERROR CANCELLING FRIEND REQ QUERY: ", e);
         res.status(500).json({ errorCancellingFriend: true });
     }
 });
@@ -310,10 +310,24 @@ app.post("/unfriend", async (req, res) => {
             friendStatus: null
         });
     } catch (e) {
-        console.log("ERROR CANCELLING FRIEND REQ QUERY", e);
-        res.status(500).json({ errorCancellingFriend: true });
+        console.log("ERROR CANCELLING FRIEND REQ QUERY: ", e);
+        res.status(500).json({ errorUnfriending: true });
     }
 });
+
+app.get("/fetchall-friends-wannabes"),
+    async (req, res) => {
+        try {
+            const allFriendsWannabes = await queryFunction.fetchFriendsWannabes();
+            console.log(
+                "queryfunction fetchfriendswannabees response: ",
+                allFriendsWannabes
+            );
+        } catch (e) {
+            console.log("ERROR FETCHING ALL FRIENDS WANNABEES: ", e);
+            res.status(500).json({ errorFetchingFriendsWannabees: true });
+        }
+    };
 
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {

@@ -71,15 +71,15 @@ module.exports.deleteFriendRow = function(userId, otherUserId) {
     );
 };
 
-// module.exports.fetchFriendsWannabes = function() {
-//     return db.query(
-//         `
-//           SELECT users.id, first, last, image, status
-//           FROM friendships
-//           JOIN users
-//           ON (status = 1 AND recipient_id = $1 AND requester_id = users.id)
-//           OR (status = 2 AND recipient_id = $1 AND requester_id = users.id)
-//           OR (status = 2 AND requester_id = $1 AND recipient_id = users.id)
-//       `
-//     );
-// };
+module.exports.fetchFriendsWannabes = function() {
+    return db.query(
+        `
+          SELECT users.id, first, last, image, status
+          FROM friendships
+          JOIN users
+          ON (status = 1 AND recipient_id = $1 AND requester_id = users.id)
+          OR (status = 2 AND recipient_id = $1 AND requester_id = users.id)
+          OR (status = 2 AND requester_id = $1 AND recipient_id = users.id)
+      `
+    );
+};
