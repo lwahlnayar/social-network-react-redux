@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getFriendsWannabes } from "../actions.js";
+import { getFriendsWannabes, acceptFriendReq } from "../actions.js";
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -23,6 +23,12 @@ class Friends extends React.Component {
                         src={i.avatar || "/default_image.png"}
                         alt={i.name}
                     />
+                    <div
+                        onClick={e => this.props.dispatch(unfriend(i.id))}
+                        className="button miniButton"
+                    >
+                        Unfriend
+                    </div>
                 </div>
             );
         });
@@ -38,6 +44,14 @@ class Friends extends React.Component {
                         src={i.avatar || "/default_image.png"}
                         alt={i.name}
                     />
+                    <div
+                        onClick={e =>
+                            this.props.dispatch(acceptFriendReq(i.id))
+                        }
+                        className="button miniButton"
+                    >
+                        Accept Friend
+                    </div>
                 </div>
             );
         });

@@ -1,9 +1,41 @@
 import axios from "./axios";
 
 export async function getFriendsWannabes() {
-    const { data } = await axios.get("/fetchall-friends-wannabes");
-    return {
-        type: "ALL_FRIENDS_WANNABES_ARRAY",
-        allFriendsWannabes: data.allFriendsWannabes
-    };
+    try {
+        const { data } = await axios.get("/fetchall-friends-wannabes");
+        return {
+            type: "ALL_FRIENDS_WANNABES_ARRAY",
+            allFriendsWannabes: data.allFriendsWannabes
+        };
+    } catch (e) {
+        console.log("error mounting getFriendsWannabes action:", e);
+    }
 }
+
+export async function acceptFriendReq(otherUserId) {
+    try {
+        const { data } = await axios.post("/accept-friend-req", {
+            otherUserId: otherUserId
+        });
+        return {
+            type: "ACCEPT_FRIEND_REQ",
+            friendReqId: otherUserId //not sure about this
+        };
+    } catch (e) {
+        console.log("error mounting acceptFriend action:", e);
+    }
+}
+
+// export async function unfriend(otherUserId) {
+//     try {
+//         const { data } = await axios.post("/accept-friend-req", {
+//             otherUserId: otherUserId
+//         });
+//         return {
+//             type: "ACCEPT_FRIEND_REQ",
+//             friendReqId: otherUserId //not sure about this
+//         };
+//     } catch (e) {
+//         console.log("error mounting acceptFriend action:", e);
+//     }
+// }
