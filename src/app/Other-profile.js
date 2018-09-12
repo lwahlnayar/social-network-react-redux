@@ -103,9 +103,9 @@ export default class OtherProfile extends React.Component {
                     {firstname} {lastname}
                 </h1>
                 {user_bio && userBioHtml}
-                <Link to="/1">1</Link>
-                <Link to="/2">2</Link>
-                <Link to="/3">3</Link>
+                <Link to="/user/1">1</Link>
+                <Link to="/user/2">2</Link>
+                <Link to="/user/3">3</Link>
                 <FriendButton
                     rootId={this.props.rootId}
                     otherUserId={this.props.routeProps.match.params.otherUserId}

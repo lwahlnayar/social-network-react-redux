@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "../axios";
 import Profile from "./Profile";
 import Uploader from "./Uploader";
-import OtherProfile from "./Other-profile.js";
+import OtherProfile from "./Other-profile";
+import Friends from "./Friends";
 
 export default class App extends React.Component {
     constructor() {
@@ -90,7 +91,7 @@ export default class App extends React.Component {
                         <nav>
                             <img
                                 id="logo"
-                                src="./sesame_logo_white.png"
+                                src="/sesame_logo_white.png"
                                 alt="sesame logo"
                             />
                             <div className="headerLinks">
@@ -116,7 +117,7 @@ export default class App extends React.Component {
                             />
                             <Route
                                 exact
-                                path="/:otherUserId"
+                                path="/user/:otherUserId"
                                 render={props => (
                                     <OtherProfile
                                         rootId={this.state.id}
@@ -132,13 +133,14 @@ export default class App extends React.Component {
                                     exitModal={this.exitModal}
                                 />
                             )}
+                            <Route exact path="/friends" component={Friends} />
                         </div>
                     </section>
                     <footer>
                         <div className="footerCenterHolder">
                             <img
                                 id="logo"
-                                src="./sesame_logo.png"
+                                src="/sesame_logo.png"
                                 alt="sesame logo"
                             />
                             <p>SesameBook &copy;</p>

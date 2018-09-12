@@ -315,19 +315,21 @@ app.post("/unfriend", async (req, res) => {
     }
 });
 
-app.get("/fetchall-friends-wannabes"),
-    async (req, res) => {
-        try {
-            const allFriendsWannabes = await queryFunction.fetchFriendsWannabes();
-            console.log(
-                "queryfunction fetchfriendswannabees response: ",
-                allFriendsWannabes
-            );
-        } catch (e) {
-            console.log("ERROR FETCHING ALL FRIENDS WANNABEES: ", e);
-            res.status(500).json({ errorFetchingFriendsWannabees: true });
-        }
-    };
+app.get("/fetchall-friends-wannabes", async (req, res) => {
+    try {
+        const allFriendsWannabes = await queryFunction.fetchFriendsWannabes(
+            req.session.loggedIn
+        );
+        console.log(
+            "queryfunction fetchfriendswannabees response: ",
+            allFriendsWannabes.rows
+        );
+        res.json({ allFriendsWannabes: allFriendsWannabes.rows });
+    } catch (e) {
+        console.log("ERROR FETCHING ALL FRIENDS WANNABEES: ", e);
+        res.status(500).json({ errorFetchingFriendsWannabees: true });
+    }
+});
 
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {

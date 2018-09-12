@@ -70,16 +70,17 @@ module.exports.deleteFriendRow = function(userId, otherUserId) {
         [userId || null, otherUserId || null]
     );
 };
-
-module.exports.fetchFriendsWannabes = function() {
+//MISING ARGUMENT BELOW
+module.exports.fetchFriendsWannabes = function(userId) {
     return db.query(
         `
-          SELECT users.id, first, last, image, status
-          FROM friendships
-          JOIN users
-          ON (status = 1 AND recipient_id = $1 AND requester_id = users.id)
-          OR (status = 2 AND recipient_id = $1 AND requester_id = users.id)
-          OR (status = 2 AND requester_id = $1 AND recipient_id = users.id)
-      `
+          SELECT users.id, users.firstname, users.lastname, users.avatar, friend_requests.status
+          FROM friend_requests
+          LEFT JOIN users
+          ON (status = 1 AND receiver_id = $1 AND sender_id = users.id)
+          OR (status = 2 AND receiver_id = $1 AND sender_id = users.id)
+          OR (status = 2 AND sender_id = $1 AND receiver_id = users.id)
+      `,
+        [userId || null]
     );
 };
