@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getFriendsWannabes, acceptFriendReq } from "../actions.js";
+import { getFriendsWannabes, acceptFriendReq, unfriend } from "../actions.js";
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -64,7 +64,7 @@ class Friends extends React.Component {
                         {friendsElem.length > 0 ? (
                             friendsElem
                         ) : (
-                            <p className="badNews">You have no friends.</p>
+                            <p className="badNews">You have no friends. =(</p>
                         )}
                     </div>
                     <div className="allWannabes">
