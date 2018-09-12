@@ -283,7 +283,7 @@ app.get("/accept-friend-req", async (req, res) => {
 
 app.post("/cancel-friend-req", async (req, res) => {
     try {
-        const cancelFriendReq = await queryFunction.cancelFriendReq(
+        const cancelFriendReq = await queryFunction.deleteFriendRow(
             req.session.loggedIn,
             req.body.otherUserId
         );
@@ -300,7 +300,7 @@ app.post("/cancel-friend-req", async (req, res) => {
 
 app.post("/unfriend", async (req, res) => {
     try {
-        const unfriend = await queryFunction.unfriend(
+        const unfriend = await queryFunction.deleteFriendRow(
             req.session.loggedIn,
             req.body.otherUserId
         );

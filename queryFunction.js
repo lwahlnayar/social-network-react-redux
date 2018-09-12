@@ -57,13 +57,6 @@ module.exports.addFriend = function(sender_id, receiver_id, status) {
     );
 };
 
-module.exports.cancelFriendReq = function(sender_id, receiver_id) {
-    return db.query(
-        `DELETE FROM friend_requests WHERE (sender_id = $1 AND receiver_id = $2)`,
-        [sender_id || null, receiver_id || null]
-    );
-};
-
 module.exports.acceptFriendReq = function(id) {
     return db.query(
         `UPDATE friend_requests SET status = 2 WHERE receiver_id = $1`,
@@ -71,9 +64,22 @@ module.exports.acceptFriendReq = function(id) {
     );
 };
 
-module.exports.unfriend = function(userId, otherUserId) {
+module.exports.deleteFriendRow = function(userId, otherUserId) {
     return db.query(
         `DELETE FROM friend_requests WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)`,
         [userId || null, otherUserId || null]
     );
 };
+
+// module.exports.fetchFriendsWannabes = function() {
+//     return db.query(
+//         `
+//           SELECT users.id, first, last, image, status
+//           FROM friendships
+//           JOIN users
+//           ON (status = 1 AND recipient_id = $1 AND requester_id = users.id)
+//           OR (status = 2 AND recipient_id = $1 AND requester_id = users.id)
+//           OR (status = 2 AND requester_id = $1 AND recipient_id = users.id)
+//       `
+//     );
+// };
