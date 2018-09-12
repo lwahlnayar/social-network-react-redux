@@ -1,6 +1,12 @@
-//REDUCER- PURPOSE: used in Stat.js. Takes original state and recreates an updated copy based on action that it takes in 2nd argument.
-export default function(state = {}, action) {
-    if (action.type == "WHATEVS") {
+//REDUCER- PURPOSE: used in Stat.js. Recreates an updated copy of STATE based on action that it takes in 2nd argument.
+const INITIAL_STATE = {
+    allFriendsWannabes: [],
+    allFriends: [],
+    allWannabes: []
+};
+
+export default function(state = INITIAL_STATE, action) {
+    if (action.type == "ALL_FRIENDS_WANNABES_ARRAY") {
         state = { ...state, allFriendsWannabes: action.allFriendsWannabes };
     }
     return state;
