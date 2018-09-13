@@ -34,9 +34,6 @@ export default class OtherProfile extends React.Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        // console.log("OTHERPROFILE COMPONENT PREVSTATE,", prevState);
-        // console.log("OTHERPROFILE COMPONENT NEXTPROPS,", nextProps);
-
         if (
             prevState.otherUserId !=
             nextProps.routeProps.match.params.otherUserId
@@ -56,7 +53,6 @@ export default class OtherProfile extends React.Component {
 
     async fetchData(id) {
         try {
-            // console.log("this", this);
             if (
                 this.props.routeProps.match.params.otherUserId ==
                 this.props.rootId

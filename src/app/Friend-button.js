@@ -17,43 +17,37 @@ export default class FriendButton extends React.Component {
                 otherUserId: this.props.otherUserId
             });
             console.log("data from friend status: ", data);
-            this.setState(data);
+            this.setState({ ...data, otherUserId: this.props.otherUserId });
         } catch (e) {
             console.log("error mounting friendship button:", e);
         }
-        // console.log("THIS (friendbutton COMPONENT)", this);
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        // console.log("NEXT PROPS", nextProps);
-        console.log("PREVSTATE", prevState);
-        // if (
-        //     prevState.otherUserId !=
-        //     nextProps.routeProps.match.params.otherUserId
-        // ) {
-        //     return {
-        //         newOtherId: nextProps.routeProps.match.params.otherUserId
-        //     };
-        // }
-        // return null;
+        if (prevState.otherUserId != nextProps.otherUserId) {
+            return {
+                testProp: nextProps.otherUserId
+            };
+        }
+        return null;
     }
 
-    // componentDidUpdate() {
-    //     if (this.state.newOtherId) {
-    //         this.fetchData(this.state.newOtherId);
-    //     }
-    // }
-    //
-    // async fetchData(id) {
-    //     try {
-    //             const { data } = await axios.post(`/friend-status`, {
-    //     otherUserId: this.props.otherUserId
-    // } );
-    //             this.setState({ ...data, otherUserId: id, newOtherId: null });
-    //     } catch (e) {
-    //         console.log("Error with componentwillreceiveprops:", e);
-    //     }
-    // }
+    componentDidUpdate() {
+        if (this.state.testProp) {
+            this.fetchData(this.state.testProp);
+        }
+    }
+
+    async fetchData(id) {
+        try {
+            const { data } = await axios.post(`/friend-status`, {
+                otherUserId: this.props.otherUserId
+            });
+            this.setState({ ...data, testProp: null, otherUserId: id });
+        } catch (e) {
+            console.log("Error with componentwillreceiveprops:", e);
+        }
+    }
 
     async addFriend() {
         try {
@@ -102,7 +96,6 @@ export default class FriendButton extends React.Component {
     render() {
         let buttonText;
         let dynamicMethod;
-        // console.log("main user id", this.props.rootId);
 
         if (this.state.friendReqReceived && this.state.friendStatus == 1) {
             buttonText = "Accept Request";

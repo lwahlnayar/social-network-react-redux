@@ -1,8 +1,6 @@
 //REDUCER- PURPOSE: used in Stat.js. Recreates an updated copy of STATE based on action that it takes in 2nd argument.
 const INITIAL_STATE = {
-    allFriendsWannabes: [],
-    allFriends: [],
-    allWannabes: []
+    allFriendsWannabes: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -12,22 +10,20 @@ export default function(state = INITIAL_STATE, action) {
     if (action.type == "ACCEPT_FRIEND_REQ") {
         state = {
             ...state,
-            allFriendsWannabes: state.allFriendsWannabes.map(
-                eachFriendWannabe => {
-                    if (eachFriendWannabe.id == action.friendReqId) {
-                        return { ...eachFriendWannabe, status: 2 };
-                    } else {
-                        return eachFriendWannabe;
-                    }
+            allFriendsWannabes: state.allFriendsWannabes.map(each => {
+                if (each.id == action.friendReqId) {
+                    return { ...each, status: 2 };
+                } else {
+                    return each;
                 }
-            )
+            })
         };
     }
     if (action.type == "UNFRIEND") {
         state = {
             ...state,
             allFriendsWannabes: state.allFriendsWannabes.filter(
-                eachFriendWannabe => eachFriendWannabe.id != action.deleteId
+                each => each.id != action.deleteId
             )
         };
     }
@@ -35,7 +31,7 @@ export default function(state = INITIAL_STATE, action) {
         state = {
             ...state,
             allFriendsWannabes: state.allFriendsWannabes.filter(
-                eachFriendWannabe => eachFriendWannabe.id != action.ignoreId
+                each => each.id != action.ignoreId
             )
         };
     }
