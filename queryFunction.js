@@ -76,7 +76,7 @@ module.exports.fetchFriendsWannabes = function(userId) {
         `
           SELECT users.id, users.firstname, users.lastname, users.avatar, friend_requests.status
           FROM friend_requests
-          LEFT JOIN users
+          JOIN users
           ON (status = 1 AND receiver_id = $1 AND sender_id = users.id)
           OR (status = 2 AND receiver_id = $1 AND sender_id = users.id)
           OR (status = 2 AND sender_id = $1 AND receiver_id = users.id)

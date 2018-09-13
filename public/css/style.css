@@ -35,7 +35,14 @@ nav {
     height: 60px;
 }
 
+nav div.headerLinks {
+    font-weight: bold;
+    color: #2ebc4f;
+    font-size: 23px;
+}
+
 nav div.headerLinks a {
+    font-weight: bold;
     text-decoration: none;
     color: whitesmoke;
     font-size: 25px;
@@ -392,10 +399,62 @@ p.errorMessage {
 
 /* -------------- FRIENDS PAGE -------------- */
 
-.appContainer img.miniProfile {
+.appContainer .friendsContainer h1 {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.appContainer .friendsContainer h1 img {
+    margin: 5px;
+    height: 20px;
+}
+
+p.badNews {
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.appContainer .friendsContainer div.allWannabes,
+.appContainer .friendsContainer div.allFriends {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 960px;
+    border: yellow dashed 2px;
+}
+
+.appContainer .friendsContainer div.block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px;
+    width: 400px;
+    height: 120px;
+    border: 2px black dashed;
+}
+
+.appContainer .friendsContainer div.nameImage {
+    display: flex;
+    align-items: center;
+    border: 1px dashed blue;
+    height: 100%;
+}
+
+.appContainer .friendsContainer img.miniProfile {
     max-width: 110px;
     background-color: white;
     border-radius: 100px;
+}
+
+.appContainer .friendsContainer div.button {
+    width: 100px;
+    height: 26px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */

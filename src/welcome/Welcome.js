@@ -17,6 +17,7 @@ export default function Welcome() {
                         />
                         <div className="headerLinks">
                             <Link to="/login">Sign in</Link>
+                            /
                             <Link to="/">Register</Link>
                         </div>
                     </nav>

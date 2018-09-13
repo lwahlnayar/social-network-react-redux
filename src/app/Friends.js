@@ -12,38 +12,19 @@ class Friends extends React.Component {
         const { allFriends, allWannabes } = this.props;
         console.log("destructured", allFriends, allWannabes);
 
-        let friendsElem = allFriends.map(i => {
-            return (
-                <div className="friend" key={i.id}>
-                    <p>
-                        {i.firstname} {i.lastname}
-                    </p>
-                    <img
-                        className="miniProfile"
-                        src={i.avatar || "/default_image.png"}
-                        alt={i.name}
-                    />
-                    <div
-                        onClick={e => this.props.dispatch(unfriend(i.id))}
-                        className="button miniButton"
-                    >
-                        Unfriend
-                    </div>
-                </div>
-            );
-        });
-
         let wannabesElem = allWannabes.map(i => {
             return (
-                <div className="wannabe" key={i.id}>
-                    <p>
-                        {i.firstname} {i.lastname}
-                    </p>
-                    <img
-                        className="miniProfile"
-                        src={i.avatar || "/default_image.png"}
-                        alt={i.name}
-                    />
+                <div className="block" key={i.id}>
+                    <div className="nameImage">
+                        <img
+                            className="miniProfile"
+                            src={i.avatar || "/default_image.png"}
+                            alt={i.name}
+                        />
+                        <p>
+                            {i.firstname} {i.lastname}
+                        </p>
+                    </div>
                     <div
                         onClick={e =>
                             this.props.dispatch(acceptFriendReq(i.id))
@@ -56,26 +37,59 @@ class Friends extends React.Component {
             );
         });
 
+        let friendsElem = allFriends.map(i => {
+            return (
+                <div className="block" key={i.id}>
+                    <div className="nameImage">
+                        <img
+                            className="miniProfile"
+                            src={i.avatar || "/default_image.png"}
+                            alt={i.name}
+                        />
+                        <p>
+                            {i.firstname} {i.lastname}
+                        </p>
+                    </div>
+                    <div
+                        onClick={e => this.props.dispatch(unfriend(i.id))}
+                        className="button miniButton"
+                    >
+                        Unfriend
+                    </div>
+                </div>
+            );
+        });
+
         return (
             <section className="friendsContainer">
                 <section className="friendsContainer">
-                    <div className="allFriends">
-                        <h1>ALL FRIENDS</h1>
-                        {friendsElem.length > 0 ? (
-                            friendsElem
-                        ) : (
-                            <p className="badNews">You have no friends. =(</p>
-                        )}
+                    <div className="outerWidth">
+                        <h1>
+                            <img src="/friends_image.png" />Friend Requests
+                        </h1>
+                        <div className="allWannabes">
+                            {wannabesElem.length > 0 ? (
+                                wannabesElem
+                            ) : (
+                                <p className="badNews">
+                                    Nobody wants to be your friend. =(
+                                </p>
+                            )}
+                        </div>
                     </div>
-                    <div className="allWannabes">
-                        <h1>ALL FRIEND REQUESTS</h1>
-                        {wannabesElem.length > 0 ? (
-                            wannabesElem
-                        ) : (
-                            <p className="badNews">
-                                Nobody wants to be your friend. =(
-                            </p>
-                        )}
+                    <div className="outerWidth">
+                        <h1>
+                            <img src="/friends_image.png" />Friends
+                        </h1>
+                        <div className="allFriends">
+                            {friendsElem.length > 0 ? (
+                                friendsElem
+                            ) : (
+                                <p className="badNews">
+                                    You have no friends. =(
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </section>
             </section>
