@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getFriendsWannabes, acceptFriendReq, unfriend } from "../actions.js";
+import {
+    getFriendsWannabes,
+    acceptFriendReq,
+    unfriend,
+    ignore
+} from "../actions.js";
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -25,13 +30,21 @@ class Friends extends React.Component {
                             {i.firstname} {i.lastname}
                         </p>
                     </div>
-                    <div
-                        onClick={e =>
-                            this.props.dispatch(acceptFriendReq(i.id))
-                        }
-                        className="button miniButton"
-                    >
-                        Accept Friend
+                    <div className="buttonHolder">
+                        <div
+                            onClick={e =>
+                                this.props.dispatch(acceptFriendReq(i.id))
+                            }
+                            className="button miniButton"
+                        >
+                            Accept
+                        </div>
+                        <div
+                            onClick={e => this.props.dispatch(ignore(i.id))}
+                            className="button miniButton red"
+                        >
+                            Ignore
+                        </div>
                     </div>
                 </div>
             );
@@ -62,36 +75,32 @@ class Friends extends React.Component {
 
         return (
             <section className="friendsContainer">
-                <section className="friendsContainer">
-                    <div className="outerWidth">
-                        <h1>
-                            <img src="/friends_image.png" />Friend Requests
-                        </h1>
-                        <div className="allWannabes">
-                            {wannabesElem.length > 0 ? (
-                                wannabesElem
-                            ) : (
-                                <p className="badNews">
-                                    Nobody wants to be your friend. =(
-                                </p>
-                            )}
-                        </div>
+                <div className="outerWidth">
+                    <h1>
+                        <img src="/friends_image.png" />Friend Requests
+                    </h1>
+                    <div className="allWannabes">
+                        {wannabesElem.length > 0 ? (
+                            wannabesElem
+                        ) : (
+                            <p className="badNews">
+                                Nobody wants to be your friend. =(
+                            </p>
+                        )}
                     </div>
-                    <div className="outerWidth">
-                        <h1>
-                            <img src="/friends_image.png" />Friends
-                        </h1>
-                        <div className="allFriends">
-                            {friendsElem.length > 0 ? (
-                                friendsElem
-                            ) : (
-                                <p className="badNews">
-                                    You have no friends. =(
-                                </p>
-                            )}
-                        </div>
+                </div>
+                <div className="outerWidth">
+                    <h1>
+                        <img src="/friends_image.png" />Friends
+                    </h1>
+                    <div className="allFriends">
+                        {friendsElem.length > 0 ? (
+                            friendsElem
+                        ) : (
+                            <p className="badNews">You have no friends. =(</p>
+                        )}
                     </div>
-                </section>
+                </div>
             </section>
         );
     }

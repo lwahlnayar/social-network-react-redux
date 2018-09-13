@@ -453,8 +453,15 @@ p.badNews {
     width: 100px;
     height: 26px;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 15px;
+}
+
+.appContainer .friendsContainer div.button.red {
+    background-color: tomato;
+}
+.appContainer .friendsContainer div.button.red:hover {
+    background-color: red;
 }
 
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */

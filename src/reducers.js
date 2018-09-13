@@ -24,7 +24,6 @@ export default function(state = INITIAL_STATE, action) {
         };
     }
     if (action.type == "UNFRIEND") {
-        console.log("WTF IS G OING OOON", action.deleteId);
         state = {
             ...state,
             allFriendsWannabes: state.allFriendsWannabes.filter(
@@ -32,5 +31,15 @@ export default function(state = INITIAL_STATE, action) {
             )
         };
     }
+    if (action.type == "IGNORE") {
+        state = {
+            ...state,
+            allFriendsWannabes: state.allFriendsWannabes.filter(
+                eachFriendWannabe => eachFriendWannabe.id != action.ignoreId
+            )
+        };
+    }
     return state;
 }
+
+//refactor state allwannabes, each

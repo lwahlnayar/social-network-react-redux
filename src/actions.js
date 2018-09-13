@@ -39,3 +39,17 @@ export async function unfriend(otherUserId) {
         console.log("error mounting UNFRIEND action:", e);
     }
 }
+
+export async function ignore(otherUserId) {
+    try {
+        const { data } = await axios.post("/cancel-friend-req", {
+            otherUserId: otherUserId
+        });
+        return {
+            type: "IGNORE",
+            ignoreId: otherUserId
+        };
+    } catch (e) {
+        console.log("error mounting IGNORE action:", e);
+    }
+}
