@@ -21,7 +21,39 @@ export default class FriendButton extends React.Component {
         } catch (e) {
             console.log("error mounting friendship button:", e);
         }
+        // console.log("THIS (friendbutton COMPONENT)", this);
     }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        // console.log("NEXT PROPS", nextProps);
+        console.log("PREVSTATE", prevState);
+        // if (
+        //     prevState.otherUserId !=
+        //     nextProps.routeProps.match.params.otherUserId
+        // ) {
+        //     return {
+        //         newOtherId: nextProps.routeProps.match.params.otherUserId
+        //     };
+        // }
+        // return null;
+    }
+
+    // componentDidUpdate() {
+    //     if (this.state.newOtherId) {
+    //         this.fetchData(this.state.newOtherId);
+    //     }
+    // }
+    //
+    // async fetchData(id) {
+    //     try {
+    //             const { data } = await axios.post(`/friend-status`, {
+    //     otherUserId: this.props.otherUserId
+    // } );
+    //             this.setState({ ...data, otherUserId: id, newOtherId: null });
+    //     } catch (e) {
+    //         console.log("Error with componentwillreceiveprops:", e);
+    //     }
+    // }
 
     async addFriend() {
         try {

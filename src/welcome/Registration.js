@@ -86,7 +86,7 @@ export default class Registration extends React.Component {
                             name="password"
                             placeholder="Insert a password"
                         />
-                        <p className="terms">
+                        <p className="terms passWarning">
                             Password must contain at least eight characters, one
                             numeral, one small and one big letter.
                         </p>

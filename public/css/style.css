@@ -17,7 +17,7 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 82px;
+    height: 62px;
     background-color: #24292e;
     border: solid black;
     margin-bottom: 50px;
@@ -31,27 +31,47 @@ nav {
 }
 
 #logo {
-    width: 110px;
-    height: 60px;
+    width: 100px;
+    height: 50px;
 }
 
 nav div.headerLinks {
+    display: flex;
+    align-items: center;
     font-weight: bold;
     color: #2ebc4f;
-    font-size: 23px;
+    font-size: 20px;
+}
+
+nav a.sitewideUser {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 46px; /* must adapt to a links in header*/
+    width: fit-content;
+}
+
+nav img.sitewideProfilePic {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin-left: 5px;
+    object-fit: cover;
 }
 
 nav div.headerLinks a {
     font-weight: bold;
     text-decoration: none;
     color: whitesmoke;
-    font-size: 25px;
+    font-size: 20px; /* has to match above with 20px */
     padding: 10px;
+    margin: 0 5px;
 }
 
 nav div.headerLinks a:hover {
     transition: 0.3s ease;
     color: #2ebc4f;
+    background-color: darkslategray;
 }
 
 /* FOOTER SECTION */
@@ -459,6 +479,7 @@ p.badNews {
     height: 90%;
     background-color: white;
     border-radius: 100px;
+    object-fit: cover;
 }
 
 .appContainer .friendsContainer .nameLink {

@@ -95,6 +95,13 @@ export default class App extends React.Component {
                                 alt="sesame logo"
                             />
                             <div className="headerLinks">
+                                <Link className="sitewideUser" to="/">
+                                    {this.state.firstname}
+                                    <img
+                                        className="sitewideProfilePic"
+                                        src={this.state.avatar}
+                                    />
+                                </Link>
                                 <a href="/sign-out">Sign Out</a>
                             </div>
                         </nav>
