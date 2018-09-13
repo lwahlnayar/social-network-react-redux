@@ -211,10 +211,13 @@ p.errorMessage {
     font-size: 1rem;
 }
 
+.welcomeContainer p.passWarning {
+    transform: translateY(16px);
+}
+
 .welcomeContainer p.terms {
     width: 310px;
     font-size: 14px;
-    margin-top: 7px;
 }
 
 .welcomeContainer button {

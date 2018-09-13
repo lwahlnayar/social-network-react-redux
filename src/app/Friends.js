@@ -76,23 +76,17 @@ class Friends extends React.Component {
                 </div>
             );
         });
-
+        let wannabesHtml = (
+            <div className="outerWidth">
+                <h1>
+                    <img src="/friends_image.png" />Friend Requests
+                </h1>
+                <div className="allWannabes">{wannabesElem}</div>
+            </div>
+        );
         return (
             <section className="friendsContainer">
-                <div className="outerWidth">
-                    <h1>
-                        <img src="/friends_image.png" />Friend Requests
-                    </h1>
-                    <div className="allWannabes">
-                        {wannabesElem.length > 0 ? (
-                            wannabesElem
-                        ) : (
-                            <p className="badNews">
-                                Nobody wants to be your friend. =(
-                            </p>
-                        )}
-                    </div>
-                </div>
+                {wannabesElem.length > 0 && wannabesHtml}
                 <div className="outerWidth">
                     <h1>
                         <img src="/friends_image.png" />Friends
