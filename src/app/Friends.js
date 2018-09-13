@@ -16,7 +16,6 @@ class Friends extends React.Component {
     render() {
         console.log("this.props (from redux state): ", this.props);
         const { allFriends, allWannabes } = this.props;
-        console.log("destructured", allFriends, allWannabes);
 
         let wannabesElem = allWannabes.map(i => {
             return (
@@ -112,10 +111,15 @@ class Friends extends React.Component {
 }
 
 const mapStateToProps = function(state) {
+    const friendsFiltered =
+        state.allFriendsWannabes &&
+        state.allFriendsWannabes.filter(x => x.status == 2);
     return {
-        allFriends:
-            state.allFriendsWannabes &&
-            state.allFriendsWannabes.filter(x => x.status == 2),
+        allFriends: friendsFiltered.sort(function(a, b) {
+            var textA = a.lastname.toUpperCase();
+            var textB = b.lastname.toUpperCase();
+            return textA < textB ? -1 : textA > textB ? 1 : 0;
+        }),
         allWannabes:
             state.allFriendsWannabes &&
             state.allFriendsWannabes.filter(x => x.status == 1)
