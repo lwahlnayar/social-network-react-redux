@@ -292,6 +292,8 @@ p.errorMessage {
 
 .appContainer .profileContainer img {
     max-width: 100%;
+    height: 250px; /* ADAPT THIS TO MAX WIDTH ABOVE (profilecontainer) */
+    object-fit: cover;
     background-color: white;
     border-radius: 200px;
 }
@@ -408,8 +410,8 @@ p.errorMessage {
 }
 
 .appContainer .friendsContainer h1 img {
-    margin: 5px;
-    height: 20px;
+    margin: 0 10px;
+    height: 25px;
 }
 
 p.badNews {
@@ -422,8 +424,9 @@ p.badNews {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin-top: 10px;
     width: 960px;
-    border: yellow dashed 2px;
+    /*         border: yellow dashed 2px; */
 }
 
 .appContainer .friendsContainer div.block {
@@ -433,28 +436,50 @@ p.badNews {
     margin: 8px;
     width: 400px;
     height: 120px;
-    border: 2px black dashed;
+    border: 1px #dddfe2 solid;
 }
 
 .appContainer .friendsContainer div.nameImage {
     display: flex;
     align-items: center;
-    border: 1px dashed blue;
+    margin: 5px;
+    /*         border: 1px dashed blue; */
     height: 100%;
+}
+
+.appContainer .friendsContainer .imageLink {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border-radius: 120px;
 }
 
 .appContainer .friendsContainer img.miniProfile {
     max-width: 110px;
+    height: 90%;
     background-color: white;
     border-radius: 100px;
 }
 
-.appContainer .friendsContainer div.button {
-    width: 100px;
-    height: 26px;
+.appContainer .friendsContainer .nameLink {
+    color: #365899;
+    text-decoration: none;
+    font-weight: bold;
     margin: 5px;
+    font-size: 18px;
+}
+.appContainer .friendsContainer .nameLink:hover {
+    text-decoration: underline;
+    font-weight: ;
+}
+
+.appContainer .friendsContainer div.button {
+    width: 110px;
+    height: 30px;
+    margin: 7px;
     border-radius: 2px;
     font-size: 15px;
+    font-weight: bold;
 }
 
 .appContainer .friendsContainer div.button.red {

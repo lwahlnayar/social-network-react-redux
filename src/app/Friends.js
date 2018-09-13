@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
     getFriendsWannabes,
     acceptFriendReq,
@@ -21,14 +22,16 @@ class Friends extends React.Component {
             return (
                 <div className="block" key={i.id}>
                     <div className="nameImage">
-                        <img
-                            className="miniProfile"
-                            src={i.avatar || "/default_image.png"}
-                            alt={i.name}
-                        />
-                        <p>
+                        <Link className="imageLink" to={`/user/${i.id}`}>
+                            <img
+                                className="miniProfile"
+                                src={i.avatar || "/default_image.png"}
+                                alt={i.name}
+                            />
+                        </Link>
+                        <Link className="nameLink" to={`/user/${i.id}`}>
                             {i.firstname} {i.lastname}
-                        </p>
+                        </Link>
                     </div>
                     <div className="buttonHolder">
                         <div
@@ -54,14 +57,16 @@ class Friends extends React.Component {
             return (
                 <div className="block" key={i.id}>
                     <div className="nameImage">
-                        <img
-                            className="miniProfile"
-                            src={i.avatar || "/default_image.png"}
-                            alt={i.name}
-                        />
-                        <p>
+                        <Link className="imageLink" to={`/user/${i.id}`}>
+                            <img
+                                className="miniProfile"
+                                src={i.avatar || "/default_image.png"}
+                                alt={i.name}
+                            />
+                        </Link>
+                        <Link className="nameLink" to={`/user/${i.id}`}>
                             {i.firstname} {i.lastname}
-                        </p>
+                        </Link>
                     </div>
                     <div
                         onClick={e => this.props.dispatch(unfriend(i.id))}
