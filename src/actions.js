@@ -53,3 +53,14 @@ export async function ignore(otherUserId) {
         console.log("error mounting IGNORE action:", e);
     }
 }
+
+export async function addOnlineUsersToState(onlineUsers) {
+    try {
+        return {
+            type: "ADD_ONLINE_USERS_TO_STATE",
+            onlineUsers
+        };
+    } catch (e) {
+        console.log("error mounting IGNORE action:", e);
+    }
+}

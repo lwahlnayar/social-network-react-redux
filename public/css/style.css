@@ -551,6 +551,12 @@ p.badNews {
     background-color: red;
 }
 
+/* -------------- ONLINE USERS ----------------- */
+
+.appContainer .onlineContainer img#onlineIcon {
+    width: 30px;
+}
+
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */
 @media (max-width: 980px) {
     /* CHECK GITHUB HOME TO SEE HEADER/FOOTER WIDHTS */

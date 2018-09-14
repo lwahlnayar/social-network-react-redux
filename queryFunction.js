@@ -70,7 +70,7 @@ module.exports.deleteFriendRow = function(userId, otherUserId) {
         [userId || null, otherUserId || null]
     );
 };
-//MISING ARGUMENT BELOW
+
 module.exports.fetchFriendsWannabes = function(userId) {
     return db.query(
         `
@@ -82,5 +82,12 @@ module.exports.fetchFriendsWannabes = function(userId) {
           OR (status = 2 AND sender_id = $1 AND receiver_id = users.id)
       `,
         [userId || null]
+    );
+};
+
+module.exports.getOnlineUsers = function(arrayUserIds) {
+    return db.query(
+        `SELECT id, firstname, lastname, avatar FROM users WHERE id = ANY($1)`,
+        [arrayUserIds || null]
     );
 };

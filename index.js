@@ -352,13 +352,23 @@ server.listen(8080, function() {
 });
 
 //websockets listening- (order doesnt matter, listens in parallel)
+let onlineUsers = {};
 io.on("connection", function(socket) {
     if (!socket.request.session || !socket.request.session.loggedIn) {
         return socket.disconnect(true);
     }
     console.log(`socket with the id ${socket.id} is now connected`);
     const loggedIn = socket.request.session.loggedIn;
-    console.log("userid ->", loggedIn);
+
+    //create array of unique loggedin users
+    onlineUsers[socket.id] = loggedIn;
+    let arrayUserIds = Object.values(onlineUsers);
+
+    queryFunction.getOnlineUsers(arrayUserIds).then(onlineUsers => {
+        socket.emit("onlineUsersResponse", {
+            onlineUsers: onlineUsers.rows
+        });
+    });
 
     socket.on("disconnect", function() {
         console.log(
@@ -368,19 +378,3 @@ io.on("connection", function(socket) {
         );
     });
 });
-
-// io.on("connection", function(socket) {
-//     console.log(`socket with the id ${socket.id} is now connected`);
-//
-// socket.on("disconnect", function() {
-//     console.log(`socket with the id ${socket.id} is now disconnected`);
-// });
-
-// socket.on("thanks", function(data) {
-//     console.log(data);
-// });
-//
-// socket.emit("welcome", {
-//     message: "Welome. It is nice to see you"
-// });
-// });

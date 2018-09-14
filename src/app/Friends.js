@@ -14,7 +14,6 @@ class Friends extends React.Component {
     }
 
     render() {
-        console.log("this of FRIENDS COMPONENT (from redux state): ", this);
         const { allFriends, allWannabes } = this.props;
 
         let wannabesElem = allWannabes.map(i => {
@@ -84,6 +83,8 @@ class Friends extends React.Component {
                 <div className="allWannabes">{wannabesElem}</div>
             </div>
         );
+
+        //MAIN RENDER() RETURN
         return (
             <section className="friendsContainer">
                 {wannabesElem.length > 0 && wannabesHtml}

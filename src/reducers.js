@@ -1,6 +1,7 @@
 //REDUCER- PURPOSE: used in Stat.js. Recreates an updated copy of STATE based on action that it takes in 2nd argument.
 const INITIAL_STATE = {
-    allFriendsWannabes: []
+    allFriendsWannabes: [],
+    onlineUsers: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -33,6 +34,12 @@ export default function(state = INITIAL_STATE, action) {
             allFriendsWannabes: state.allFriendsWannabes.filter(
                 each => each.id != action.ignoreId
             )
+        };
+    }
+    if (action.type == "ADD_ONLINE_USERS_TO_STATE") {
+        state = {
+            ...state,
+            onlineUsers: action.onlineUsers
         };
     }
     return state;
