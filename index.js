@@ -353,9 +353,34 @@ server.listen(8080, function() {
 
 //websockets listening- (order doesnt matter, listens in parallel)
 io.on("connection", function(socket) {
-    if (!socket.request.session || !socket.request.session.user) {
+    if (!socket.request.session || !socket.request.session.loggedIn) {
         return socket.disconnect(true);
     }
-    // const userId = socket.request.session.user.id;
     console.log(`socket with the id ${socket.id} is now connected`);
+    const loggedIn = socket.request.session.loggedIn;
+    console.log("userid ->", loggedIn);
+
+    socket.on("disconnect", function() {
+        console.log(
+            `socket with the id ${
+                socket.id
+            } and user id ${loggedIn} is now disconnected`
+        );
+    });
 });
+
+// io.on("connection", function(socket) {
+//     console.log(`socket with the id ${socket.id} is now connected`);
+//
+// socket.on("disconnect", function() {
+//     console.log(`socket with the id ${socket.id} is now disconnected`);
+// });
+
+// socket.on("thanks", function(data) {
+//     console.log(data);
+// });
+//
+// socket.emit("welcome", {
+//     message: "Welome. It is nice to see you"
+// });
+// });

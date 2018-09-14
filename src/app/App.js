@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import Uploader from "./Uploader";
 import OtherProfile from "./Other-profile";
 import Friends from "./Friends";
+import Online from "./Online";
 
 export default class App extends React.Component {
     constructor() {
@@ -108,6 +109,7 @@ export default class App extends React.Component {
                     </header>
                     <section>
                         <div className="centerHolder">
+                            {/* PROFILE PIC */}
                             <Route
                                 exact
                                 path="/"
@@ -122,6 +124,8 @@ export default class App extends React.Component {
                                     />
                                 )}
                             />
+
+                            {/* OTHER PROFILE*/}
                             <Route
                                 exact
                                 path="/user/:otherUserId"
@@ -133,6 +137,7 @@ export default class App extends React.Component {
                                 )}
                             />
 
+                            {/* UPLOADER(HIDDEN)*/}
                             {this.state.modalVisible && (
                                 <Uploader
                                     handleModalClick={this.handleModalClick}
@@ -140,7 +145,12 @@ export default class App extends React.Component {
                                     exitModal={this.exitModal}
                                 />
                             )}
+
+                            {/* FRIENDS PAGE*/}
                             <Route exact path="/friends" component={Friends} />
+
+                            {/* ONLINE USERS*/}
+                            <Route exact path="/online" component={Online} />
                         </div>
                     </section>
                     <footer>

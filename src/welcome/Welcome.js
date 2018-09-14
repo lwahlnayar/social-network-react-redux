@@ -43,11 +43,14 @@ export default function Welcome() {
                         </div>
                         <div className="formHolder">
                             <div>
+                                {/* REGISTRATION */}
                                 <Route
                                     exact
                                     path="/"
                                     component={Registration}
                                 />
+
+                                {/* LOGIN / SIGNUP*/}
                                 <Route path="/login" component={Login} />
                             </div>
                         </div>
