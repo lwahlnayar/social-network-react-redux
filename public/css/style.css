@@ -303,7 +303,6 @@ p.errorMessage {
     margin-bottom: 50px;
 }
 
-/* TO BE DELETED POTENTIALLY--- DARK OVERLAY FOR MAIN PROFILE PIC */
 .appContainer .profileContainer {
     max-width: 250px;
     display: flex;
@@ -315,25 +314,36 @@ p.errorMessage {
     margin: auto;
 }
 
+.appContainer .profileContainer div.circleWindow {
+    cursor: pointer;
+    border: 0.5px solid #bdc7d8;
+    position: relative;
+    border-radius: 200px;
+    max-width: 250px;
+    height: 250px;
+    overflow: hidden;
+}
+
 .appContainer .profileContainer img {
     max-width: 100%;
     height: 100%; /* ADAPT THIS TO MAX WIDTH ABOVE (profilecontainer) */
     object-fit: cover;
     background-color: white;
-    border-radius: 200px;
-}
-.appContainer .profileContainer img.mainProfilePic:hover {
-    cursor: pointer;
 }
 
-.appContainer div.picBackground {
+/* TEST PROFILE PIC EDIT LAYER */
+.appContainer .profileContainer div.darkEditProfile {
     position: absolute;
-    width: 100%;
-    bottom: 0;
-    height: 100%;
-    background-color: black;
-    opacity: 0.6;
-    border-radius: 200px;
+    bottom: 0px;
+    width: 250px;
+    height: 30%;
+    background-color: rgba(36, 41, 46, 0.88);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    pointer-events: none;
 }
 
 .appContainer div.editPicContainer {

@@ -39,9 +39,7 @@ export default function Welcome() {
                             <h2 className="fade-in">
                                 A place to stay in touch...
                             </h2>
-                            <p className="fade-in2">
-                                ...and worship the Funky Chicken
-                            </p>
+                            <p className="fade-in2">...and worship...</p>
                         </div>
                         <div className="formHolder">
                             <div>
