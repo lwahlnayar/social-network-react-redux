@@ -14,7 +14,7 @@ class Friends extends React.Component {
     }
 
     render() {
-        console.log("this.props (from redux state): ", this.props);
+        console.log("this of FRIENDS COMPONENT (from redux state): ", this);
         const { allFriends, allWannabes } = this.props;
 
         let wannabesElem = allWannabes.map(i => {

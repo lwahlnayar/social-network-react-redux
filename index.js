@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 const compression = require("compression");
 const bodyParser = require("body-parser");
 const queryFunction = require("./queryFunction");
@@ -18,12 +20,23 @@ process.env.NODE_ENV === "production"
     : (secrets = require("./secrets.json"));
 
 app.use(bodyParser.json());
-app.use(
-    cookieSession({
-        secret: secrets.cookieSecret,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+
+// app.use(
+//     cookieSession({
+//         secret: secrets.cookieSecret,
+//         maxAge: 1000 * 60 * 60 * 24 * 14
+//     })
+// );
+
+const cookieSessionMiddleware = cookieSession({
+    secret: secrets.cookieSecret,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 var diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -333,7 +346,19 @@ app.get("*", checkIfLoggedIn, (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-//server listening
-app.listen(8080, function() {
+//server listening- (only http requests)
+server.listen(8080, function() {
     console.log("I'm listening: ");
+});
+
+//websockets listening- (order doesnt matter, listens in parallel)
+io.on("connection", function(socket) {
+    console.log("yo1");
+
+    // console.log("userId", userId);
+
+    if (!socket.request.session || !socket.request.session.user) {
+        return socket.disconnect(true);
+    }
+    const userId = socket.request.session.user.id;
 });

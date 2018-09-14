@@ -19,7 +19,7 @@ export default function Uploader(props) {
                         accept="image/*"
                     />
                     <label id="labelUploadButton" htmlFor="fileButton">
-                        UPLOAD
+                        Upload
                     </label>
                 </div>
             </div>

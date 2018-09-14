@@ -7,6 +7,7 @@ import reduxPromise from "redux-promise";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./reducers";
+import { getSocket } from "./socket";
 
 //store -> holds the main redux STATE object
 const store = createStore(
@@ -19,11 +20,12 @@ let elem;
 if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
-    elem = (
+    elem = (getSocket(store),
+    (
         <Provider store={store}>
             <App />
         </Provider>
-    );
+    ));
 }
 
 ReactDOM.render(elem, document.querySelector("main"));
