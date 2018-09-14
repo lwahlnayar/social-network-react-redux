@@ -7,9 +7,9 @@ export default function Profile(props) {
 
     let buttonText;
     if (!user_bio) {
-        buttonText = "Add a short biography!";
+        buttonText = "Add Bio";
     } else {
-        buttonText = "Edit your biography!";
+        buttonText = "Edit your Bio";
     }
 
     const addBioButton = (

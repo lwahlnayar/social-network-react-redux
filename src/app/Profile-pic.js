@@ -5,15 +5,25 @@ export default function ProfilePic(props) {
     const { clickHandler } = props;
     return (
         <div className="profilePicContainer">
-            <img
-                className="mainProfilePic"
-                onClick={clickHandler}
-                width="250px"
-                src={avatar || "/default_image.png"}
-            />
+            <div className="editPicContainer">
+                <img
+                    className="mainProfilePic"
+                    onClick={clickHandler}
+                    width="250px"
+                    src={avatar || "/default_image.png"}
+                />
+                <img
+                    onClick={clickHandler}
+                    src="/edit_user_icon.png"
+                    className="editPic"
+                />
+            </div>
             <h1 className="userfullname">
                 {firstname} {lastname}
             </h1>
         </div>
     );
 }
+// <div onClick={clickHandler} className="picBackground">
+//     Edit Profile
+// </div>

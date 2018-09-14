@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server, { origins: "localhost:8080" });
-const compression = require("compression");
+const compression = require("compression"); //to compress the bundle server before response to client
 const bodyParser = require("body-parser");
 const queryFunction = require("./queryFunction");
 const chalk = require("chalk");
@@ -353,12 +353,9 @@ server.listen(8080, function() {
 
 //websockets listening- (order doesnt matter, listens in parallel)
 io.on("connection", function(socket) {
-    console.log("yo1");
-
-    // console.log("userId", userId);
-
     if (!socket.request.session || !socket.request.session.user) {
         return socket.disconnect(true);
     }
-    const userId = socket.request.session.user.id;
+    // const userId = socket.request.session.user.id;
+    console.log(`socket with the id ${socket.id} is now connected`);
 });
