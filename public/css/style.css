@@ -86,13 +86,14 @@ footer {
 }
 
 footer p {
-    padding-top: 24px;
+    /* padding-top: 24px; */
     font-size: 18px;
 }
 
 .footerCenterHolder {
     width: 980px;
     display: flex;
+    align-items: center;
 }
 
 /* MINOR SITEWIDE THINGS */
@@ -141,7 +142,16 @@ p.errorMessage {
 .button:hover {
     cursor: pointer;
     transition: 0.5s ease;
-    background-color: mediumseagreen;
+    background-color: limegreen;
+}
+
+div.addFriendIcon {
+    background-image: url("/add_friend_white.png");
+    background-size: 25px;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    margin-right: 8px;
 }
 
 /* END SITEWIDE */
@@ -544,17 +554,54 @@ p.badNews {
     font-weight: bold;
 }
 
-.appContainer .friendsContainer div.button.red {
-    background-color: tomato;
+.appContainer .friendsContainer div.button.salmon {
+    background-color: salmon;
 }
-.appContainer .friendsContainer div.button.red:hover {
-    background-color: red;
+.appContainer .friendsContainer div.button.salmon:hover {
+    background-color: lightsalmon;
+}
+
+.friendsContainer div.addFriendIcon {
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
 }
 
 /* -------------- ONLINE USERS ----------------- */
 
-.appContainer .onlineContainer img#onlineIcon {
+/* .appContainer .onlineContainer img#onlineIcon {
     width: 30px;
+} */
+
+.appContainer .online div.block {
+    border: none;
+}
+
+.appContainer .online div.block {
+    position: relative;
+    border: none;
+    height: 60px;
+    max-width: 220px;
+    justify-content: flex-between;
+}
+
+.appContainer .online img.miniProfile {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.appContainer .online a.nameLink {
+    font-size: 15px;
+}
+
+.appContainer .online i.onlineDot {
+    position: absolute;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+    background-color: #44b62e;
+    border-radius: 20px;
+    transform: translateY(1px);
 }
 
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */

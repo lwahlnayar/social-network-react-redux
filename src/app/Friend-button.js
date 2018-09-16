@@ -95,10 +95,12 @@ export default class FriendButton extends React.Component {
 
     render() {
         let buttonText;
+        let addFriendIcon;
         let dynamicMethod;
 
         if (this.state.friendReqReceived && this.state.friendStatus == 1) {
             buttonText = "Accept Request";
+            addFriendIcon = <div className="addFriendIcon" />;
             dynamicMethod = this.acceptFriend;
         }
         if (this.state.friendReqReceived && this.state.friendStatus == 2) {
@@ -107,10 +109,11 @@ export default class FriendButton extends React.Component {
         }
         if (!this.state.friendReqSent && !this.state.friendStatus) {
             buttonText = "Add Friend";
+            addFriendIcon = <div className="addFriendIcon" />;
             dynamicMethod = this.addFriend;
         }
         if (this.state.friendReqSent && this.state.friendStatus == 1) {
-            buttonText = "Cancel Friend Request";
+            buttonText = "Cancel Request";
             dynamicMethod = this.cancelFriend;
         }
         if (this.state.friendReqSent && this.state.friendStatus == 2) {
@@ -120,6 +123,7 @@ export default class FriendButton extends React.Component {
 
         return (
             <div onClick={dynamicMethod} className="button friendButton">
+                {addFriendIcon}
                 {buttonText}
             </div>
         );

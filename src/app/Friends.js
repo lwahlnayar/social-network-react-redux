@@ -38,11 +38,11 @@ class Friends extends React.Component {
                             }
                             className="button miniButton"
                         >
-                            Accept
+                            <div className="addFriendIcon" /> Accept
                         </div>
                         <div
                             onClick={e => this.props.dispatch(ignore(i.id))}
-                            className="button miniButton red"
+                            className="button miniButton salmon"
                         >
                             Ignore
                         </div>
@@ -68,7 +68,7 @@ class Friends extends React.Component {
                     </div>
                     <div
                         onClick={e => this.props.dispatch(unfriend(i.id))}
-                        className="button miniButton"
+                        className="button miniButton salmon"
                     >
                         Unfriend
                     </div>

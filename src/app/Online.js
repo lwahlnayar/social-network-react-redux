@@ -25,6 +25,7 @@ class Online extends React.Component {
                             {i.firstname} {i.lastname}
                         </Link>
                     </div>
+                    <i className="onlineDot" />
                 </div>
             );
         });

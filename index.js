@@ -357,8 +357,12 @@ io.on("connection", function(socket) {
     if (!socket.request.session || !socket.request.session.loggedIn) {
         return socket.disconnect(true);
     }
-    console.log(`socket with the id ${socket.id} is now connected`);
     const loggedIn = socket.request.session.loggedIn;
+    console.log(
+        `socket with the id ${
+            socket.id
+        } and USERID ${loggedIn} is now connected`
+    );
 
     //create array of unique loggedin users
     onlineUsers[socket.id] = loggedIn;
@@ -367,6 +371,13 @@ io.on("connection", function(socket) {
     queryFunction.getOnlineUsers(arrayUserIds).then(onlineUsers => {
         socket.emit("onlineUsersResponse", {
             onlineUsers: onlineUsers.rows
+        });
+
+        queryFunction.fetchUserData(loggedIn).then(userJoined => {
+            const { id, firstname, lastname, avatar } = userJoined.rows[0];
+            io.sockets.emit("usersJoined", {
+                usersJoined: { id, firstname, lastname, avatar }
+            });
         });
     });
 

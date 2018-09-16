@@ -9,9 +9,13 @@ export function getSocket(store) {
         socket.on("onlineUsersResponse", response => {
             store.dispatch(addOnlineUsersToState(response.onlineUsers));
             console.log(
-                "onlineusers websockets response",
+                "onlineUsers websockets response",
                 response.onlineUsers
             );
+        });
+        socket.on("usersJoined", response => {
+            // store.dispatch(addOnlineUsersToState(response.onlineUsers));
+            console.log("usersJoined websockets response", response);
         });
     }
     return socket;
