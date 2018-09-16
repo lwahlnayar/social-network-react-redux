@@ -86,7 +86,6 @@ footer {
 }
 
 footer p {
-    /* padding-top: 24px; */
     font-size: 18px;
 }
 
@@ -174,8 +173,8 @@ div.addFriendIcon {
     position: relative;
     /* this width needs removing on mediaframe */
     width: 980px;
-    min-height: 100vh;
-    margin-bottom: 50px;
+/*     min-height: 100vh; */
+    margin-bottom: 80px;
 }
 
 .welcomeContainer .greetings {
@@ -569,20 +568,16 @@ p.badNews {
 
 /* -------------- ONLINE USERS ----------------- */
 
-/* .appContainer .onlineContainer img#onlineIcon {
-    width: 30px;
-} */
-
-.appContainer .online div.block {
-    border: none;
-}
-
 .appContainer .online div.block {
     position: relative;
     border: none;
     height: 60px;
-    max-width: 220px;
+    max-width: 230px;
     justify-content: flex-between;
+}
+
+.appContainer .nameImage {
+    max-width: 90%;
 }
 
 .appContainer .online img.miniProfile {
@@ -605,11 +600,151 @@ p.badNews {
 }
 
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */
-@media (max-width: 980px) {
-    /* CHECK GITHUB HOME TO SEE HEADER/FOOTER WIDHTS */
+@media (max-width: 1000px) {
+    /*     .centerHolder {
+        flex-direction: column;
+
+    }
+ */
+    .welcomeContainer h1 {
+        font-size: 45px;
+        width: 100%;
+    }
+
+    .welcomeContainer h2 {
+        font-size: 28px;
+    }
+    .welcomeContainer div.greetings p {
+        font-size: 22px;
+    }
+
+    nav {
+        margin: 0 30px;
+        width: 100%;
+    }
+
+    .footerCenterHolder {
+        width: 100%;
+        margin: 0 30px;
+    }
+
+    .welcomeContainer div.greetings {
+        display: flex;
+        flex-direction: column;
+        margin-left: 50px;
+    }
+
+    /* 171 */
+    .welcomeContainer .centerHolder {
+        /* this width needs removing on mediaframe */
+        width: 100%;
+    }
+    .welcomeContainer .formHolder {
+        margin: 0 30px;
+    }
+}
+
+@media (max-width: 854px) {
+    .welcomeContainer div.formHolder {
+        margin-left: 0px;
+    }
+
+    .welcomeContainer h1 {
+        font-size: 38px;
+        width: 100%;
+    }
+
+    .welcomeContainer h2 {
+        font-size: 20px;
+    }
+
+    .welcomeContainer div.greetings p {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 768px) {
+    .welcomeContainer .centerHolder {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .welcomeContainer h2,
+    div.greetings p {
+        display: none;
+    }
+
+    .welcomeContainer h1 {
+        margin-bottom: 30px;
+    }
+
+    .welcomeContainer div.greetings {
+        margin: 0;
+    }
+
+    .welcomeContainer div.formHolder {
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 520px) {
+    .welcomeContainer h1 {
+        font-size: 30px;
+    }
+
+    .welcomeContainer div.formHolder {
+        margin: 0 10px;
+        width: 350px;
+    }
+}
+
+@media (max-width: 425px) {
+    #logo {
+        width: 70px;
+        height: 40px;
+    }
+
+    nav div.headerLinks {
+        font-size: 17px;
+    }
+
+    nav div.headerLinks a {
+        margin: 0;
+        font-size: 17px; /* has to match above with 20px */
+    }
+
+    nav {
+        margin: 0 15px;
+    }
+
+    .footerCenterHolder {
+        margin: 0 15px;
+    }
+
+    footer p {
+        font-size: 15px;
+    }
+
+    .welcomeContainer h1 {
+        font-size: 25px;
+    }
+
+    .welcomeContainer div.formHolder {
+        margin: 0 10px;
+        width: 300px;
+    }
+
+    .welcomeContainer form {
+        width: 220px;
+    }
+
+    .welcomeContainer div.formHolder p.terms {
+        width: 220px;
+    }
+
+    .welcomeContainer div.formHolder input {
+    min-width: 220px;
 }
 
 /* ANIMATIONS BELOW */
