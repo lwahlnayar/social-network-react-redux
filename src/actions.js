@@ -64,3 +64,15 @@ export async function addOnlineUsersToState(onlineUsers) {
         console.log("error mounting IGNORE action:", e);
     }
 }
+
+export async function addUserJoined(onlineUsers) {
+    try {
+        // console.log("adduserjoined ACTION FILE: ", userJoined);
+        return {
+            type: "USER_JOINED",
+            onlineUsers: [onlineUsers]
+        };
+    } catch (e) {
+        console.log("error mounting userJoined action:", e);
+    }
+}

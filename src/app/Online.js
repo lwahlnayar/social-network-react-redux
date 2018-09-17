@@ -9,7 +9,7 @@ class Online extends React.Component {
 
     render() {
         const { onlineUsers } = this.props;
-        console.log("onlineusers", onlineUsers);
+        // console.log("onlineusers", onlineUsers);
         let onlineUsersElem = onlineUsers.map(i => {
             return (
                 <div className="block" key={i.id}>

@@ -36,10 +36,13 @@ export default function(state = INITIAL_STATE, action) {
             )
         };
     }
-    if (action.type == "ADD_ONLINE_USERS_TO_STATE") {
+    if (
+        action.type == "ADD_ONLINE_USERS_TO_STATE" ||
+        action.type == "USER_JOINED"
+    ) {
         state = {
             ...state,
-            onlineUsers: action.onlineUsers
+            onlineUsers: [...state.onlineUsers, ...action.onlineUsers]
         };
     }
     return state;

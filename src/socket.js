@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-import { addOnlineUsersToState } from "./actions.js";
+import { addOnlineUsersToState, addUserJoined } from "./actions.js";
 
 let socket;
 
@@ -8,14 +8,10 @@ export function getSocket(store) {
         socket = io.connect();
         socket.on("onlineUsersResponse", response => {
             store.dispatch(addOnlineUsersToState(response.onlineUsers));
-            console.log(
-                "onlineUsers websockets response",
-                response.onlineUsers
-            );
         });
-        socket.on("usersJoined", response => {
-            // store.dispatch(addOnlineUsersToState(response.onlineUsers));
-            console.log("usersJoined websockets response", response);
+        socket.on("userJoined", response => {
+            store.dispatch(addUserJoined(response.userJoined));
+            // console.log("userJoined websockets response", response.userJoined);
         });
     }
     return socket;

@@ -364,7 +364,7 @@ io.on("connection", function(socket) {
         } and USERID ${loggedIn} is now connected`
     );
 
-    //create array of unique loggedin users
+    //create array of loggedin users
     onlineUsers[socket.id] = loggedIn;
     let arrayUserIds = Object.values(onlineUsers);
 
@@ -372,13 +372,20 @@ io.on("connection", function(socket) {
         socket.emit("onlineUsersResponse", {
             onlineUsers: onlineUsers.rows
         });
+        console.log("just logged in user: ", loggedIn);
+        console.log("loggedInUsers Array: ", arrayUserIds);
 
-        queryFunction.fetchUserData(loggedIn).then(userJoined => {
-            const { id, firstname, lastname, avatar } = userJoined.rows[0];
-            io.sockets.emit("usersJoined", {
-                usersJoined: { id, firstname, lastname, avatar }
+        let allSocketIds = arrayUserIds.filter(id => id == loggedIn);
+        console.log("allsocketIds", allSocketIds);
+
+        if (allSocketIds.length == 1) {
+            queryFunction.fetchUserData(loggedIn).then(userJoined => {
+                const { id, firstname, lastname, avatar } = userJoined.rows[0];
+                socket.broadcast.emit("userJoined", {
+                    userJoined: { id, firstname, lastname, avatar }
+                });
             });
-        });
+        }
     });
 
     socket.on("disconnect", function() {
@@ -387,5 +394,6 @@ io.on("connection", function(socket) {
                 socket.id
             } and user id ${loggedIn} is now disconnected`
         );
+        delete onlineUsers[socket.id];
     });
 });
