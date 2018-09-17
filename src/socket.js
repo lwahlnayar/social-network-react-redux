@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-import { addOnlineUsersToState, addUserJoined } from "./actions.js";
+import { addOnlineUsersToState, addUserJoined, userLeft } from "./actions.js";
 
 let socket;
 
@@ -11,7 +11,9 @@ export function getSocket(store) {
         });
         socket.on("userJoined", response => {
             store.dispatch(addUserJoined(response.userJoined));
-            // console.log("userJoined websockets response", response.userJoined);
+        });
+        socket.on("userLeft", response => {
+            store.dispatch(userLeft(response.userLeft));
         });
     }
     return socket;

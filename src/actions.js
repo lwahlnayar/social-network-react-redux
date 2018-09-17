@@ -65,14 +65,26 @@ export async function addOnlineUsersToState(onlineUsers) {
     }
 }
 
-export async function addUserJoined(onlineUsers) {
+export async function addUserJoined(userJoined) {
     try {
         // console.log("adduserjoined ACTION FILE: ", userJoined);
         return {
             type: "USER_JOINED",
-            onlineUsers: [onlineUsers]
+            userJoined
         };
     } catch (e) {
         console.log("error mounting userJoined action:", e);
+    }
+}
+
+export async function userLeft(userLeft) {
+    try {
+        // console.log("adduserjoined ACTION FILE: ", userJoined);
+        return {
+            type: "USER_LEFT",
+            userLeft
+        };
+    } catch (e) {
+        console.log("error mounting userLeft action:", e);
     }
 }

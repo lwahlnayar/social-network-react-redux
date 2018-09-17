@@ -352,7 +352,7 @@ server.listen(8080, function() {
 });
 
 //websockets listening- (order doesnt matter, listens in parallel)
-let onlineUsers = {};
+let onlineUsersObj = {};
 io.on("connection", function(socket) {
     if (!socket.request.session || !socket.request.session.loggedIn) {
         return socket.disconnect(true);
@@ -365,8 +365,8 @@ io.on("connection", function(socket) {
     );
 
     //create array of loggedin users
-    onlineUsers[socket.id] = loggedIn;
-    let arrayUserIds = Object.values(onlineUsers);
+    onlineUsersObj[socket.id] = loggedIn;
+    let arrayUserIds = Object.values(onlineUsersObj);
 
     queryFunction.getOnlineUsers(arrayUserIds).then(onlineUsers => {
         socket.emit("onlineUsersResponse", {
@@ -374,19 +374,18 @@ io.on("connection", function(socket) {
         });
         console.log("just logged in user: ", loggedIn);
         console.log("loggedInUsers Array: ", arrayUserIds);
-
-        let allSocketIds = arrayUserIds.filter(id => id == loggedIn);
-        console.log("allsocketIds", allSocketIds);
-
-        if (allSocketIds.length == 1) {
-            queryFunction.fetchUserData(loggedIn).then(userJoined => {
-                const { id, firstname, lastname, avatar } = userJoined.rows[0];
-                socket.broadcast.emit("userJoined", {
-                    userJoined: { id, firstname, lastname, avatar }
-                });
-            });
-        }
     });
+
+    let allSocketIds = arrayUserIds.filter(id => id == loggedIn);
+    if (allSocketIds.length == 1) {
+        queryFunction.fetchUserData(loggedIn).then(userJoined => {
+            const { id, firstname, lastname, avatar } = userJoined.rows[0];
+            socket.broadcast.emit("userJoined", {
+                //broadcast sends to all except main user
+                userJoined: { id, firstname, lastname, avatar }
+            });
+        });
+    }
 
     socket.on("disconnect", function() {
         console.log(
@@ -394,6 +393,16 @@ io.on("connection", function(socket) {
                 socket.id
             } and user id ${loggedIn} is now disconnected`
         );
-        delete onlineUsers[socket.id];
+        delete onlineUsersObj[socket.id];
+        arrayUserIds = Object.values(onlineUsersObj);
+        //create if to find out if really left before querying
+        if (!arrayUserIds.includes(loggedIn)) {
+            queryFunction.fetchUserData(loggedIn).then(userLeft => {
+                const { id, firstname, lastname, avatar } = userLeft.rows[0];
+                io.sockets.emit("userLeft", {
+                    userLeft: { id, firstname, lastname, avatar }
+                });
+            });
+        }
     });
 });

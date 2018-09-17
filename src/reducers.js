@@ -36,13 +36,24 @@ export default function(state = INITIAL_STATE, action) {
             )
         };
     }
-    if (
-        action.type == "ADD_ONLINE_USERS_TO_STATE" ||
-        action.type == "USER_JOINED"
-    ) {
+    if (action.type == "ADD_ONLINE_USERS_TO_STATE") {
         state = {
             ...state,
-            onlineUsers: [...state.onlineUsers, ...action.onlineUsers]
+            onlineUsers: action.onlineUsers
+        };
+    }
+    if (action.type == "USER_JOINED") {
+        state = {
+            ...state,
+            onlineUsers: [...state.onlineUsers, action.userJoined]
+        };
+    }
+    if (action.type == "USER_LEFT") {
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(
+                user => user.id != action.userLeft.id
+            )
         };
     }
     return state;
