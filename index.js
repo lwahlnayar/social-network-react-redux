@@ -372,8 +372,6 @@ io.on("connection", function(socket) {
         socket.emit("onlineUsersResponse", {
             onlineUsers: onlineUsers.rows
         });
-        console.log("just logged in user: ", loggedIn);
-        console.log("loggedInUsers Array: ", arrayUserIds);
     });
 
     let allSocketIds = arrayUserIds.filter(id => id == loggedIn);
