@@ -403,6 +403,7 @@ io.on("connection", function(socket) {
                 let chatDataSorted = chatData.rows.sort(function(a, b) {
                     return a.id - b.id;
                 });
+                console.log("alldata sorted", chatDataSorted);
                 io.sockets.emit("allChatResponse", chatDataSorted);
             })
             .catch(e => console.log("error getting chat data: ", e));
