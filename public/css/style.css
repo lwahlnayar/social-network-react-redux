@@ -644,6 +644,7 @@ p.badNews {
 
 .chatContainer .avatarNameHold p {
     margin-left: 10px;
+    font-weight: bold;
 }
 
 .chatContainer .singleChat .speech-bubble {
@@ -691,6 +692,14 @@ p.badNews {
     margin-bottom: 25px;
 }
 
+.chatContainer p.msgDate {
+    position: absolute;
+    font-size: 11px;
+    font-style: italic;
+    bottom: -5px;
+    right: 15px;
+}
+
 .chatContainer div#chatInput {
     display: flex;
     margin-top: 3px;
@@ -702,10 +711,13 @@ p.badNews {
     height: 80px;
     border-radius: 4px;
     resize: none;
+    text-indent: 5px;
+    padding-top: 5px;
 }
 .chatContainer .enterChatMessage {
     width: 80px;
     height: 80px;
+    margin-left: 3px;
 }
 
 

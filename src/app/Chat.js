@@ -3,16 +3,23 @@ import { connect } from "react-redux";
 import axios from "../axios";
 import { Link } from "react-router-dom";
 import { getSocket } from "../socket";
+import { formatDate } from "../dateFormat";
 
 class Chat extends React.Component {
+    constructor() {
+        super();
+        this.postChatMessage = this.postChatMessage.bind(this);
+    }
+
     componentDidMount() {
         getSocket().emit("getChatMessages");
     }
 
     postChatMessage(e) {
         if (e.keyCode == 13 || e.button == 0) {
-            let textOnClick = document.getElementById("chatTextArea").value;
-            getSocket().emit("sendChatMessage", e.target.value || textOnClick);
+            e.preventDefault(); //enter new line behavour stops
+            getSocket().emit("sendChatMessage", this.textVal.value);
+            this.textVal.value = "";
         }
     }
 
@@ -27,7 +34,10 @@ class Chat extends React.Component {
                         </p>
                     </div>
                     <div className="speech-bubble">
-                        {message.messages} {message.created_at}
+                        <p>{message.messages}</p>
+                        <p className="msgDate">
+                            {formatDate(message.created_at)}
+                        </p>
                     </div>
                 </div>
             );
@@ -47,7 +57,9 @@ class Chat extends React.Component {
                     <textarea
                         onKeyDown={this.postChatMessage}
                         id="chatTextArea"
+                        ref={textVal => (this.textVal = textVal)}
                         maxLength="300"
+                        placeholder="Share your thoughts with everyone..."
                     />
                     <div
                         onClick={this.postChatMessage}
