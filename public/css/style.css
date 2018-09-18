@@ -50,6 +50,7 @@ nav div.headerLinks {
 
 nav a.sitewideUser {
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     height: 40px; /* must adapt to a links in header*/
@@ -84,6 +85,43 @@ nav img.friendsIcon {
     width: 26px;
     height: 26px;
 }
+/* -----------------TOOLTIPS------------------- */
+nav span.tooltip {
+    visibility: hidden;
+    font-size: 14px;
+    width: 80px;
+    padding: 0 45px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    transform: translate(-28px, 48px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+nav span.friendReq {
+    width: 62px;
+    transform: translate(-19px, 48px);
+}
+nav span.tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  transparent  transparent #555 transparent;
+}
+nav a.sitewideUser:hover .tooltip {
+    transition-delay: 0.6s;
+    visibility: visible;
+    opacity: 1;
+}
+/* -----------------/TOOLTIP------------------- */
+
 
 nav img.chatIcon {
     width: 26px;

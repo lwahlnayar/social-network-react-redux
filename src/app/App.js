@@ -110,12 +110,16 @@ export default class App extends React.Component {
                                         className="chatIcon"
                                         src="/chat-icon.png"
                                     />
+                                    <span class="tooltip"> Messages </span>
                                 </Link>
                                 <Link className="sitewideUser" to="/friends">
                                     <img
                                         className="friendsIcon"
                                         src="/friends_icon.png"
                                     />
+                                    <span class="tooltip friendReq">
+                                        Friends
+                                    </span>
                                 </Link>
                                 <div className="separator" />
                                 <a href="/sign-out">Sign Out</a>
