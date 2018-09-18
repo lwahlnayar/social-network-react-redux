@@ -416,7 +416,6 @@ io.on("connection", function(socket) {
     });
 
     socket.on("sendChatMessage", message => {
-        console.log("SEND CHAT MESSAGE REQUEST", message);
         queryFunction
             .postChatMessage(loggedIn, message)
             .then(lastIdReturned => {

@@ -25,22 +25,37 @@ class Chat extends React.Component {
 
     render() {
         let chatMessageElements = this.props.chatMessages.map(message => {
-            return (
-                <div className="singleChat" key={message.id}>
-                    <div className="avatarNameHold">
-                        <img src={message.avatar} />
-                        <p>
-                            {message.firstname} {message.lastname}
-                        </p>
+            if (message.mainUser) {
+                return (
+                    <div className="singleChat" key={message.id}>
+                        <div className="main_speech-bubble">
+                            <p>{message.messages}</p>
+                            <p className="main_msgDate">
+                                {formatDate(message.created_at)}
+                            </p>
+                        </div>
                     </div>
-                    <div className="speech-bubble">
-                        <p>{message.messages}</p>
-                        <p className="msgDate">
-                            {formatDate(message.created_at)}
-                        </p>
+                );
+            } else {
+                return (
+                    <div className="singleChat" key={message.id}>
+                        <div className="avatarNameHold">
+                            <img src={message.avatar} />
+                            <p>
+                                {message.firstname} {message.lastname}
+                            </p>
+                        </div>
+                        <div className="bubbleWrapper">
+                            <div className="speech-bubble">
+                                <p>{message.messages}</p>
+                                <p className="msgDate">
+                                    {formatDate(message.created_at)}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            }
         });
 
         //MAIN RENDER() RETURN
@@ -64,10 +79,8 @@ class Chat extends React.Component {
                     <div
                         onClick={this.postChatMessage}
                         htmlFor="chatTextArea"
-                        className="button enterChatMessage"
-                    >
-                        Post
-                    </div>
+                        className="enterChatMessage"
+                    />
                 </div>
             </section>
         );
