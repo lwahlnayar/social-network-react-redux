@@ -104,6 +104,20 @@ export default class App extends React.Component {
                                         src={this.state.avatar}
                                     />
                                 </Link>
+                                <div className="separator" />
+                                <Link className="sitewideUser" to="/chat">
+                                    <img
+                                        className="chatIcon"
+                                        src="/chat-icon.png"
+                                    />
+                                </Link>
+                                <Link className="sitewideUser" to="/friends">
+                                    <img
+                                        className="friendsIcon"
+                                        src="/friends_icon.png"
+                                    />
+                                </Link>
+                                <div className="separator" />
                                 <a href="/sign-out">Sign Out</a>
                             </div>
                         </nav>

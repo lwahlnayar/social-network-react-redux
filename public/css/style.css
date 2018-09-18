@@ -35,6 +35,11 @@ nav {
     height: 40px;
 }
 
+nav div.separator {
+    border: 1px #3c444c solid;
+    height: 22px;
+}
+
 nav div.headerLinks {
     display: flex;
     align-items: center;
@@ -73,6 +78,16 @@ nav div.headerLinks a:hover {
     transition: 0.3s ease;
     color: #2ebc4f;
     background-color: darkslategray;
+}
+
+nav img.friendsIcon {
+    width: 26px;
+    height: 26px;
+}
+
+nav img.chatIcon {
+    width: 26px;
+    height: 26px;
 }
 
 /* FOOTER SECTION */
