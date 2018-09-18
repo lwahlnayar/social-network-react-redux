@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Online extends React.Component {
-    componentDidMount() {
-        // this.props.dispatch(getFriendsWannabes());
-    }
-
     render() {
         const { onlineUsers } = this.props;
         // console.log("onlineusers", onlineUsers);

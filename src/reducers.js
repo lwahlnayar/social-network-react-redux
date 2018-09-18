@@ -1,7 +1,8 @@
 //REDUCER- PURPOSE: used in Stat.js. Recreates an updated copy of STATE based on action that it takes in 2nd argument.
 const INITIAL_STATE = {
     allFriendsWannabes: [],
-    onlineUsers: []
+    onlineUsers: [],
+    chatMessages: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -54,6 +55,19 @@ export default function(state = INITIAL_STATE, action) {
             onlineUsers: state.onlineUsers.filter(
                 user => user.id != action.userLeft.id
             )
+        };
+    }
+    ////////////////CHAT REDUCERS/////////////////////////
+    if (action.type == "ADD_ALL_CHAT_RESP") {
+        state = {
+            ...state,
+            chatMessages: action.allChat
+        };
+    }
+    if (action.type == "ADD_MESSAGE_RESP") {
+        state = {
+            ...state,
+            chatMessages: [...state.chatMessages, action.message]
         };
     }
     return state;

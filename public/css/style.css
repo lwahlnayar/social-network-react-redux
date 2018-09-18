@@ -459,6 +459,7 @@ div.addFriendIcon {
     width: 100%;
     height: 45px;
     border-radius: 3px;
+    resize: none;
 }
 
 .appContainer p#bioComment {
@@ -599,6 +600,117 @@ p.badNews {
     transform: translateY(1px);
 }
 
+
+/* ----------------- PUBLIC CHAT ---------------- */
+
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatContainer div#chatField {
+    border: 1px solid #bdc7d8;
+    border-radius: 5px;
+    width: 60%; /*must match form field below*/
+    background-color: white;
+     position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.chatContainer div.singleChat {
+    display: flex;
+    margin-top: 7px;
+/*     border: solid black 1px; */
+}
+.chatContainer div.singleChat:first-child {
+    margin-top: 25px;
+}
+.chatContainer div.singleChat:last-child {
+    margin-bottom: 25px;
+}
+
+
+.chatContainer .singleChat div.avatarNameHold {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    width: 35%;
+    height: 81px;
+/*     border: solid yellow 1px; */
+}
+
+.chatContainer .avatarNameHold p {
+    margin-left: 10px;
+}
+
+.chatContainer .singleChat .speech-bubble {
+    display: flex;
+    background: #efefef;
+    border-radius: 5px;
+    line-height: 1.3;
+    margin: 0 10px 10px;
+    width: 300px;
+    padding: 15px;
+    position: relative;
+}
+
+.speech-bubble p {
+    margin: 0 0 10px;
+}
+
+
+.speech-bubble::after {
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid #efefef;
+    bottom: 0px;
+    content: "";
+    position: absolute;
+    left: -8px;
+}
+
+.chatContainer .singleChat img {
+    max-width: 55px;
+    height: 55px;
+    border-radius: 100px;
+    border: 0.5px solid #bdc7d8;
+    background-color: white;
+    object-fit: cover;
+    margin-left: 10px;
+}
+
+.chatContainer h1 {
+    font-size: 30px;
+}
+
+.chatContainer h2 {
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.chatContainer div#chatInput {
+    display: flex;
+    margin-top: 3px;
+    width: 60%; /*must match field above*/
+}
+
+.chatContainer #chatTextArea {
+    width: 100%;
+    height: 80px;
+    border-radius: 4px;
+    resize: none;
+}
+.chatContainer .enterChatMessage {
+    width: 80px;
+    height: 80px;
+}
+
+
+
+
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */
 @media (max-width: 1000px) {
     /*     .centerHolder {
@@ -634,7 +746,6 @@ p.badNews {
         margin-left: 50px;
     }
 
-    /* 171 */
     .welcomeContainer .centerHolder {
         /* this width needs removing on mediaframe */
         width: 100%;

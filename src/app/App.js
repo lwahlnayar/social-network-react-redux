@@ -6,6 +6,7 @@ import Uploader from "./Uploader";
 import OtherProfile from "./Other-profile";
 import Friends from "./Friends";
 import Online from "./Online";
+import Chat from "./Chat";
 
 export default class App extends React.Component {
     constructor() {
@@ -151,6 +152,9 @@ export default class App extends React.Component {
 
                             {/* ONLINE USERS*/}
                             <Route exact path="/online" component={Online} />
+
+                            {/* CHAT COMPONENT*/}
+                            <Route exact path="/chat" component={Chat} />
                         </div>
                     </section>
                     <footer>

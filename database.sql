@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS chat;
 DROP TABLE IF EXISTS friend_requests;
 DROP TABLE IF EXISTS users;
 
@@ -16,5 +17,12 @@ CREATE TABLE friend_requests(
   sender_id INT REFERENCES users(id) NOT NULL,
   receiver_id INT REFERENCES users(id) NOT NULL,
   status INT NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE chat(
+  id SERIAL PRIMARY KEY,
+  messages VARCHAR(600) NOT NULL,
+  sender_id INT REFERENCES users(id) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

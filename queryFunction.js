@@ -79,8 +79,7 @@ module.exports.fetchFriendsWannabes = function(userId) {
           JOIN users
           ON (status = 1 AND receiver_id = $1 AND sender_id = users.id)
           OR (status = 2 AND receiver_id = $1 AND sender_id = users.id)
-          OR (status = 2 AND sender_id = $1 AND receiver_id = users.id)
-      `,
+          OR (status = 2 AND sender_id = $1 AND receiver_id = users.id)`,
         [userId || null]
     );
 };
@@ -89,5 +88,38 @@ module.exports.getOnlineUsers = function(arrayUserIds) {
     return db.query(
         `SELECT id, firstname, lastname, avatar FROM users WHERE id = ANY($1)`,
         [arrayUserIds || null]
+    );
+};
+
+///////////////////////////////POSTGRES CHAT////////////////////////////////////
+
+module.exports.postChatMessage = function(userId, message) {
+    return db.query(
+        `INSERT INTO chat (messages, sender_id) VALUES ($2, $1)
+         RETURNING id`,
+        [userId || null, message || null]
+    );
+};
+
+module.exports.fetchChatDataMounted = function() {
+    return db.query(
+        `SELECT chat.id, chat.messages, chat.created_at,
+         users.firstname, users.lastname, users.avatar
+         FROM chat
+         JOIN users
+         ON (chat.sender_id = users.id)
+         ORDER BY chat.id DESC LIMIT 10`
+    );
+};
+
+module.exports.fetchLastMessage = function(chatId) {
+    return db.query(
+        `SELECT chat.id, chat.messages, chat.created_at,
+         users.firstname, users.lastname, users.avatar
+         FROM chat
+         JOIN users
+         ON (chat.sender_id = users.id)
+         WHERE chat.id = $1`,
+        [chatId]
     );
 };

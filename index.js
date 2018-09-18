@@ -21,13 +21,6 @@ process.env.NODE_ENV === "production"
 
 app.use(bodyParser.json());
 
-// app.use(
-//     cookieSession({
-//         secret: secrets.cookieSecret,
-//         maxAge: 1000 * 60 * 60 * 24 * 14
-//     })
-// );
-
 const cookieSessionMiddleware = cookieSession({
     secret: secrets.cookieSecret,
     maxAge: 1000 * 60 * 60 * 24 * 90
@@ -341,6 +334,21 @@ app.get("/fetchall-friends-wannabes", async (req, res) => {
     }
 });
 
+// app.post("/post-chat-message", async (req, res) => {
+//     try {
+//         console.log(req.body.message);
+//         console.log(req.session.loggedIn);
+//         const chatMessages = queryFunction.postChatMessage(
+//             req.session.loggedIn,
+//             req.body.message
+//         );
+//         res.json({ chatMessageSuccess: true });
+//     } catch (e) {
+//         console.log("ERROR POSTING CHAT MESSAGES: ", e);
+//         res.status(500).json({ errorPostingChatMessage: true });
+//     }
+// });
+
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -364,6 +372,7 @@ io.on("connection", function(socket) {
         } and USERID ${loggedIn} is now connected`
     );
 
+    ////////////////////////////////JOIN AND LEAVE/////////////////////////
     //create array of loggedin users
     onlineUsersObj[socket.id] = loggedIn;
     let arrayUserIds = Object.values(onlineUsersObj);
@@ -385,6 +394,34 @@ io.on("connection", function(socket) {
         });
     }
 
+    ///////////////////////////////CHAT COMMENT/////////////////////////////
+
+    socket.on("getChatMessages", () => {
+        queryFunction
+            .fetchChatDataMounted()
+            .then(chatData => {
+                let chatDataSorted = chatData.rows.sort(function(a, b) {
+                    return a.id - b.id;
+                });
+                io.sockets.emit("allChatResponse", chatDataSorted);
+            })
+            .catch(e => console.log("error getting chat data: ", e));
+    });
+
+    socket.on("sendChatMessage", message => {
+        console.log("SEND CHAT MESSAGE REQUEST", message);
+        queryFunction
+            .postChatMessage(loggedIn, message)
+            .then(lastIdReturned => {
+                const lastId = lastIdReturned.rows[0].id;
+                queryFunction.fetchLastMessage(lastId).then(lastMessage => {
+                    io.sockets.emit("messageResp", lastMessage.rows[0]);
+                });
+            })
+            .catch(e => console.log("error posting chat message to server", e));
+    });
+
+    ///////////////////////////////DISCONNECT///////////////////////////////
     socket.on("disconnect", function() {
         console.log(
             `socket with the id ${

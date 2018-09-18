@@ -88,3 +88,26 @@ export async function userLeft(userLeft) {
         console.log("error mounting userLeft action:", e);
     }
 }
+/////////////////////////CHAT ACTIONS //////////////////////////////
+
+export async function addAllChatResp(allChat) {
+    try {
+        return {
+            type: "ADD_ALL_CHAT_RESP",
+            allChat
+        };
+    } catch (e) {
+        console.log("error mounting ADD ALLCHAT action:", e);
+    }
+}
+
+export async function addMessageResp(message) {
+    try {
+        return {
+            type: "ADD_MESSAGE_RESP",
+            message
+        };
+    } catch (e) {
+        console.log("error mounting ADD Message action:", e);
+    }
+}
