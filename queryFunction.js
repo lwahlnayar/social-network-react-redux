@@ -103,7 +103,7 @@ module.exports.postChatMessage = function(userId, message) {
 
 module.exports.fetchChatDataMounted = function() {
     return db.query(
-        `SELECT chat.id, chat.messages, chat.created_at,
+        `SELECT chat.id, chat.messages, chat.created_at, chat.sender_id,
          users.firstname, users.lastname, users.avatar
          FROM chat
          JOIN users
@@ -114,7 +114,7 @@ module.exports.fetchChatDataMounted = function() {
 
 module.exports.fetchLastMessage = function(chatId) {
     return db.query(
-        `SELECT chat.id, chat.messages, chat.created_at,
+        `SELECT chat.id, chat.messages, chat.created_at, chat.sender_id,
          users.firstname, users.lastname, users.avatar
          FROM chat
          JOIN users

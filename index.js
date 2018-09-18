@@ -403,8 +403,14 @@ io.on("connection", function(socket) {
                 let chatDataSorted = chatData.rows.sort(function(a, b) {
                     return a.id - b.id;
                 });
-                console.log("alldata sorted", chatDataSorted);
-                io.sockets.emit("allChatResponse", chatDataSorted);
+                const chatSortedMapped = chatDataSorted.map(message => {
+                    if (message.sender_id == loggedIn) {
+                        return { ...message, mainUser: true };
+                    } else {
+                        return message;
+                    }
+                });
+                io.sockets.emit("allChatResponse", chatSortedMapped);
             })
             .catch(e => console.log("error getting chat data: ", e));
     });
@@ -416,7 +422,11 @@ io.on("connection", function(socket) {
             .then(lastIdReturned => {
                 const lastId = lastIdReturned.rows[0].id;
                 queryFunction.fetchLastMessage(lastId).then(lastMessage => {
-                    io.sockets.emit("messageResp", lastMessage.rows[0]);
+                    socket.emit("messageResp", {
+                        ...lastMessage.rows[0],
+                        mainUser: true
+                    });
+                    socket.broadcast.emit("messageResp", lastMessage.rows[0]);
                 });
             })
             .catch(e => console.log("error posting chat message to server", e));
