@@ -889,12 +889,13 @@ img#onlineIcon_sw {
 .chatContainer div#chatInput {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 15px;
     width: 60%; /*must match field above*/
 }
 
 .chatContainer #chatTextArea {
-    width: 80%;
+    width: 500px;
     height: 80px;
     border-radius: 4px;
     resize: none;
@@ -905,6 +906,7 @@ img#onlineIcon_sw {
     width: 80px;
     height: 80px;
     margin-left: 3px;
+    margin-right: 5px;
     background-image: url("/arrow-button.png");
     background-repeat: no-repeat;
     background-size: 80px;
