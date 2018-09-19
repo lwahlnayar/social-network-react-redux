@@ -8,6 +8,7 @@ export default class SearchbarSw extends React.Component {
         super();
         this.state = { searchedUsersArray: [] };
         this.searchUsers = this.searchUsers.bind(this);
+        this.clearState = this.clearState.bind(this);
     }
 
     async searchUsers() {
@@ -20,6 +21,13 @@ export default class SearchbarSw extends React.Component {
         this.setState(data); //{searchedUsersArray: Array(x)}
     }
 
+    clearState(e) {
+        if (e.keyCode == 27 || e.button == 0) {
+            this.setState({ searchedUsersArray: [] });
+            this.searchElem.value = "";
+        }
+    }
+
     render() {
         const { searchedUsersArray } = this.state;
         console.log("SEARCHBAR COMPONENT STATE->", searchedUsersArray);
@@ -29,6 +37,7 @@ export default class SearchbarSw extends React.Component {
                     className="searchResultLink"
                     to={`/user/${user.id}`}
                     key={user.id}
+                    onClick={this.clearState}
                 >
                     <div className="searchBlock">
                         <img
@@ -51,6 +60,7 @@ export default class SearchbarSw extends React.Component {
         return (
             <section className="searchbarSwContainer">
                 <input
+                    onKeyDown={this.clearState}
                     onChange={this.searchUsers}
                     ref={searchElem => (this.searchElem = searchElem)}
                     className="searchBar"
