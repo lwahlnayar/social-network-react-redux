@@ -6,6 +6,7 @@ import Uploader from "./Uploader";
 import OtherProfile from "./Other-profile";
 import Friends from "./Friends";
 import Online from "./Online";
+import OnlineSitewide from "./Online-sitewide";
 import Chat from "./Chat";
 
 export default class App extends React.Component {
@@ -89,7 +90,7 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <div className="appContainer">
-                    <header>
+                    <header className="appHeader">
                         <nav>
                             <img
                                 id="logo"
@@ -110,14 +111,14 @@ export default class App extends React.Component {
                                         className="chatIcon"
                                         src="/chat-icon.png"
                                     />
-                                    <span class="tooltip"> Messages </span>
+                                    <span className="tooltip"> Messages </span>
                                 </Link>
                                 <Link className="sitewideUser" to="/friends">
                                     <img
                                         className="friendsIcon"
                                         src="/friends_icon.png"
                                     />
-                                    <span class="tooltip friendReq">
+                                    <span className="tooltip friendReq">
                                         Friends
                                     </span>
                                 </Link>
@@ -126,7 +127,8 @@ export default class App extends React.Component {
                             </div>
                         </nav>
                     </header>
-                    <section>
+                    <section className="appBody">
+                        <OnlineSitewide />
                         <div className="centerHolder">
                             {/* PROFILE PIC */}
                             <Route

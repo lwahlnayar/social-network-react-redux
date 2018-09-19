@@ -23,6 +23,11 @@ header {
     margin-bottom: 50px;
 }
 
+header.appHeader {
+  position: fixed;
+  z-index: 1;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -133,7 +138,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 60px;
     width: 100%;
     background: white;
 }
@@ -348,6 +353,7 @@ div.addFriendIcon {
 /* -------------- APP HOMEPAGE------------------- */
 
 .appContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -363,6 +369,10 @@ div.addFriendIcon {
     width: 980px;
     min-height: 80vh;
     margin-bottom: 50px;
+}
+
+.appContainer section.appBody {
+    margin-top: 100px;
 }
 
 .appContainer .profileContainer {
@@ -528,7 +538,7 @@ div.addFriendIcon {
 .appContainer .friendsContainer h1 {
     display: flex;
     align-items: center;
-    font-size: 25px;
+    font-size: 22px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -549,8 +559,8 @@ p.badNews {
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 10px;
-    width: 960px;
-    /*         border: yellow dashed 2px; */
+    width: 800px;
+/*             border: yellow dashed 2px; */
 }
 
 .appContainer .friendsContainer div.block {
@@ -558,7 +568,7 @@ p.badNews {
     justify-content: space-between;
     align-items: center;
     margin: 8px;
-    width: 400px;
+    width: 350px;
     height: 120px;
     border: 1px #dddfe2 solid;
 }
@@ -591,7 +601,7 @@ p.badNews {
     text-decoration: none;
     font-weight: bold;
     margin: 5px;
-    font-size: 18px;
+    font-size: 16px;
 }
 .appContainer .friendsContainer .nameLink:hover {
     text-decoration: underline;
@@ -599,11 +609,11 @@ p.badNews {
 }
 
 .appContainer .friendsContainer div.button {
-    width: 110px;
+    width: 90px;
     height: 30px;
     margin: 7px;
     border-radius: 2px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -654,6 +664,82 @@ p.badNews {
 }
 
 
+/* -------------- ONLINE SITEWIDE ----------------- */
+
+.onlineContainer_sw {
+    border-left: solid #bdc7d8 1.5px;
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    top: 52px; /*must match header height */
+    right: 0;
+}
+
+.linkWrapper {
+/*     border: 1px solid black; */
+    text-decoration: none;
+}
+
+.block_sw {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    height: 38px;
+    max-width: 100%;
+    justify-content: flex-between;
+}
+
+.block_sw:hover {
+    background-color: azure;
+}
+
+.appContainer .nameImage_sw {
+    display: flex;
+    align-items: center;
+    max-width: 90%;
+}
+
+img#onlineIcon_sw {
+    width: 16px;
+    margin-right: 5px;
+}
+
+.onlineContainer_sw div.nameLink_sw {
+    margin-left: 5px;
+    font-size: 12.5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.onlineContainer_sw h1 {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin: 10px 12px;
+}
+
+.onlineContainer_sw img.miniProfile_sw {
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 100px;
+    object-fit: cover;
+    background-color: white;
+    border: 0.5px solid #bdc7d8;
+    margin-left: 8px;
+}
+
+.onlineContainer_sw i.onlineDot {
+    position: absolute;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+    background-color: #44b62e;
+    border-radius: 20px;
+    transform: translate(-10px, 1px);
+}
+
+
 /* ----------------- PUBLIC CHAT ---------------- */
 
 .chatContainer {
@@ -665,7 +751,7 @@ p.badNews {
 .chatContainer div#chatField {
     border: 1px solid #bdc7d8;
     border-radius: 5px;
-    width: 70%; /*must match form field below*/
+    width: 60%; /*must match form field below*/
     background-color: white;
      position:relative;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -804,7 +890,7 @@ p.badNews {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
-    width: 70%; /*must match field above*/
+    width: 60%; /*must match field above*/
 }
 
 .chatContainer #chatTextArea {
