@@ -177,7 +177,7 @@ export default class App extends React.Component {
                             <Route exact path="/chat" component={Chat} />
                         </div>
                     </section>
-                    <footer>
+                    <footer className="appFooter">
                         <div className="footerCenterHolder">
                             <img
                                 id="logo"
