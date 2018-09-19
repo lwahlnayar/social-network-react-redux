@@ -29,7 +29,6 @@ class Onlinesw extends React.Component {
         });
 
         //MAIN RENDER() RETURN
-        console.log("THIS PROPS", this.props);
         return (
             <section className="onlineContainer_sw">
                 <div className="outerWidth_sw">
