@@ -401,6 +401,10 @@ div.addFriendIcon {
     height: 250px;
     overflow: hidden;
 }
+.appContainer .profileContainer div.two {
+    cursor:auto;
+}
+
 
 .appContainer .profileContainer img {
     max-width: 100%;
@@ -451,6 +455,7 @@ div.addFriendIcon {
     justify-content: center;
     align-items: center;
     position: fixed;
+    top: 0;
     bottom: 0;
     right: 0;
     background-color: rgba(36, 41, 46, 0.9);
@@ -960,13 +965,13 @@ section.searchbarSwContainer {
     background-color: white;
 }
 
-.searchResultLink {
+a.searchResultLink {
    display: block;
    text-decoration: none;
    font-size: 15px;
    font-weight: bold;
 }
-div.searchBlock:hover {
+a.searchResultLink:hover {
     background-color: whitesmoke;
 }
 .searchResultLink:last-child {

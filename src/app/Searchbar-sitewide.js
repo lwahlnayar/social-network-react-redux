@@ -8,17 +8,34 @@ export default class SearchbarSw extends React.Component {
         super();
         this.state = { searchedUsersArray: [] };
         this.searchUsers = this.searchUsers.bind(this);
+        this.searchUsersFn = this.searchUsersFn.bind(this);
         this.clearState = this.clearState.bind(this);
     }
 
-    async searchUsers() {
+    componentDidMount() {
+        document.addEventListener("click", e => {
+            console.log(e.target == this.searchElem);
+            if (e.target != this.searchElem) {
+                this.setState({ searchedUsersArray: [] });
+                this.searchElem.value = "";
+            }
+        });
+    }
+
+    async searchUsersFn() {
         if (this.searchElem.value.length == 0) {
             return this.setState({ searchedUsersArray: [] });
         }
         const searchObj = { search: this.searchElem.value };
         const { data } = await axios.post("/search-users", searchObj);
-        console.log("search users response obj (with array): ", data);
-        this.setState(data); //{searchedUsersArray: Array(x)}
+        return this.setState(data); //{searchedUsersArray: Array(x)}
+    }
+
+    searchUsers() {
+        if (this.timerId) {
+            clearTimeout(this.timerId);
+        }
+        this.timerId = setTimeout(this.searchUsersFn, 250);
     }
 
     clearState(e) {
@@ -30,7 +47,7 @@ export default class SearchbarSw extends React.Component {
 
     render() {
         const { searchedUsersArray } = this.state;
-        console.log("SEARCHBAR COMPONENT STATE->", searchedUsersArray);
+        // console.log("SEARCHBAR COMPONENT STATE->", searchedUsersArray);
         const searchResultLink = searchedUsersArray.map(user => {
             return (
                 <Link
@@ -58,7 +75,10 @@ export default class SearchbarSw extends React.Component {
 
         //MAIN RENDER() RETURN
         return (
-            <section className="searchbarSwContainer">
+            <section
+                onClick={this.props.handleModalClick}
+                className="searchbarSwContainer"
+            >
                 <input
                     onKeyDown={this.clearState}
                     onChange={this.searchUsers}

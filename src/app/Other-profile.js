@@ -79,7 +79,7 @@ export default class OtherProfile extends React.Component {
         return (
             <section className="profileContainer other">
                 <div className="editPicContainer">
-                    <div className="circleWindow">
+                    <div className="circleWindow two">
                         <img
                             width="250px"
                             src={avatar || "/default_image.png"}

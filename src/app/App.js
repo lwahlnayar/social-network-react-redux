@@ -98,7 +98,9 @@ export default class App extends React.Component {
                                 src="/sesame_logo_white.png"
                                 alt="sesame logo"
                             />
-                            <SearchbarSw />
+                            <SearchbarSw
+                                handleModalClick={this.handleModalClick}
+                            />
                             <div className="headerLinks">
                                 <Link className="sitewideUser" to="/">
                                     {this.state.firstname}
