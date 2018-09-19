@@ -87,8 +87,8 @@ nav div.headerLinks a:hover {
 }
 
 nav img.friendsIcon {
-    width: 26px;
-    height: 26px;
+    width: 23px;
+    height: 23px;
 }
 /* -----------------TOOLTIPS------------------- */
 nav span.tooltip {
@@ -129,8 +129,8 @@ nav a.sitewideUser:hover .tooltip {
 
 
 nav img.chatIcon {
-    width: 26px;
-    height: 26px;
+    width: 23px;
+    height: 23px;
 }
 
 /* FOOTER SECTION */
@@ -368,7 +368,7 @@ div.addFriendIcon {
     /* this width needs removing on mediaframe */
     width: 980px;
     min-height: 80vh;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 }
 
 .appContainer section.appBody {
@@ -531,6 +531,10 @@ div.addFriendIcon {
     font-size: 20px;
     margin-top: 5px;
     word-wrap: break-word;
+}
+
+.other p#bioComment {
+    margin-bottom: 38px;
 }
 
 /* -------------- FRIENDS PAGE -------------- */
