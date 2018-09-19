@@ -538,8 +538,8 @@ div.addFriendIcon {
     word-wrap: break-word;
 }
 
-.other p#bioComment {
-    margin-bottom: 38px;
+.other div.friendButton {
+    transform: translateY(30px)
 }
 
 /* -------------- FRIENDS PAGE -------------- */
@@ -687,6 +687,7 @@ p.badNews {
 .linkWrapper {
 /*     border: 1px solid black; */
     text-decoration: none;
+    color: #24292e;
 }
 
 .block_sw {

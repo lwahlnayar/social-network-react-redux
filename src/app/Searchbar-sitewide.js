@@ -11,7 +11,9 @@ export default class SearchbarSw extends React.Component {
     }
 
     async searchUsers() {
-        console.log("searchusers done", this.searchElem.value);
+        if (this.searchElem.value.length == 0) {
+            return this.setState({ searchedUsersArray: [] });
+        }
         const searchObj = { search: this.searchElem.value };
         const { data } = await axios.post("/search-users", searchObj);
         console.log("search users response obj (with array): ", data);
@@ -25,7 +27,7 @@ export default class SearchbarSw extends React.Component {
             return (
                 <Link
                     className="searchResultLink"
-                    to={"/user/${user.id}"}
+                    to={`/user/${user.id}`}
                     key={user.id}
                 >
                     <div className="searchBlock">

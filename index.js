@@ -339,7 +339,6 @@ app.post("/search-users", async (req, res) => {
         const searchedUsers = await queryFunction.fetchSearchedUsers(
             req.body.search
         );
-        console.log("query response SEARCHED USERS:", searchedUsers.rows);
         res.json({ searchedUsersArray: searchedUsers.rows });
     } catch (e) {
         console.log("ERROR FETCHING SEARCHED USERS FROM DB: ", e);
