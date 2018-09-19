@@ -8,6 +8,7 @@ import Friends from "./Friends";
 import Online from "./Online";
 import OnlineSitewide from "./Online-sitewide";
 import Chat from "./Chat";
+import SearchbarSw from "./Searchbar-sitewide";
 
 export default class App extends React.Component {
     constructor() {
@@ -97,12 +98,16 @@ export default class App extends React.Component {
                                 src="/sesame_logo_white.png"
                                 alt="sesame logo"
                             />
+                            <SearchbarSw />
                             <div className="headerLinks">
                                 <Link className="sitewideUser" to="/">
                                     {this.state.firstname}
                                     <img
                                         className="sitewideProfilePic"
-                                        src={this.state.avatar}
+                                        src={
+                                            this.state.avatar ||
+                                            "/default_image.png"
+                                        }
                                     />
                                 </Link>
                                 <div className="separator" />

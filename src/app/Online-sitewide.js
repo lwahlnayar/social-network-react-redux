@@ -8,7 +8,7 @@ class Onlinesw extends React.Component {
         // console.log("onlineusers", onlineUsers);
         let onlineUsersElem = onlineUsers.map(i => {
             return (
-                <Link className="linkWrapper" to={`/user/${i.id}`}>
+                <Link className="linkWrapper" key={i.id} to={`/user/${i.id}`}>
                     <div className="block_sw" key={i.id}>
                         <div className="nameImage_sw">
                             <div className="imageLink_sw">

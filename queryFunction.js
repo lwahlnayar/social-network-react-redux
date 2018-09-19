@@ -123,3 +123,14 @@ module.exports.fetchLastMessage = function(chatId) {
         [chatId]
     );
 };
+
+module.exports.fetchSearchedUsers = function(search) {
+    search += "%";
+    return db.query(
+        `SELECT id, firstname, lastname, avatar
+         FROM users
+         WHERE (firstname ILIKE $1) OR (lastname ILIKE $1)
+         ORDER BY lastname ASC LIMIT 4`,
+        [search]
+    );
+};

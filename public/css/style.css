@@ -96,7 +96,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 6.6vh;
+    height: 50px;
     width: 100%;
     background: white;
 }
@@ -885,7 +885,7 @@ img#onlineIcon_sw {
     font-size: 11px;
     font-style: italic;
     bottom: -5px;
-    left: 13px;
+    right: 15px;
 }
 .chatContainer p.msgDate {
     position: absolute;
