@@ -754,6 +754,13 @@ img#onlineIcon_sw {
     transform: translate(-10px, 1px);
 }
 
+.onlineContainer_sw p.badNews {
+    color: salmon;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: 1px;
+}
+
 
 /* ----------------- PUBLIC CHAT ---------------- */
 
@@ -764,6 +771,8 @@ img#onlineIcon_sw {
 }
 
 .chatContainer div#chatField {
+    overflow: auto;
+    height: 380px;
     border: 1px solid #bdc7d8;
     border-radius: 5px;
     width: 60%; /*must match form field below*/

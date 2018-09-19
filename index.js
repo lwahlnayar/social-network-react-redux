@@ -375,8 +375,15 @@ io.on("connection", function(socket) {
     let arrayUserIds = Object.values(onlineUsersObj);
 
     queryFunction.getOnlineUsers(arrayUserIds).then(onlineUsers => {
+        const onlineUsersMapped = onlineUsers.rows.map(user => {
+            if (user.id == loggedIn) {
+                return { ...user, mainUser: true };
+            } else {
+                return user;
+            }
+        });
         socket.emit("onlineUsersResponse", {
-            onlineUsers: onlineUsers.rows
+            onlineUsers: onlineUsersMapped
         });
     });
 

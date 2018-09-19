@@ -15,6 +15,15 @@ class Chat extends React.Component {
         getSocket().emit("getChatMessages");
     }
 
+    componentDidUpdate() {
+        if (!this.chatElem) {
+            return;
+        } else {
+            this.chatElem.scrollTop =
+                this.chatElem.scrollHeight - this.chatElem.clientHeight;
+        }
+    }
+
     postChatMessage(e) {
         if (e.keyCode == 13 || e.button == 0) {
             e.preventDefault(); //enter new line behavour stops
@@ -63,7 +72,10 @@ class Chat extends React.Component {
             <section className="chatContainer">
                 <h1>Public Chat</h1>
                 <h2>Chat with everyone</h2>
-                <div id="chatField">
+                <div
+                    ref={chatElem => (this.chatElem = chatElem)}
+                    id="chatField"
+                >
                     <div className="chatResponseField">
                         {chatMessageElements}
                     </div>
