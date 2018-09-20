@@ -26,9 +26,7 @@ export default function Welcome() {
                     <div className="centerHolder">
                         <div className="greetings">
                             <h1>
-                                <span className="slide-in-blurred-top">
-                                    Welcome
-                                </span>{" "}
+                                <span className="bounce-in-top">Welcome</span>{" "}
                                 <span className="slide-in-blurred-top2">
                                     to
                                 </span>{" "}
@@ -39,7 +37,10 @@ export default function Welcome() {
                             <h2 className="fade-in">
                                 A place to stay in touch...
                             </h2>
-                            <p className="fade-in2">...and worship...</p>
+                            <p className="fade-in2">
+                                ...and worship the{" "}
+                                <span id="funkyChicken">Funky Chicken</span>
+                            </p>
                         </div>
                         <div className="formHolder">
                             <div>

@@ -107,10 +107,12 @@ class WallPosts extends React.Component {
                             maxLength="600"
                             placeholder={`Write something to ${firstname}...`}
                         />
-                        <div
-                            onClick={this.postWallMessage}
-                            className="postWallButton"
-                        />
+
+                        <div onClick={this.postWallMessage} className="share">
+                            <div className="separatorWallPost" />
+                            Share
+                            <div className="postWallButton" />
+                        </div>
                     </div>
                 </div>
                 {wallPostElem}

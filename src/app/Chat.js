@@ -90,10 +90,13 @@ class Chat extends React.Component {
                             placeholder="Share your thoughts with everyone..."
                         />
                         <div
+                            className="chatEnter"
                             onClick={this.postChatMessage}
-                            htmlFor="chatTextArea"
-                            className="enterChatMessage"
-                        />
+                        >
+                            <div className="separatorChatPost" />
+                            Send
+                            <div className="enterChatMessage" />
+                        </div>
                     </div>
                 </div>
             </section>
