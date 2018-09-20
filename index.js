@@ -377,17 +377,34 @@ app.post("/post-wall", async (req, res) => {
 
 app.get("/get-wallposts/:otherUserId", async (req, res) => {
     try {
-        if (req.params.otherUserId == true) {
+        if (!isNaN(req.params.otherUserId)) {
             const wallPosts = await queryFunction.fetchWallPosts(
                 req.params.otherUserId
             );
-            res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
-        } else {
+            const userData = await queryFunction.fetchUserData(
+                req.params.otherUserId
+            );
+            const { firstname } = userData.rows[0];
+            console.log(userData.rows[0]);
+
+            res.json({
+                wallPostsReceived: wallPosts.rows,
+                postsOnWall: true,
+                firstname
+            });
+        } else if (isNaN(req.params.otherUserId)) {
             const wallPosts = await queryFunction.fetchWallPosts(
                 req.session.loggedIn
             );
-            console.log("WALLPOSTS MAINUSER", wallPosts.rows);
-            res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
+            const userData = await queryFunction.fetchUserData(
+                req.session.loggedIn
+            );
+            const { firstname } = userData.rows[0];
+            res.json({
+                wallPostsReceived: wallPosts.rows,
+                postsOnWall: true,
+                firstname
+            });
         }
     } catch (e) {
         console.log("ERROR FETCHING WALLPOSTS FROM DB: ", e);

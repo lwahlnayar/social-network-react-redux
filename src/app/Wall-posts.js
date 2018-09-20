@@ -7,7 +7,8 @@ class WallPosts extends React.Component {
     constructor() {
         super();
         this.state = {
-            wallPostsReceived: []
+            wallPostsReceived: [],
+            firstname: []
         };
         this.postWallMessage = this.postWallMessage.bind(this);
     }
@@ -16,8 +17,7 @@ class WallPosts extends React.Component {
         const { data } = await axios.get(`/get-wallposts/${this.otherUserId}`);
         this.setState({
             ...data,
-            otherUserId: this.otherUserId,
-            receiverName: data.wallPostsReceived[0].firstname_receiver
+            otherUserId: this.otherUserId
         }); //{wallPostsReceived: Array(5)}
     }
 
@@ -40,7 +40,11 @@ class WallPosts extends React.Component {
             const { data } = await axios.get(
                 `/get-wallposts/${this.otherUserId}`
             );
-            this.setState({ ...data, newProp: null, otherUserId: id });
+            this.setState({
+                ...data,
+                newProp: null,
+                otherUserId: id
+            });
         } catch (e) {
             console.log("Error with componentwillreceiveprops:", e);
         }
@@ -68,6 +72,12 @@ class WallPosts extends React.Component {
                 <div className="eachWallPost" key={wallPost.id}>
                     <div className="wallPostNames">
                         <Link to={`/user/${wallPost.sender_id}`}>
+                            <img
+                                className="miniProfile_wall"
+                                src={wallPost.avatar_sender}
+                            />
+                        </Link>
+                        <Link to={`/user/${wallPost.sender_id}`}>
                             {wallPost.firstname_sender}{" "}
                             {wallPost.lastname_sender}
                         </Link>
@@ -81,11 +91,12 @@ class WallPosts extends React.Component {
                 </div>
             );
         });
-
+        console.log("this state --------->", this.state);
         //MAIN RENDER() RETURN
         const { otherUserId } = this.props.routeProps.match.params;
-        console.log("STATE", this.state);
         this.otherUserId = otherUserId; //passes prop more globally above
+        const { firstname } = this.state;
+        console.log(firstname);
         return (
             <section className="wallPostsContainer">
                 <div className="wallPostDiv">
@@ -94,9 +105,7 @@ class WallPosts extends React.Component {
                             id="wallTextArea"
                             ref={textElem => (this.textElem = textElem)}
                             maxLength="600"
-                            placeholder={`Write something to ${
-                                this.state.receiverName
-                            }...`}
+                            placeholder={`Write something to ${firstname}...`}
                         />
                         <div
                             onClick={this.postWallMessage}

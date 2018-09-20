@@ -374,11 +374,11 @@ div.addFriendIcon {
     height: auto;
     display: flex;
     justify-content: space-between;
-    border: dashed blue;
+/*     border: dashed blue; */
 }
 
 .necessaryEvil {
-       border: 1px solid red;
+/*        border: 1px solid red; */
 }
 
 .appContainer .centerHolder {
@@ -1056,7 +1056,7 @@ section.wallPostsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 80%;
 /*     border: dashed red; */
 }
 
@@ -1135,6 +1135,16 @@ div.wallPostNames a:hover {
 
 p.wallPostText {
     margin: 12px 15px;
+}
+
+img.miniProfile_wall {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    object-fit: cover;
+    background-color: white;
+    border: 0.5px solid #bdc7d8;
+    margin-right: 5px;;
 }
 
 
