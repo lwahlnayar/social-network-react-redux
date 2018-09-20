@@ -369,6 +369,18 @@ div.addFriendIcon {
     background: #edf0f5;
 }
 
+.userProfileWrapper {
+    width: 700px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    border: dashed blue;
+}
+
+.necessaryEvil {
+       border: 1px solid red;
+}
+
 .appContainer .centerHolder {
     position: relative;
     /* this width needs removing on mediaframe */

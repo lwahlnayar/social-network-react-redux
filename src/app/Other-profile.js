@@ -84,7 +84,8 @@ export default class OtherProfile extends React.Component {
         );
         //MAIN RENDER() RETURN
         const friendship =
-            this.state.friendReqSent && this.state.friendStatus == 2;
+            (this.state.friendReqSent && this.state.friendStatus == 2) ||
+            (this.state.friendReqReceived && this.state.friendStatus == 2);
         return (
             <section className="otherUserProfileWrapper">
                 <section className="profileContainer other">

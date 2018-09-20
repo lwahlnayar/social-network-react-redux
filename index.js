@@ -352,11 +352,10 @@ app.post("/post-wall", async (req, res) => {
         const senderData = await queryFunction.fetchUserData(
             req.session.loggedIn
         );
-        console.log("sendername", senderData.rows[0]);
         const { firstname, lastname, avatar } = senderData.rows[0];
         const postWall = await queryFunction.postWall(
             req.session.loggedIn,
-            req.body.otherUserId,
+            req.body.otherUserId || req.session.loggedIn,
             req.body.text,
             firstname,
             lastname,
@@ -364,7 +363,7 @@ app.post("/post-wall", async (req, res) => {
         );
         // do wallposts fetch to update state immediately on hitting enter.
         const wallPosts = await queryFunction.fetchWallPosts(
-            req.body.otherUserId
+            req.body.otherUserId || req.session.loggedIn
         );
         res.json({
             wallPostsReceived: wallPosts.rows,
@@ -378,10 +377,18 @@ app.post("/post-wall", async (req, res) => {
 
 app.get("/get-wallposts/:otherUserId", async (req, res) => {
     try {
-        const wallPosts = await queryFunction.fetchWallPosts(
-            req.params.otherUserId
-        );
-        res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
+        if (req.params.otherUserId == true) {
+            const wallPosts = await queryFunction.fetchWallPosts(
+                req.params.otherUserId
+            );
+            res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
+        } else {
+            const wallPosts = await queryFunction.fetchWallPosts(
+                req.session.loggedIn
+            );
+            console.log("WALLPOSTS MAINUSER", wallPosts.rows);
+            res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
+        }
     } catch (e) {
         console.log("ERROR FETCHING WALLPOSTS FROM DB: ", e);
         res.status(500).json({ errorGetWallPosts: true });

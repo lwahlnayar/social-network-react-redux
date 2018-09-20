@@ -1,5 +1,6 @@
 import React from "react";
 import ProfilePic from "./Profile-pic";
+import WallPosts from "./Wall-posts";
 
 export default function Profile(props) {
     const { clickHandler, toggleBioInputField, postBio, rootState } = props;
@@ -41,8 +42,16 @@ export default function Profile(props) {
 
     return (
         <section className="profileContainer">
-            <ProfilePic rootState={rootState} clickHandler={clickHandler} />
-            {bioInputFieldCheck ? bioInputField : addBioButton}
+            <section className="userProfileWrapper">
+                <div className="necessaryEvil">
+                    <ProfilePic
+                        rootState={rootState}
+                        clickHandler={clickHandler}
+                    />
+                    {bioInputFieldCheck ? bioInputField : addBioButton}
+                </div>
+                <WallPosts routeProps={props.routeProps} />
+            </section>
         </section>
     );
 }

@@ -141,7 +141,7 @@ export default class App extends React.Component {
                             <Route
                                 exact
                                 path="/"
-                                render={() => (
+                                render={props => (
                                     <Profile
                                         rootState={this.state}
                                         clickHandler={this.makeUploaderVisible}
@@ -149,6 +149,7 @@ export default class App extends React.Component {
                                             this.toggleBioInputField
                                         }
                                         postBio={this.postBio}
+                                        routeProps={props}
                                     />
                                 )}
                             />

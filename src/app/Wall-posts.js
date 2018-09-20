@@ -63,8 +63,6 @@ class WallPosts extends React.Component {
     }
 
     render() {
-        console.log("this set state", this.state);
-
         const wallPostElem = this.state.wallPostsReceived.map(wallPost => {
             return (
                 <div className="eachWallPost" key={wallPost.id}>
@@ -86,6 +84,7 @@ class WallPosts extends React.Component {
 
         //MAIN RENDER() RETURN
         const { otherUserId } = this.props.routeProps.match.params;
+        console.log("STATE", this.state);
         this.otherUserId = otherUserId; //passes prop more globally above
         return (
             <section className="wallPostsContainer">
