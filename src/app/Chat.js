@@ -72,27 +72,29 @@ class Chat extends React.Component {
             <section className="chatContainer">
                 <h1>Public Chatroom</h1>
                 <h2>Worship the Funky Chicken below</h2>
-                <div
-                    ref={chatElem => (this.chatElem = chatElem)}
-                    id="chatField"
-                >
-                    <div className="chatResponseField">
-                        {chatMessageElements}
-                    </div>
-                </div>
-                <div id="chatInput">
-                    <textarea
-                        onKeyDown={this.postChatMessage}
-                        id="chatTextArea"
-                        ref={textVal => (this.textVal = textVal)}
-                        maxLength="300"
-                        placeholder="Share your thoughts with everyone..."
-                    />
+                <div className="chatWrapper">
                     <div
-                        onClick={this.postChatMessage}
-                        htmlFor="chatTextArea"
-                        className="enterChatMessage"
-                    />
+                        ref={chatElem => (this.chatElem = chatElem)}
+                        id="chatField"
+                    >
+                        <div className="chatResponseField">
+                            {chatMessageElements}
+                        </div>
+                    </div>
+                    <div className="chatInput">
+                        <textarea
+                            onKeyDown={this.postChatMessage}
+                            id="chatTextArea"
+                            ref={textVal => (this.textVal = textVal)}
+                            maxLength="300"
+                            placeholder="Share your thoughts with everyone..."
+                        />
+                        <div
+                            onClick={this.postChatMessage}
+                            htmlFor="chatTextArea"
+                            className="enterChatMessage"
+                        />
+                    </div>
                 </div>
             </section>
         );

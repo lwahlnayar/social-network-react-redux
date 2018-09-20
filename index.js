@@ -373,7 +373,6 @@ app.get("/get-wallposts/:otherUserId", async (req, res) => {
         const wallPosts = await queryFunction.fetchWallPosts(
             req.params.otherUserId
         );
-        console.log("wall posts of currentpage users page: ", wallPosts.rows);
         res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
     } catch (e) {
         console.log("ERROR FETCHING WALLPOSTS FROM DB: ", e);

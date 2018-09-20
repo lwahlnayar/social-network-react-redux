@@ -15,7 +15,36 @@ class WallPosts extends React.Component {
     async componentDidMount() {
         const { data } = await axios.get(`/get-wallposts/${this.otherUserId}`);
         console.log("wallpost component: current page user wallposts: ", data);
-        this.setState(data); //{wallPostsReceived: Array(5)}
+        this.setState({ ...data, otherUserId: this.otherUserId }); //{wallPostsReceived: Array(5)}
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const nextPropId = nextProps.routeProps.match.params.otherUserId;
+        console.log("PREV STATE ID", prevState.otherUserId);
+        console.log("NEXT PROPS ID", nextPropId);
+        if (prevState.otherUserId != nextPropId) {
+            return {
+                newProp: nextPropId
+            };
+        }
+        return null;
+    }
+
+    componentDidUpdate() {
+        if (this.state.newProp) {
+            this.fetchData(this.state.newProp);
+        }
+    }
+
+    async fetchData(id) {
+        try {
+            const { data } = await axios.get(
+                `/get-wallposts/${this.otherUserId}`
+            );
+            this.setState({ ...data, newProp: null, otherUserId: id });
+        } catch (e) {
+            console.log("Error with componentwillreceiveprops:", e);
+        }
     }
 
     async postWallMessage(e) {
@@ -44,7 +73,8 @@ class WallPosts extends React.Component {
 
         //MAIN RENDER() RETURN
         const { otherUserId } = this.props.routeProps.match.params;
-        this.otherUserId = otherUserId; //passes prop above
+        this.otherUserId = otherUserId; //passes prop more globally above
+        // console.log("WALLPOST THIS STATE", this.state);
         return (
             <section className="wallPostsContainer">
                 <div className="wallPostDiv">
