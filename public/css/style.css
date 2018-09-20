@@ -1097,8 +1097,34 @@ div.eachWallPost {
     height: fit-content;
     min-height: 100px;
     border-radius: 3px;
-
 }
+
+div.wallPostNames {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+    font-size: 14px;
+}
+
+div.wallPostNames a {
+    text-decoration: none;
+    color:#365899;
+}
+div.wallPostNames a:hover {
+    text-decoration: underline;
+}
+
+.eachWallPost div.arrow {
+  margin: 0 5px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 6px solid darkslategray;
+}
+
+p.wallPostText {
+    margin: 12px 15px;
+}
+
 
 /* ----------MEDIA QUERIES SITEWIDE BELOW-------- */
 @media (max-width: 1000px) {

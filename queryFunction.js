@@ -135,18 +135,35 @@ module.exports.fetchSearchedUsers = function(search) {
     );
 };
 
-module.exports.postWall = function(id, otherUserId, text) {
+module.exports.postWall = function(
+    id,
+    otherUserId,
+    text,
+    firstname_sender,
+    lastname_sender,
+    avatar_sender
+) {
     return db.query(
-        `INSERT INTO wall (sender_id, receiver_id, wallposts) VALUES ($1, $2, $3)
+        `INSERT INTO wall (sender_id, receiver_id, wallposts,
+         firstname_sender, lastname_sender, avatar_sender) VALUES ($1, $2, $3, $4, $5, $6)
          RETURNING id`,
-        [id, otherUserId, text || null]
+        [
+            id,
+            otherUserId,
+            text || null,
+            firstname_sender || null,
+            lastname_sender || null,
+            avatar_sender || null
+        ]
     );
 };
 
 module.exports.fetchWallPosts = function(otherUserId) {
     return db.query(
-        `SELECT wall.id, wall.wallposts, wall.sender_id, wall.receiver_id,
-         wall.created_at, users.firstname, users.lastname, users.avatar
+        `SELECT wall.id, wall.wallposts, wall.sender_id, wall.firstname_sender,
+         wall.lastname_sender, wall.avatar_sender, wall.receiver_id,
+         wall.created_at, users.firstname as firstname_receiver,
+         users.lastname as lastname_receiver, users.avatar as avatar_receiver
          FROM wall
          JOIN users
          ON (wall.receiver_id = users.id)

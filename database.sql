@@ -33,5 +33,8 @@ CREATE TABLE wall(
   wallposts VARCHAR(600) NOT NULL,
   sender_id INT REFERENCES users(id) NOT NULL,
   receiver_id INT NOT NULL,
+  firstname_sender VARCHAR(200) NOT NULL,
+  lastname_sender  VARCHAR(200) NOT NULL,
+  avatar_sender TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

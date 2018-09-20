@@ -20,8 +20,6 @@ class WallPosts extends React.Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const nextPropId = nextProps.routeProps.match.params.otherUserId;
-        console.log("PREV STATE ID", prevState.otherUserId);
-        console.log("NEXT PROPS ID", nextPropId);
         if (prevState.otherUserId != nextPropId) {
             return {
                 newProp: nextPropId
@@ -29,13 +27,11 @@ class WallPosts extends React.Component {
         }
         return null;
     }
-
     componentDidUpdate() {
         if (this.state.newProp) {
             this.fetchData(this.state.newProp);
         }
     }
-
     async fetchData(id) {
         try {
             const { data } = await axios.get(
@@ -57,6 +53,7 @@ class WallPosts extends React.Component {
                 };
                 const { data } = await axios.post(`/post-wall`, wallPostObj);
                 this.textElem.value = "";
+                this.setState(data);
                 console.log("wallpost response!", data);
             }
         }
@@ -66,7 +63,18 @@ class WallPosts extends React.Component {
         const wallPostElem = this.state.wallPostsReceived.map(wallPost => {
             return (
                 <div className="eachWallPost" key={wallPost.id}>
-                    {wallPost.wallposts}
+                    <div className="wallPostNames">
+                        <Link to={`/user/${wallPost.sender_id}`}>
+                            {wallPost.firstname_sender}{" "}
+                            {wallPost.lastname_sender}
+                        </Link>
+                        <div className="arrow" />{" "}
+                        <Link to={`/user/${wallPost.receiver_id}`}>
+                            {wallPost.firstname_receiver}{" "}
+                            {wallPost.lastname_receiver}
+                        </Link>
+                    </div>
+                    <p className="wallPostText">{wallPost.wallposts}</p>
                 </div>
             );
         });

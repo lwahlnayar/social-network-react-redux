@@ -349,14 +349,22 @@ app.post("/search-users", async (req, res) => {
 app.post("/post-wall", async (req, res) => {
     try {
         console.log("WALL POST DATA ->", req.body);
+        const senderData = await queryFunction.fetchUserData(
+            req.session.loggedIn
+        );
+        console.log("sendername", senderData.rows[0]);
+        const { firstname, lastname, avatar } = senderData.rows[0];
         const postWall = await queryFunction.postWall(
             req.session.loggedIn,
             req.body.otherUserId,
-            req.body.text
+            req.body.text,
+            firstname,
+            lastname,
+            avatar
         );
-        //do wallposts fetch to update state immediately on hitting enter.
+        // do wallposts fetch to update state immediately on hitting enter.
         const wallPosts = await queryFunction.fetchWallPosts(
-            req.params.otherUserId
+            req.body.otherUserId
         );
         res.json({
             wallPostsReceived: wallPosts.rows,
