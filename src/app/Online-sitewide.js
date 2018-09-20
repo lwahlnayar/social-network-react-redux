@@ -35,9 +35,6 @@ class Onlinesw extends React.Component {
             }
         });
         let badNews = <p className="badNews"> ...NO USERS ONLINE... </p>;
-        console.log("ELEM", onlineUsersElem);
-        console.log("badNews", badNews);
-        console.log("props!!! --->", this.props.onlineUsers.length);
         //MAIN RENDER() RETURN
         return (
             <section className="onlineContainer_sw">

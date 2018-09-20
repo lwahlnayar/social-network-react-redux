@@ -13,11 +13,11 @@ export default class SearchbarSw extends React.Component {
     }
 
     componentDidMount() {
-        document.addEventListener("click", e => {
-            console.log(e.target == this.searchElem);
+        document.addEventListener("click", async e => {
             if (e.target != this.searchElem) {
                 this.setState({ searchedUsersArray: [] });
-                this.searchElem.value = "";
+            } else if (this.searchElem.value.length != 0) {
+                this.searchUsersFn();
             }
         });
     }

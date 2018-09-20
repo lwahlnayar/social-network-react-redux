@@ -96,7 +96,7 @@ class Friends extends React.Component {
                         {friendsElem.length > 0 ? (
                             friendsElem
                         ) : (
-                            <p className="badNews">You have no friends. =(</p>
+                            <p className="badNews">You have no friends.</p>
                         )}
                     </div>
                 </div>

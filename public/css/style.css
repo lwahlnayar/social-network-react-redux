@@ -564,7 +564,8 @@ div.addFriendIcon {
 
 p.badNews {
     font-weight: bold;
-    margin: 0 auto;
+    margin: 50px auto;
+    color: lightsalmon;
 }
 
 .appContainer .friendsContainer div.allWannabes,
@@ -755,10 +756,11 @@ img#onlineIcon_sw {
 }
 
 .onlineContainer_sw p.badNews {
-    color: salmon;
+    color: lightsalmon;
     font-weight: bold;
     margin-top: 50px;
     margin-left: 1px;
+    text-align: center;
 }
 
 
