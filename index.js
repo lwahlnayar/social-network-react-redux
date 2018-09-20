@@ -346,6 +346,41 @@ app.post("/search-users", async (req, res) => {
     }
 });
 
+app.post("/post-wall", async (req, res) => {
+    try {
+        console.log("WALL POST DATA ->", req.body);
+        const postWall = await queryFunction.postWall(
+            req.session.loggedIn,
+            req.body.otherUserId,
+            req.body.text
+        );
+        //do wallposts fetch to update state immediately on hitting enter.
+        const wallPosts = await queryFunction.fetchWallPosts(
+            req.params.otherUserId
+        );
+        res.json({
+            wallPostsReceived: wallPosts.rows,
+            postsOnWall: true
+        });
+    } catch (e) {
+        console.log("ERROR POSTINGon WALL TO DB: ", e);
+        res.status(500).json({ errorPostingWall: true });
+    }
+});
+
+app.get("/get-wallposts/:otherUserId", async (req, res) => {
+    try {
+        const wallPosts = await queryFunction.fetchWallPosts(
+            req.params.otherUserId
+        );
+        console.log("wall posts of currentpage users page: ", wallPosts.rows);
+        res.json({ wallPostsReceived: wallPosts.rows, postsOnWall: true });
+    } catch (e) {
+        console.log("ERROR FETCHING WALLPOSTS FROM DB: ", e);
+        res.status(500).json({ errorGetWallPosts: true });
+    }
+});
+
 //order here MATTERS
 app.get("*", checkIfLoggedIn, (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -356,6 +391,9 @@ server.listen(8080, function() {
     console.log("I'm listening: ");
 });
 
+////////////////////////////////////////////////////////////////////////////
+//////////////////////////SOCKETS COMMUNICATION BELOW///////////////////////
+////////////////////////////////////////////////////////////////////////////
 //websockets listening- (order doesnt matter, listens in parallel)
 let onlineUsersObj = {};
 io.on("connection", function(socket) {

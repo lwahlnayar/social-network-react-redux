@@ -2,6 +2,7 @@ import React from "react";
 import axios from "../axios";
 import { Link } from "react-router-dom";
 import FriendButton from "./Friend-button";
+import WallPosts from "./Wall-posts";
 
 export default class OtherProfile extends React.Component {
     constructor() {
@@ -75,25 +76,30 @@ export default class OtherProfile extends React.Component {
                 <p id="bioComment">{user_bio}</p>
             </div>
         );
-
+        //MAIN RENDER() RETURN
         return (
-            <section className="profileContainer other">
-                <div className="editPicContainer">
-                    <div className="circleWindow two">
-                        <img
-                            width="250px"
-                            src={avatar || "/default_image.png"}
-                        />
+            <section className="otherUserProfileWrapper">
+                <section className="profileContainer other">
+                    <div className="editPicContainer">
+                        <div className="circleWindow two">
+                            <img
+                                width="250px"
+                                src={avatar || "/default_image.png"}
+                            />
+                        </div>
                     </div>
-                </div>
-                <h1 className="userfullname">
-                    {firstname} {lastname}
-                </h1>
-                {user_bio && userBioHtml}
-                <FriendButton
-                    rootId={this.props.rootId}
-                    otherUserId={this.props.routeProps.match.params.otherUserId}
-                />
+                    <h1 className="userfullname">
+                        {firstname} {lastname}
+                    </h1>
+                    {user_bio && userBioHtml}
+                    <FriendButton
+                        rootId={this.props.rootId}
+                        otherUserId={
+                            this.props.routeProps.match.params.otherUserId
+                        }
+                    />
+                </section>
+                <WallPosts routeProps={this.props.routeProps} />
             </section>
         );
     }

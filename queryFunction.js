@@ -134,3 +134,24 @@ module.exports.fetchSearchedUsers = function(search) {
         [search]
     );
 };
+
+module.exports.postWall = function(id, otherUserId, text) {
+    return db.query(
+        `INSERT INTO wall (sender_id, receiver_id, wallposts) VALUES ($1, $2, $3)
+         RETURNING id`,
+        [id, otherUserId, text || null]
+    );
+};
+
+module.exports.fetchWallPosts = function(otherUserId) {
+    return db.query(
+        `SELECT wall.id, wall.wallposts, wall.sender_id, wall.receiver_id,
+         wall.created_at, users.firstname, users.lastname, users.avatar
+         FROM wall
+         JOIN users
+         ON (wall.receiver_id = users.id)
+         WHERE (wall.receiver_id = $1)
+         ORDER BY created_at DESC LIMIT 5`,
+        [otherUserId]
+    );
+};

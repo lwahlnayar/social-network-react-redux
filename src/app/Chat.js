@@ -70,8 +70,8 @@ class Chat extends React.Component {
         //MAIN RENDER() RETURN
         return (
             <section className="chatContainer">
-                <h1>Public Chat</h1>
-                <h2>Chat with everyone</h2>
+                <h1>Public Chatroom</h1>
+                <h2>Worship the Funky Chicken below</h2>
                 <div
                     ref={chatElem => (this.chatElem = chatElem)}
                     id="chatField"
