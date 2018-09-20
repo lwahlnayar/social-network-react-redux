@@ -14,8 +14,11 @@ class WallPosts extends React.Component {
 
     async componentDidMount() {
         const { data } = await axios.get(`/get-wallposts/${this.otherUserId}`);
-        console.log("wallpost component: current page user wallposts: ", data);
-        this.setState({ ...data, otherUserId: this.otherUserId }); //{wallPostsReceived: Array(5)}
+        this.setState({
+            ...data,
+            otherUserId: this.otherUserId,
+            receiverName: data.wallPostsReceived[0].firstname_receiver
+        }); //{wallPostsReceived: Array(5)}
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -60,6 +63,8 @@ class WallPosts extends React.Component {
     }
 
     render() {
+        console.log("this set state", this.state);
+
         const wallPostElem = this.state.wallPostsReceived.map(wallPost => {
             return (
                 <div className="eachWallPost" key={wallPost.id}>
@@ -82,17 +87,17 @@ class WallPosts extends React.Component {
         //MAIN RENDER() RETURN
         const { otherUserId } = this.props.routeProps.match.params;
         this.otherUserId = otherUserId; //passes prop more globally above
-        // console.log("WALLPOST THIS STATE", this.state);
         return (
             <section className="wallPostsContainer">
                 <div className="wallPostDiv">
                     <div id="chatInput">
                         <textarea
-                            onKeyDown={this.postWallMessage}
                             id="wallTextArea"
                             ref={textElem => (this.textElem = textElem)}
                             maxLength="600"
-                            placeholder="Write something to..."
+                            placeholder={`Write something to ${
+                                this.state.receiverName
+                            }...`}
                         />
                         <div
                             onClick={this.postWallMessage}

@@ -16,7 +16,7 @@ export default class FriendButton extends React.Component {
             const { data } = await axios.post("/friend-status", {
                 otherUserId: this.props.otherUserId
             });
-            console.log("data from friend status: ", data);
+            // console.log("data from friend status: ", data);
             this.setState({ ...data, otherUserId: this.props.otherUserId });
         } catch (e) {
             console.log("error mounting friendship button:", e);

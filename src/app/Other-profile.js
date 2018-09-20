@@ -12,21 +12,21 @@ export default class OtherProfile extends React.Component {
     }
 
     async componentDidMount() {
-        if (
-            this.props.routeProps.match.params.otherUserId == this.props.rootId
-        ) {
+        const otherUserId = this.props.routeProps.match.params.otherUserId;
+        if (otherUserId == this.props.rootId) {
             this.props.routeProps.history.push("/");
         } else {
             try {
                 const { data } = await axios.get(
-                    `/get-other-users-data/${
-                        this.props.routeProps.match.params.otherUserId
-                    }`
+                    `/get-other-users-data/${otherUserId}`
                 );
-
+                const friendStatus = await axios.post("/friend-status", {
+                    otherUserId: otherUserId
+                });
                 this.setState({
                     ...data,
-                    otherUserId: this.props.routeProps.match.params.otherUserId
+                    ...friendStatus.data,
+                    otherUserId: otherUserId
                 });
             } catch (e) {
                 console.log("Error with componenwillmount:", e);
@@ -54,14 +54,20 @@ export default class OtherProfile extends React.Component {
 
     async fetchData(id) {
         try {
-            if (
-                this.props.routeProps.match.params.otherUserId ==
-                this.props.rootId
-            ) {
+            const otherUserId = this.props.routeProps.match.params.otherUserId;
+            if (otherUserId == this.props.rootId) {
                 this.props.routeProps.history.push("/");
             } else {
                 const { data } = await axios.get(`/get-other-users-data/${id}`);
-                this.setState({ ...data, otherUserId: id, newOtherId: null });
+                const friendStatus = await axios.post("/friend-status", {
+                    otherUserId: otherUserId
+                });
+                this.setState({
+                    ...data,
+                    ...friendStatus.data,
+                    otherUserId: id,
+                    newOtherId: null
+                });
             }
         } catch (e) {
             console.log("Error with componentwillreceiveprops:", e);
@@ -77,6 +83,8 @@ export default class OtherProfile extends React.Component {
             </div>
         );
         //MAIN RENDER() RETURN
+        const friendship =
+            this.state.friendReqSent && this.state.friendStatus == 2;
         return (
             <section className="otherUserProfileWrapper">
                 <section className="profileContainer other">
@@ -99,7 +107,7 @@ export default class OtherProfile extends React.Component {
                         }
                     />
                 </section>
-                <WallPosts routeProps={this.props.routeProps} />
+                {friendship && <WallPosts routeProps={this.props.routeProps} />}
             </section>
         );
     }
