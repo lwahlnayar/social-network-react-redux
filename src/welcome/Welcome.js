@@ -22,7 +22,7 @@ export default function Welcome() {
                         </div>
                     </nav>
                 </header>
-                <section>
+                <section className="welcomeBodyWrapper">
                     <div className="centerHolder">
                         <div className="greetings">
                             <h1>

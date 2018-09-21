@@ -231,6 +231,10 @@ div.addFriendIcon {
     background: #edf0f5;
 }
 
+.welcomeBodyWrapper {
+    min-height:80vh;
+}
+
 .welcomeContainer .centerHolder {
     display: flex;
     justify-content: space-between;
@@ -787,6 +791,7 @@ img#onlineIcon_sw {
 }
 
 .onlineContainer_sw p.badNews {
+    font-size: 13px;
     color: lightsalmon;
     font-weight: bold;
     margin-top: 50px;
@@ -806,6 +811,7 @@ img#onlineIcon_sw {
 
 .chatWrapper {
 /*     border: 1px dashed blue; */
+border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -984,13 +990,19 @@ img#onlineIcon_sw {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 22px;
+    font-size: 19px;
     bottom: 5px;
     right: 12px;
     width: 100px;
     color: white;
     cursor:pointer;
     font-weight: bold;
+    padding: 2px 7px;
+    border-radius: 3px;
+}
+.chatEnter:hover {
+    transition: 0.3s ease;
+    background-color: #b2bdc8;
 }
 
 .chatContainer .separatorChatPost {
@@ -1003,10 +1015,10 @@ img#onlineIcon_sw {
 }
 
 .chatContainer .enterChatMessage {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     background: url("/reply-button.png") no-repeat;
-    background-size: 30px;
+    background-size: 26px;
     background-color: transparent;
 }
 
@@ -1117,14 +1129,22 @@ div.wallPostDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;
-    bottom: 5px;
+    font-size: 18px;
+    border-radius: 2px;
+    bottom: 3px;
     right: 12px;
     width: 100px;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    padding: 2px 10px;
 }
+
+.share:hover {
+    transition: 0.3s ease;
+    background-color: #b2bdc8 ;
+}
+
 div.separatorWallPost {
     position: absolute;
     left: -14px;
@@ -1149,7 +1169,7 @@ div.eachWallPost {
     width: 90%;
     border: solid 0.5px #bdc7d8;
     height: fit-content;
-    min-height: 100px;
+    min-height: 120px;
     border-radius: 3px;
 }
 
@@ -1176,6 +1196,7 @@ div.wallPostNames a:hover {
 }
 
 p.wallPostText {
+    padding: 2px 2px;
     margin: 12px 15px;
 }
 

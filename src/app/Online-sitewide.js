@@ -34,7 +34,7 @@ class Onlinesw extends React.Component {
                 );
             }
         });
-        let badNews = <p className="badNews"> ...NO USERS ONLINE... </p>;
+        let badNews = <p className="badNews"> NO USERS ONLINE </p>;
         //MAIN RENDER() RETURN
         return (
             <section className="onlineContainer_sw">
