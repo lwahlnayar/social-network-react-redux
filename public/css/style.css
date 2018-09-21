@@ -1200,6 +1200,10 @@ p.wallPostText {
     margin: 12px 15px;
 }
 
+a.miniProfile_wall_link {
+    height: 35px; /*must fit wall profile image*/
+}
+
 img.miniProfile_wall {
     width: 35px;
     height: 35px;

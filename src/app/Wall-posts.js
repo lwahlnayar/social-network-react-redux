@@ -71,7 +71,10 @@ class WallPosts extends React.Component {
             return (
                 <div className="eachWallPost" key={wallPost.id}>
                     <div className="wallPostNames">
-                        <Link to={`/user/${wallPost.sender_id}`}>
+                        <Link
+                            className="miniProfile_wall_link"
+                            to={`/user/${wallPost.sender_id}`}
+                        >
                             <img
                                 className="miniProfile_wall"
                                 src={wallPost.avatar_sender}
@@ -96,7 +99,12 @@ class WallPosts extends React.Component {
         const { otherUserId } = this.props.routeProps.match.params;
         this.otherUserId = otherUserId; //passes prop more globally above
         const { firstname } = this.state;
-        console.log(firstname);
+        let placeholder;
+        if (this.props.routeProps.match.url.length > 1) {
+            placeholder = `Write something to ${firstname}...`;
+        } else {
+            placeholder = "What are you thinking?";
+        }
         return (
             <section className="wallPostsContainer">
                 <div className="wallPostDiv">
@@ -105,7 +113,7 @@ class WallPosts extends React.Component {
                             id="wallTextArea"
                             ref={textElem => (this.textElem = textElem)}
                             maxLength="600"
-                            placeholder={`Write something to ${firstname}...`}
+                            placeholder={placeholder}
                         />
 
                         <div onClick={this.postWallMessage} className="share">
