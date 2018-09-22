@@ -49,7 +49,7 @@ class Chat extends React.Component {
                 return (
                     <div className="singleChat" key={message.id}>
                         <div className="avatarNameHold">
-                            <img src={message.avatar} />
+                            <img src={message.avatar || "/default_image.png"} />
                             <p>
                                 {message.firstname} {message.lastname}
                             </p>

@@ -25,6 +25,7 @@ export default function Profile(props) {
     const bioInputField = (
         <div id="inputField">
             <textarea
+                placeholder="Write something about yourself..."
                 id="textArea"
                 maxLength="50"
                 onKeyDown={postBio}

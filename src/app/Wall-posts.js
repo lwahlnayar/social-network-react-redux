@@ -77,7 +77,10 @@ class WallPosts extends React.Component {
                         >
                             <img
                                 className="miniProfile_wall"
-                                src={wallPost.avatar_sender}
+                                src={
+                                    wallPost.avatar_sender ||
+                                    "/default_image.png"
+                                }
                             />
                         </Link>
                         <Link to={`/user/${wallPost.sender_id}`}>
