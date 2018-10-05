@@ -93,14 +93,16 @@ export default class App extends React.Component {
                 <div className="appContainer">
                     <header className="appHeader">
                         <nav>
-                            <img
-                                id="logo"
-                                src="/sesame_logo_white.png"
-                                alt="sesame logo"
-                            />
-                            <SearchbarSw
-                                handleModalClick={this.handleModalClick}
-                            />
+                            <div className="logoAndSearchbar">
+                                <img
+                                    id="logo"
+                                    src="/sesame_logo_white.png"
+                                    alt="sesame logo"
+                                />
+                                <SearchbarSw
+                                    handleModalClick={this.handleModalClick}
+                                />
+                            </div>
                             <div className="headerLinks">
                                 <Link className="sitewideUser" to="/">
                                     {this.state.firstname}

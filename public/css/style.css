@@ -35,6 +35,12 @@ nav {
     width: 980px;
 }
 
+nav .logoAndSearchbar {
+/*     border: yellow solid 1px; */
+    display: flex;
+    align-items: center;
+}
+
 #logo {
     width: 80px;
     height: 40px;
@@ -1031,11 +1037,6 @@ border-radius: 5px;
 
 /* -------------SEARCH BAR COMPONENT------------ */
 
-section.searchbarSwContainer {
-    position: absolute;
-    left: 270px;
-}
-
 .searchbarSwContainer input {
     border: #1b1f23 solid 1px;
     text-indent: 10px;
@@ -1363,5 +1364,3 @@ img.miniProfile_wall {
     .welcomeContainer div.formHolder input {
     min-width: 220px;
 }
-
-/* ANIMATIONS BELOW */
