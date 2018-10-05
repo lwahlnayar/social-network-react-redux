@@ -36,7 +36,7 @@ nav {
 }
 
 nav .logoAndSearchbar {
-/*     border: yellow solid 1px; */
+position: relative;
     display: flex;
     align-items: center;
 }
@@ -1042,20 +1042,20 @@ border-radius: 5px;
     text-indent: 10px;
     border-radius: 2px;
     height: 30px;
-    width: 300px;
+    width: 300px; /*must match search results width*/
 }
 
 .searchIcon {
     position: absolute;
     right: 5px;
-    top: 2.5px;
+    top: 7.5px;
     width: 25px;
     height: 25px;
 }
 
 .searchResults {
     position: absolute;
-    width: 100%;
+    width: 300px;  /*must match searchbar width above*/
     border-left: 1px solid #bdc7d89c;
     border-right: 1px solid #bdc7d89c;
     border-radius: 2px;
