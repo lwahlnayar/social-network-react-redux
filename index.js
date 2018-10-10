@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
-const io = require("socket.io")(server, { origins: "localhost:8080" });
+const io = require("socket.io")(server, {});
+// origins: "localhost:8080"
 const compression = require("compression"); //to compress the bundle server before response to client
 const bodyParser = require("body-parser");
 const queryFunction = require("./queryFunction");
