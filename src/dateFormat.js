@@ -27,7 +27,7 @@ export function formatDate(date) {
     var dateString =
         monthNames[d.getMonth()] +
         " " +
-        d.getDay() +
+        d.getDate() +
         ", " +
         digitFix(d.getHours()) +
         ":" +
