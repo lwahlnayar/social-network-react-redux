@@ -29,8 +29,6 @@ export function formatDate(date) {
         " " +
         d.getDay() +
         ", " +
-        d.getFullYear() +
-        ", " +
         digitFix(d.getHours()) +
         ":" +
         digitFix(d.getMinutes());
