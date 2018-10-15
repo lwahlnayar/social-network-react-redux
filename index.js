@@ -1,9 +1,13 @@
+let origin;
+let secrets;
+process.env.NODE_ENV === "production"
+    ? (origin = "http://sesamebook-social-network.herokuapp.com:*")
+    : (origin = "localhost:8080");
+
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
-const io = require("socket.io")(server, {
-    origins: "http://sesamebook-social-network.herokuapp.com:*"
-});
+const io = require("socket.io")(server, { origins: origin });
 // origins: "localhost:8080"
 const compression = require("compression"); //to compress the bundle server before response to client
 const bodyParser = require("body-parser");
@@ -17,7 +21,6 @@ const uidSafe = require("uid-safe");
 const { s3Url } = require("./config");
 const path = require("path");
 
-let secrets;
 process.env.NODE_ENV === "production"
     ? (secrets = process.env)
     : (secrets = require("./secrets.json"));
