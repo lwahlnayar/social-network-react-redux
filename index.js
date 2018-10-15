@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
-const io = require("socket.io")(server, {});
+const io = require("socket.io")(server, {
+    origins: "http://sesamebook-social-network.herokuapp.com/:*"
+});
 // origins: "localhost:8080"
 const compression = require("compression"); //to compress the bundle server before response to client
 const bodyParser = require("body-parser");
