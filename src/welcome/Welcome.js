@@ -35,11 +35,11 @@ export default function Welcome() {
                                 </span>
                             </h1>
                             <h2 className="fade-in">
-                                A place to stay in touch...
+                                Stay in touch with old friends...
                             </h2>
                             <p className="fade-in2">
-                                ...and worship the{" "}
-                                <span id="funkyChicken">Funky Chicken</span>
+                                ... and join a network of like-minded
+                                developers!
                             </p>
                         </div>
                         <div className="formHolder">
