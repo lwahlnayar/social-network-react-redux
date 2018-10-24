@@ -61,12 +61,7 @@ export default class App extends React.Component {
             this.setState({ bioInputFieldCheck: false });
         }
     }
-
     /////////////////////////////////
-    updateAvatarInstantly(argument) {
-        this.setState({ modalVisible: false });
-        this.setState(argument);
-    }
 
     submit(e) {
         const file = e.target.files[0];
@@ -76,11 +71,13 @@ export default class App extends React.Component {
 
         axios.post("/avatar-uploads", fd).then(res => {
             console.log("RESPONSE IN POST/UPLOAD IMAGE ajax", res.data.avatar);
-            this.updateAvatarInstantly(res.data);
+            this.setState({ avatar: res.data.avatar });
         });
+        this.exitModal();
     }
 
     render() {
+        console.log("APP obj", this);
         if (!this.state.firstname) {
             return (
                 <div className="errorTemplate">
