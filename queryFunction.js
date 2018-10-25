@@ -160,15 +160,15 @@ module.exports.postWall = function(
 
 module.exports.fetchWallPosts = function(otherUserId) {
     return db.query(
-        `SELECT wall.id, wall.wallposts, wall.sender_id, wall.firstname_sender,
-         wall.lastname_sender, wall.avatar_sender, wall.receiver_id,
-         wall.created_at, users.firstname as firstname_receiver,
-         users.lastname as lastname_receiver, users.avatar as avatar_receiver
+        `SELECT wall.id, wall.wallposts, wall.sender_id, wall.receiver_id,
+         users2.firstname as firstname_sender, users2.lastname as lastname_sender,
+         users.firstname as firstname_receiver, users.lastname as lastname_receiver,
+         users.avatar as avatar_receiver, users2.avatar as avatar_sender, wall.created_at
          FROM wall
-         JOIN users
-         ON (wall.receiver_id = users.id)
-         WHERE (wall.receiver_id = $1)
-         ORDER BY created_at DESC LIMIT 5`,
+         JOIN users ON (wall.receiver_id = users.id)
+         JOIN users AS users2 ON (wall.sender_id = users2.id) WHERE (wall.receiver_id=$1)
+         ORDER BY created_at DESC LIMIT 5;
+        `,
         [otherUserId]
     );
 };

@@ -391,7 +391,6 @@ app.get("/get-wallposts/:otherUserId", async (req, res) => {
                 req.params.otherUserId
             );
             const { firstname } = userData.rows[0];
-            // console.log(userData.rows[0]);
             res.json({
                 wallPostsReceived: wallPosts.rows,
                 postsOnWall: true,
