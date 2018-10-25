@@ -64,6 +64,8 @@ export default class App extends React.Component {
     /////////////////////////////////
 
     submit(e) {
+        this.setState({ imageLoading: true });
+        this.exitModal();
         const file = e.target.files[0];
         console.log("FILE variable:", file);
         const fd = new FormData();
@@ -71,9 +73,8 @@ export default class App extends React.Component {
 
         axios.post("/avatar-uploads", fd).then(res => {
             console.log("RESPONSE IN POST/UPLOAD IMAGE ajax", res.data.avatar);
-            this.setState({ avatar: res.data.avatar });
+            this.setState({ avatar: res.data.avatar, imageLoading: false });
         });
-        this.exitModal();
     }
 
     render() {

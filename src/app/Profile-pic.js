@@ -17,8 +17,32 @@ export default class ProfilePic extends React.Component {
     }
 
     render() {
-        const { firstname, lastname, avatar, user_bio } = this.props.rootState;
+        const {
+            firstname,
+            lastname,
+            avatar,
+            user_bio,
+            imageLoading
+        } = this.props.rootState;
         const { clickHandler } = this.props;
+
+        const imageElement = (
+            <img
+                className="mainProfilePic"
+                width="250px"
+                src={avatar || "/default_image.png"}
+            />
+        );
+
+        const loadingElement = (
+            <img
+                className="mainProfilePic"
+                width="250px"
+                src={"/loading2.gif"}
+            />
+        );
+
+        //ACTUAL RETURN BELOW
         return (
             <div className="profilePicContainer">
                 <div className="editPicContainer">
@@ -28,11 +52,8 @@ export default class ProfilePic extends React.Component {
                         onClick={clickHandler}
                         className="circleWindow"
                     >
-                        <img
-                            className="mainProfilePic"
-                            width="250px"
-                            src={avatar || "/default_image.png"}
-                        />
+                        {imageLoading ? loadingElement : imageElement}
+
                         {this.state.editProfile && (
                             <div className="darkEditProfile">Edit Profile</div>
                         )}

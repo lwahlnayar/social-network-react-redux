@@ -425,6 +425,9 @@ span.bounce-in-top {
 
 .appContainer .profileContainer div.circleWindow {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 0.5px solid #bdc7d8;
     position: relative;
     border-radius: 200px;
@@ -436,8 +439,7 @@ span.bounce-in-top {
     cursor:auto;
 }
 
-
-.appContainer .profileContainer img {
+.appContainer .mainProfilePic {
     max-width: 100%;
     height: 100%; /* ADAPT THIS TO MAX WIDTH ABOVE (profilecontainer) */
     object-fit: cover;
